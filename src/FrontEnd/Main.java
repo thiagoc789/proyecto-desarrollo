@@ -5,7 +5,23 @@
  */
 package FrontEnd;
 
-//VERSION 0.2.0 COMPLETADO SPRINT 1
+// v0.2.0
+//
+//Se separan el frontEnd y el backEnd
+//BackEnd
+//-Conexion a la base de datos
+//-Se pueden registrar sedes
+//-Se pueden registrar usuarios
+//
+//FrontEnd
+//-Vista principal usuario nuevo(primer ingreso al sistema)
+//-Vista para registrar sede
+//-Vista general del gerente
+//
+//Se completan los requerimientos del sprint 1
+//Sprint1
+//-Un usuario desea iniciar sesión con rol de gerente
+//-El gerente desea poder registrar una nueva sede de la empresa
 
 import BackEnd.ConexionBD;
 import BackEnd.RegistrarUsuario;
