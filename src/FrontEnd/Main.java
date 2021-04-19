@@ -5,6 +5,8 @@
  */
 package FrontEnd;
 
+//VERSION 0.2.0 COMPLETADO SPRINT 1
+
 import BackEnd.ConexionBD;
 import BackEnd.RegistrarUsuario;
 import java.sql.SQLException;
