@@ -51,7 +51,8 @@ public class ConexionBD {
         return conexion;
     }
     
-    public void getGerente(){
+    public boolean getGerente(){
+        boolean gerenteActivo = false;
         try{
             Class.forName("org.postgresql.Driver");
         }catch(ClassNotFoundException e){
@@ -76,19 +77,24 @@ public class ConexionBD {
                 //texto = texto + rs.getString("telefono");
                 //texto = texto + rs.getString("contraseña");
                 //texto = texto + rs.getString("cargo");
-                texto = rs.getString("cargo");
+                texto = rs.getString("nombre");
                 //texto = texto + rs.getString("sede");
                 //texto.append(rs.getString("cedula") + "\n");
                 //area.append(rs.getString("nombre") + "\n");
                 //area.append(rs.getString("apellido") + "\n");
                 //area.append("\n");
             }
+            
+//            if(!texto.isBlank()){
+//                gerenteActivo = true;
+//                JOptionPane.showMessageDialog(null, "El gerente esta " + gerenteActivo, "", JOptionPane.INFORMATION_MESSAGE);
+//            }
 
-            JOptionPane.showMessageDialog(null, texto, "Mundo", JOptionPane.INFORMATION_MESSAGE);            
+            JOptionPane.showMessageDialog(null, texto + " es gerente", "", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Failed to Connected, aquí falló");
         }
-        //return conexion;
+        return gerenteActivo;
     }
     
 //    public void consultar(){

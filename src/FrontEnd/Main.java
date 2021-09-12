@@ -35,10 +35,16 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static void main(String args[]) throws SQLException {
+        boolean gerente = false;
+        
         ConexionBD conexion = new ConexionBD();
         conexion.dbConecction();
         
-        conexion.getGerente();
+        gerente = conexion.getGerente();
+        
+//        if(gerente){
+//            JOptionPane.showMessageDialog(null, "Gerente existe", "", JOptionPane.INFORMATION_MESSAGE);
+//        };
         
         //JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos", "Sistematizacion De Procesos - Flash", JOptionPane.ERROR_MESSAGE);
 
@@ -66,12 +72,19 @@ public class Main {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UsuarioNuevo().setVisible(true);
-            }
-        })
-        ;
+        if(gerente){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new IngresoUsuario().setVisible(true);
+                }
+            });
+        }
+        else
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new UsuarioNuevo().setVisible(true);
+                }
+            });
     }
 
 }

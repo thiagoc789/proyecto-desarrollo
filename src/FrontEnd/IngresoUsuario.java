@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
+public class IngresoUsuario extends javax.swing.JFrame {
 
     private int x;
     private int y;
 
-    public UsuarioNuevoPRUEBA() {
+    public IngresoUsuario() {
         initComponents();
     }
 
@@ -26,16 +26,11 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
         javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
-        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Cedula = new javax.swing.JFormattedTextField();
-        Telefono = new javax.swing.JFormattedTextField();
-        Nombre = new javax.swing.JFormattedTextField();
-        Correo = new javax.swing.JFormattedTextField();
         Contraseña = new javax.swing.JPasswordField();
-        javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -93,7 +88,7 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Primer Inicio De Sesion - Usuario Gerente");
+        jLabel6.setText("Inicio De Sesión");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,13 +122,9 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
 
-        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("Usted es el primer usuario en ingresar al sistema");
-
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Registre sus datos y se le asignara el rol de gerente");
+        jLabel2.setText("Por favor ingrese su cédula y su contraseña");
 
         jLabel3.setBackground(new java.awt.Color(0, 153, 102));
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
@@ -189,54 +180,6 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
             }
         });
 
-        Telefono.setForeground(new java.awt.Color(153, 153, 153));
-        Telefono.setText("Telefono");
-        Telefono.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                TelefonoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TelefonoFocusLost(evt);
-            }
-        });
-        Telefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TelefonoActionPerformed(evt);
-            }
-        });
-
-        Nombre.setForeground(new java.awt.Color(153, 153, 153));
-        Nombre.setText("Nombre");
-        Nombre.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                NombreFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                NombreFocusLost(evt);
-            }
-        });
-        Nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NombreActionPerformed(evt);
-            }
-        });
-
-        Correo.setForeground(new java.awt.Color(153, 153, 153));
-        Correo.setText("Correo");
-        Correo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                CorreoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                CorreoFocusLost(evt);
-            }
-        });
-        Correo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CorreoActionPerformed(evt);
-            }
-        });
-
         Contraseña.setForeground(new java.awt.Color(153, 153, 153));
         Contraseña.setText("Contraseña");
         Contraseña.setHighlighter(null);
@@ -249,37 +192,22 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setText("CARGO : GERENTE");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(197, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Telefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                             .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Nombre)
-                            .addComponent(Correo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                            .addComponent(Contraseña, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(Contraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(221, 221, 221))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(177, 177, 177))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(211, 211, 211)
@@ -289,24 +217,14 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(55, 55, 55)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addGap(224, 224, 224)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(118, 118, 118))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -347,10 +265,6 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CedulaActionPerformed
 
-    private void TelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TelefonoActionPerformed
-
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {//1
@@ -359,14 +273,14 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        RegistrarUsuario registrar = new RegistrarUsuario();
-        try {
-            registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede");
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioNuevoPRUEBA.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        new PantallaGeneralGerente().setVisible(true);
-        this.setVisible(false);
+//        RegistrarUsuario registrar = new RegistrarUsuario();
+//        try {
+//            registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede");
+//        } catch (SQLException ex) {
+//            Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        new PantallaGeneralGerente().setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -380,14 +294,6 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jLabel4MouseEntered
-
-    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NombreActionPerformed
-
-    private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CorreoActionPerformed
 
     private void CedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusGained
         // TODO add your handling code here:
@@ -404,55 +310,6 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
             Cedula.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_CedulaFocusLost
-
-    private void NombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NombreFocusGained
-        // TODO add your handling code here:
-        if (Nombre.getText().equals("Nombre")) {
-            Nombre.setText("");
-            Nombre.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_NombreFocusGained
-
-    private void NombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NombreFocusLost
-        // TODO add your handling code here:
-        if (Nombre.getText().equals("")) {
-            Nombre.setText("Nombre");
-            Nombre.setForeground(new Color(153, 153, 153));
-        }
-
-    }//GEN-LAST:event_NombreFocusLost
-
-    private void TelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TelefonoFocusGained
-        // TODO add your handling code here:
-        if (Telefono.getText().equals("Telefono")) {
-            Telefono.setText("");
-            Telefono.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_TelefonoFocusGained
-
-    private void TelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TelefonoFocusLost
-        // TODO add your handling code here:
-        if (Telefono.getText().equals("")) {
-            Telefono.setText("Telefono");
-            Telefono.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_TelefonoFocusLost
-
-    private void CorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CorreoFocusGained
-        // TODO add your handling code here:
-        if (Correo.getText().equals("Correo")) {
-            Correo.setText("");
-            Correo.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_CorreoFocusGained
-
-    private void CorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CorreoFocusLost
-        // TODO add your handling code here:
-        if (Correo.getText().equals("")) {
-            Correo.setText("Correo");
-            Correo.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_CorreoFocusLost
 
     private void ContraseñaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContraseñaFocusGained
         // TODO add your handling code here:
@@ -492,9 +349,6 @@ public class UsuarioNuevoPRUEBA extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JFormattedTextField Cedula;
     javax.swing.JPasswordField Contraseña;
-    javax.swing.JFormattedTextField Correo;
-    javax.swing.JFormattedTextField Nombre;
-    javax.swing.JFormattedTextField Telefono;
     javax.swing.JLabel jLabel3;
     javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
