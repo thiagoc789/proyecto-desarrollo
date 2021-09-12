@@ -26,6 +26,7 @@ package FrontEnd;
 import BackEnd.ConexionBD;
 import BackEnd.RegistrarUsuario;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,6 +37,10 @@ public class Main {
     public static void main(String args[]) throws SQLException {
         ConexionBD conexion = new ConexionBD();
         conexion.dbConecction();
+        
+        conexion.getGerente();
+        
+        //JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos", "Sistematizacion De Procesos - Flash", JOptionPane.ERROR_MESSAGE);
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -65,7 +70,8 @@ public class Main {
             public void run() {
                 new UsuarioNuevo().setVisible(true);
             }
-        });
+        })
+        ;
     }
 
 }

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 
 /**
  *
@@ -49,6 +50,91 @@ public class ConexionBD {
         }
         return conexion;
     }
+    
+    public void getGerente(){
+        try{
+            Class.forName("org.postgresql.Driver");
+        }catch(ClassNotFoundException e){
+            e.getMessage();
+        }
+        
+        try {
+            conexion = DriverManager.getConnection(url, user, password);           
+            stmt = conexion.createStatement();
+
+            sql = "SELECT * FROM usuarios";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            String texto = " ";
+            
+            //rs.getRow();
+            
+            while(rs.next()){
+                //texto.concat("ds","d");
+                //texto = texto + rs.getString("cedula");
+                //texto = texto + rs.getString("nombre");
+                //texto = texto + rs.getString("telefono");
+                //texto = texto + rs.getString("contraseña");
+                //texto = texto + rs.getString("cargo");
+                texto = rs.getString("cargo");
+                //texto = texto + rs.getString("sede");
+                //texto.append(rs.getString("cedula") + "\n");
+                //area.append(rs.getString("nombre") + "\n");
+                //area.append(rs.getString("apellido") + "\n");
+                //area.append("\n");
+            }
+
+            JOptionPane.showMessageDialog(null, texto, "Mundo", JOptionPane.INFORMATION_MESSAGE);            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Failed to Connected, aquí falló");
+        }
+        //return conexion;
+    }
+    
+//    public void consultar(){
+//        
+//        try{
+//            Class.forName("org.postgresql.Driver");
+//        }catch(ClassNotFoundException e){
+//            e.getMessage();
+//        }
+//        
+//        try {
+//            conexion = DriverManager.getConnection(url, user, password);           
+//            //JOptionPane.showMessageDialog(null, "Connected to Database");
+//            //conexion.close();
+//            stmt = conexion.createStatement();
+//            
+////            sql = "INSERT INTO ciudadano(cedula, nombre, apellido) VALUES("
+////                    + "\'" + cedula.getText() + "\',"
+////                    + "\'" + nombre.getText() + "\',"
+////                    + "\'" + apellido.getText() + "\'"
+////                    + ");";
+//
+//            sql = "SELECT * FROM ciudadano";
+//            //stmt.executeUpdate(sql);
+//            ResultSet rs = stmt.executeQuery(sql);
+//            //JOptionPane.showMessageDialog(null, stmt.executeQuery(sql));
+//            //JOptionPane.showMessageDialog(null, numero);
+//            
+//            while(rs.next()){
+//                area.append(rs.getString("cedula") + "\n");
+//                area.append(rs.getString("nombre") + "\n");
+//                area.append(rs.getString("apellido") + "\n");
+//                area.append("\n");
+//            }
+//            
+//            
+//            conexion.close();
+//            
+//            cedula.setText("");
+//            nombre.setText("");
+//            apellido.setText("");
+//            
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Failed to Connected");
+//        }
+//    }
 
     public String getUrl() {
         return url;
