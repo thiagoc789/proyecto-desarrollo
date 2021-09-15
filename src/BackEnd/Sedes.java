@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author zanti
  */
-public class RegistrarSedes {
+public class Sedes {
 
     ConexionBD conexionExistente = new ConexionBD();
     String sql = "";

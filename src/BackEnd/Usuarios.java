@@ -7,6 +7,7 @@ package BackEnd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author zanti
  */
-public class RegistrarUsuario {
+public class Usuarios {
 
     ConexionBD conexionExistente = new ConexionBD();
     String sql = "";
@@ -31,8 +32,6 @@ public class RegistrarUsuario {
 
         try {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
-            //JOptionPane.showMessageDialog(null, "Connected to Database");
-            //conexion.close();
             stmt = conexion.createStatement();
 
             sql = "INSERT INTO usuarios(cedula, nombre, telefono, contraseña, cargo, sede) VALUES("
@@ -51,5 +50,38 @@ public class RegistrarUsuario {
             JOptionPane.showMessageDialog(null, "Failed to Connected");
         }
     }
+    
+    public boolean validarUsuario(String cedula, String contraseña) throws SQLException {
+        boolean usuarioValido = false;
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.getMessage();
+        }
 
+        try {            
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+            
+            sql = "SELECT * FROM usuarios "
+                    + "WHERE cedula = \'" + cedula + "\'";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            String texto = " ";
+            
+            while(rs.next()){
+                texto = rs.getString("contraseña");
+            }
+
+            if( !(contraseña.compareTo(texto) == 0) )
+                JOptionPane.showMessageDialog(null, "Cédula o contraseña invalida");
+            else
+                usuarioValido = true;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Failed to Connected");
+        }
+        
+        return usuarioValido;
+    }
 }

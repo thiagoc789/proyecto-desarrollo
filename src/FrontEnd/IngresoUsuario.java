@@ -1,6 +1,6 @@
 package FrontEnd;
 
-import BackEnd.RegistrarUsuario;
+import BackEnd.Usuarios;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -273,14 +273,17 @@ public class IngresoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-//        RegistrarUsuario registrar = new RegistrarUsuario();
-//        try {
-//            registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        new PantallaGeneralGerente().setVisible(true);
-//        this.setVisible(false);
+        Usuarios validar = new Usuarios();
+        boolean usuariValido = false;
+        try {
+            usuariValido = validar.validarUsuario(Cedula.getText(), Contraseña.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(usuariValido){
+            new PantallaGeneralGerente().setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked

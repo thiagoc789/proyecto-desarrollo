@@ -24,7 +24,7 @@ package FrontEnd;
 //-El gerente desea poder registrar una nueva sede de la empresa
 
 import BackEnd.ConexionBD;
-import BackEnd.RegistrarUsuario;
+import BackEnd.Usuarios;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -40,7 +40,7 @@ public class Main {
         ConexionBD conexion = new ConexionBD();
         conexion.dbConecction();
         
-        gerente = conexion.getGerente();
+        gerente = conexion.getCantidadUsuarios();
         
 //        if(gerente){
 //            JOptionPane.showMessageDialog(null, "Gerente existe", "", JOptionPane.INFORMATION_MESSAGE);

@@ -1,6 +1,6 @@
 package FrontEnd;
 
-import BackEnd.RegistrarSedes;
+import BackEnd.Sedes;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -426,7 +426,7 @@ public class RegistrarSede extends javax.swing.JFrame {
 
     private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
         // TODO add your handling code here:
-        RegistrarSedes registrar = new RegistrarSedes();
+        Sedes registrar = new Sedes();
         try {
             registrar.registrarSedeNueva(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
             JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);

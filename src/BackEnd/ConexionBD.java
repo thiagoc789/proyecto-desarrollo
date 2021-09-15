@@ -38,7 +38,7 @@ public class ConexionBD {
 
         try {
             conexion = DriverManager.getConnection(url, user, password);
-            JOptionPane.showMessageDialog(null, "Se ha conectado a la base de datos", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Se ha conectado a la base de datos", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
             stmt = conexion.createStatement();
 
             sql = "CREATE TABLE IF NOT EXISTS usuarios (cedula VARCHAR(50), nombre VARCHAR(50), telefono VARCHAR(50), contraseña VARCHAR(50), cargo VARCHAR(50), sede VARCHAR(50));";
@@ -51,7 +51,7 @@ public class ConexionBD {
         return conexion;
     }
     
-    public boolean getGerente(){
+    public boolean getCantidadUsuarios(){
         boolean gerenteActivo = false;
         try{
             Class.forName("org.postgresql.Driver");
@@ -63,36 +63,21 @@ public class ConexionBD {
             conexion = DriverManager.getConnection(url, user, password);           
             stmt = conexion.createStatement();
 
-            sql = "SELECT * FROM usuarios";
+            sql = "SELECT count(*) FROM usuarios";
             ResultSet rs = stmt.executeQuery(sql);
             
             String texto = " ";
+            rs.next();
+            texto = rs.getString("count");
             
-            //rs.getRow();
-            
-            while(rs.next()){
-                //texto.concat("ds","d");
-                //texto = texto + rs.getString("cedula");
-                //texto = texto + rs.getString("nombre");
-                //texto = texto + rs.getString("telefono");
-                //texto = texto + rs.getString("contraseña");
-                //texto = texto + rs.getString("cargo");
-                texto = rs.getString("nombre");
-                //texto = texto + rs.getString("sede");
-                //texto.append(rs.getString("cedula") + "\n");
-                //area.append(rs.getString("nombre") + "\n");
-                //area.append(rs.getString("apellido") + "\n");
-                //area.append("\n");
+            if( !(texto.compareTo("0") == 0) ){
+                gerenteActivo = true;
             }
             
-//            if(!texto.isBlank()){
-//                gerenteActivo = true;
-//                JOptionPane.showMessageDialog(null, "El gerente esta " + gerenteActivo, "", JOptionPane.INFORMATION_MESSAGE);
-//            }
+            conexion.close();
 
-            JOptionPane.showMessageDialog(null, texto + " es gerente", "", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Failed to Connected, aquí falló");
+            JOptionPane.showMessageDialog(null, "Error de coneción con base de datos");
         }
         return gerenteActivo;
     }
