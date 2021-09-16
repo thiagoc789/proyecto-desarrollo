@@ -1,4 +1,4 @@
-package FrontEnd;
+package FrontEnd.Gerente;
 
 import BackEnd.Sedes;
 import java.awt.Color;
@@ -32,12 +32,12 @@ public class RegistrarSede extends javax.swing.JFrame {
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
-        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel9 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel10 = new javax.swing.JLabel();
+        javax.swing.JLabel lRegistrarUsuario = new javax.swing.JLabel();
+        javax.swing.JLabel lRegristralSede = new javax.swing.JLabel();
+        javax.swing.JLabel lModificarUsuario = new javax.swing.JLabel();
+        javax.swing.JLabel lModificarSede = new javax.swing.JLabel();
+        javax.swing.JLabel lInactivarUsuario = new javax.swing.JLabel();
+        javax.swing.JLabel lListarUsuarios = new javax.swing.JLabel();
         javax.swing.JPanel jPanel4 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel12 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel13 = new javax.swing.JLabel();
@@ -81,7 +81,7 @@ public class RegistrarSede extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/close.png"))); // NOI18N
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -91,7 +91,7 @@ public class RegistrarSede extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/negative.png"))); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -192,36 +192,36 @@ public class RegistrarSede extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("-Registrar Usuario");
+        lRegistrarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lRegistrarUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        lRegistrarUsuario.setText("-Registrar Usuario");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("-Registrar Nueva Sede");
-        jLabel2.setBorder(new javax.swing.border.MatteBorder(null));
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        lRegristralSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lRegristralSede.setForeground(new java.awt.Color(255, 0, 0));
+        lRegristralSede.setText("-Registrar Nueva Sede");
+        lRegristralSede.setBorder(new javax.swing.border.MatteBorder(null));
+        lRegristralSede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lRegristralSede.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                lRegristralSedeMouseClicked(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("-Modificar Usuario");
+        lModificarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lModificarUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        lModificarUsuario.setText("-Modificar Usuario");
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel8.setText("-Modificar Sede");
+        lModificarSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lModificarSede.setForeground(new java.awt.Color(102, 102, 102));
+        lModificarSede.setText("-Modificar Sede");
 
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel9.setText("-Inactivar Usuario");
+        lInactivarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lInactivarUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        lInactivarUsuario.setText("-Inactivar Usuario");
 
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel10.setText("-Listar Usuarios");
+        lListarUsuarios.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lListarUsuarios.setForeground(new java.awt.Color(102, 102, 102));
+        lListarUsuarios.setText("-Listar Usuarios");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -230,36 +230,36 @@ public class RegistrarSede extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lModificarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lModificarSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lInactivarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(33, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lRegristralSede)
                     .addGap(11, 11, 11)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lModificarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lInactivarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(269, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(30, 30, 30)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lRegristralSede, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(455, Short.MAX_VALUE)))
         );
 
@@ -294,7 +294,7 @@ public class RegistrarSede extends javax.swing.JFrame {
         Registrar.setForeground(new java.awt.Color(255, 255, 255));
         Registrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Registrar.setText("Registrar");
-        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Registrar.setOpaque(true);
         Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -313,7 +313,7 @@ public class RegistrarSede extends javax.swing.JFrame {
         Cancelar.setForeground(new java.awt.Color(255, 255, 255));
         Cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Cancelar.setText("Cancelar");
-        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Cancelar.setOpaque(true);
         Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -416,9 +416,9 @@ public class RegistrarSede extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void lRegristralSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegristralSedeMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_lRegristralSedeMouseClicked
 
     private void DirecciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DirecciónActionPerformed
         // TODO add your handling code here:

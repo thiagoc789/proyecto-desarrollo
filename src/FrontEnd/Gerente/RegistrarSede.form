@@ -279,18 +279,18 @@
               <Group type="102" attributes="0">
                   <EmptySpace pref="31" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="jLabel9" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="lRegistrarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="lModificarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="lListarUsuarios" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="lModificarSede" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="lInactivarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lRegristralSede" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -300,21 +300,21 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="jLabel8" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lModificarSede" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lRegistrarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lModificarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel9" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lInactivarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel10" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lListarUsuarios" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace pref="269" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="lRegristralSede" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace pref="455" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -322,7 +322,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lRegistrarUsuario">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -333,7 +333,7 @@
             <Property name="text" type="java.lang.String" value="-Registrar Usuario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lRegristralSede">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -352,10 +352,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lRegristralSedeMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="lModificarUsuario">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -366,7 +366,7 @@
             <Property name="text" type="java.lang.String" value="-Modificar Usuario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="lModificarSede">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -377,7 +377,7 @@
             <Property name="text" type="java.lang.String" value="-Modificar Sede"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
+        <Component class="javax.swing.JLabel" name="lInactivarUsuario">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -388,7 +388,7 @@
             <Property name="text" type="java.lang.String" value="-Inactivar Usuario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="lListarUsuarios">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
