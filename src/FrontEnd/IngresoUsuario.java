@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import FrontEnd.Gerente.PantallaGeneralGerente;
 import BackEnd.Usuarios;
 import java.awt.Color;
 import java.awt.MouseInfo;

@@ -84,4 +84,38 @@ public class Usuarios {
         
         return usuarioValido;
     }
+    
+    public String listarUsuarios() throws SQLException {
+        String usuarios = "";
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.getMessage();
+        }
+
+        try {            
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+            
+            sql = "SELECT * FROM usuarios";
+                    //+ "WHERE cedula = \'" + cedula + "\'";
+            
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                usuarios = usuarios + rs.getString("cedula");
+                usuarios = usuarios + "\t" + rs.getString("nombre");
+                usuarios = usuarios + "\t" + rs.getString("telefono");
+                usuarios = usuarios + "\t" + rs.getString("cargo");
+                usuarios = usuarios + "\t" + rs.getString("sede") + "\n";
+            }
+            
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Failed to Connected");
+        }
+        
+        return usuarios;
+    }
 }

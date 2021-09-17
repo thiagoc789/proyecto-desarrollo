@@ -1,6 +1,5 @@
 package FrontEnd;
 
-import FrontEnd.Gerente.PantallaGeneralGerente;
 import BackEnd.Usuarios;
 import java.awt.Color;
 import java.awt.MouseInfo;
@@ -9,12 +8,12 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UsuarioNuevo extends javax.swing.JFrame {
+public class PrimerIngreso extends javax.swing.JFrame {
 
     private int x;
     private int y;
 
-    public UsuarioNuevo() {
+    public PrimerIngreso() {
         initComponents();
     }
 
@@ -364,7 +363,7 @@ public class UsuarioNuevo extends javax.swing.JFrame {
         try {
             registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede");
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioNuevo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrimerIngreso.class.getName()).log(Level.SEVERE, null, ex);
         }
         new PantallaGeneralGerente().setVisible(true);
         this.setVisible(false);
