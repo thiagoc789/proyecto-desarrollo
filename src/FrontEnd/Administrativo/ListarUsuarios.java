@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FrontEnd.Gerente;
+package FrontEnd.Administrativo;
 
-import FrontEnd.PantallaGeneralGerente;
+import FrontEnd.PantallaGerente;
 import BackEnd.Sedes;
 import BackEnd.Usuarios;
 import java.awt.Color;
@@ -152,7 +152,7 @@ public class ListarUsuarios extends javax.swing.JPanel {
 //            Telefono.setText("");
 //
         } catch (SQLException ex) {
-            Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_listarTotalesMouseClicked
 
@@ -168,7 +168,7 @@ public class ListarUsuarios extends javax.swing.JPanel {
 
     private void listarPorSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarPorSedeMouseClicked
         // TODO add your handling code here:
-        //new PantallaGeneralGerente().setVisible(true);
+        //new PantallaGerente().setVisible(true);
         //this.setVisible(false);
     }//GEN-LAST:event_listarPorSedeMouseClicked
 

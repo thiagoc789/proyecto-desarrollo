@@ -1,26 +1,60 @@
 package FrontEnd;
 
-import FrontEnd.Gerente.ListarUsuarios;
-import FrontEnd.Gerente.ListarUsuariosViejo;
-import FrontEnd.Gerente.RegistrarSede;
-import FrontEnd.Gerente.RegistrarSedeViejo;
+import FrontEnd.Administrativo.ListarUsuarios;
+import FrontEnd.Administrativo.ModificarSede;
+import FrontEnd.Administrativo.RegistrarSede;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
-public class PantallaGeneralGerente extends javax.swing.JFrame {
+public class PantallaGerente extends javax.swing.JFrame {
 
     private int x;
     private int y;
     
     ListarUsuarios listaUsuarios = new ListarUsuarios();
     RegistrarSede nuevaSede = new RegistrarSede();
+    ModificarSede actualizarSede = new ModificarSede();
 
-    public PantallaGeneralGerente() {
+    public PantallaGerente() {
         initComponents();
         
         contenedor.setVisible(false);
 
+    }
+    
+    public void cambioVisualizacion(){
+        lInactivarUsuario.setEnabled(true);
+        lListarUsuarios.setEnabled(true);
+        lModificarSede.setEnabled(true);
+        lModificarUsuario.setEnabled(true);
+        lRegistrarSede.setEnabled(true);
+        lRegistrarUsuario.setEnabled(true);
+        
+        nuevaSede.setVisible(false);
+        listaUsuarios.setVisible(false);
+        actualizarSede.setVisible(false);
+        
+    }
+    
+    public void visualizacionActual(String panel){
+        
+        if(panel.compareTo("registrarSede") == 0){
+            nuevaSede.setVisible(true);
+            contenedor.add(nuevaSede);
+            lRegistrarSede.setEnabled(false);
+        }else if(panel.compareTo("listarUsuarios") == 0){
+            listaUsuarios.setVisible(true);
+            contenedor.add(listaUsuarios);
+            lListarUsuarios.setEnabled(false);
+        }else if(panel.compareTo("actualizarSede") == 0){
+            actualizarSede.setVisible(true);
+            contenedor.add(actualizarSede);
+            lModificarSede.setEnabled(false);
+        }
+        
+        contenedor.validate();
+        contenedor.setVisible(true);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -214,6 +248,11 @@ public class PantallaGeneralGerente extends javax.swing.JFrame {
         lModificarSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lModificarSede.setForeground(new java.awt.Color(102, 102, 102));
         lModificarSede.setText("-Modificar Sede");
+        lModificarSede.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lModificarSedeMouseClicked(evt);
+            }
+        });
 
         lInactivarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lInactivarUsuario.setForeground(new java.awt.Color(102, 102, 102));
@@ -309,54 +348,27 @@ public class PantallaGeneralGerente extends javax.swing.JFrame {
 
     private void lRegistrarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseClicked
         // TODO add your handling code here:
-//        new RegistrarSedeViejo().setVisible(true);
-//        this.setVisible(false);
-        
-        nuevaSede.setVisible(true);
-        listaUsuarios.setVisible(false);
-        
-        contenedor.add(nuevaSede);
-        contenedor.validate();
-        contenedor.setVisible(true);
-        
-        lInactivarUsuario.setEnabled(true);
-        lListarUsuarios.setEnabled(true);
-        lModificarSede.setEnabled(true);
-        lModificarUsuario.setEnabled(true);
-        lRegistrarSede.setEnabled(false);
-        lRegistrarUsuario.setEnabled(true);
-
+        cambioVisualizacion();
+        visualizacionActual("registrarSede");
     }//GEN-LAST:event_lRegistrarSedeMouseClicked
 
     private void lRegistrarSedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseEntered
-        // TODO add your handling code here:
-        //lRegistrarSede.setForeground(Color.red);
+
     }//GEN-LAST:event_lRegistrarSedeMouseEntered
 
     private void lRegistrarSedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseExited
-        // TODO add your handling code here:
-        //lRegistrarSede.setForeground(new Color(102, 102, 102));
+
     }//GEN-LAST:event_lRegistrarSedeMouseExited
 
     private void lListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lListarUsuariosMouseClicked
-        //new ListarUsuariosViejo().setVisible(true);
-        //this.setVisible(false);
-        
-        nuevaSede.setVisible(false);
-        listaUsuarios.setVisible(true);
-        
-        contenedor.add(listaUsuarios);
-        contenedor.validate();
-        contenedor.setVisible(true);
-        
-        lInactivarUsuario.setEnabled(true);
-        lListarUsuarios.setEnabled(false);        
-        lModificarSede.setEnabled(true);
-        lModificarUsuario.setEnabled(true);
-        lRegistrarSede.setEnabled(true);
-        lRegistrarUsuario.setEnabled(true);
-    
+        cambioVisualizacion();
+        visualizacionActual("listarUsuarios");
     }//GEN-LAST:event_lListarUsuariosMouseClicked
+
+    private void lModificarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lModificarSedeMouseClicked
+        cambioVisualizacion();
+        visualizacionActual("actualizarSede");
+    }//GEN-LAST:event_lModificarSedeMouseClicked
 
     /**
      * @param args the command line arguments

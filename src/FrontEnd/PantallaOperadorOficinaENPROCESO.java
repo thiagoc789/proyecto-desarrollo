@@ -1,31 +1,23 @@
-package FrontEnd.Gerente;
+package FrontEnd;
 
-import BackEnd.Sedes;
+import FrontEnd.Administrativo.ListarUsuarios;
+import FrontEnd.Administrativo.RegistrarSede;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
-public class ListarUsuariosViejo extends javax.swing.JFrame {
-    
-    panel1 panel01 = new panel1();
-    panel2 panel02 = new panel2();
+public class PantallaOperadorOficinaENPROCESO extends javax.swing.JFrame {
 
     private int x;
     private int y;
+    
+    ListarUsuarios listaUsuarios = new ListarUsuarios();
+    RegistrarSede nuevaSede = new RegistrarSede();
 
-    public ListarUsuariosViejo() {
+    public PantallaOperadorOficinaENPROCESO() {
         initComponents();
         
-        panel4.add(panel01);
-        panel01.setVisible(true);
-        panel02.setVisible(false);
-        
-        panel4.setVisible(false);
+        contenedor.setVisible(false);
 
     }
 
@@ -36,21 +28,20 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
         javax.swing.JButton jButton2 = new javax.swing.JButton();
         javax.swing.JButton jButton1 = new javax.swing.JButton();
         javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel11 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel12 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
-        javax.swing.JLabel lRegistrarUsuario = new javax.swing.JLabel();
-        javax.swing.JLabel lRegristralSede = new javax.swing.JLabel();
-        javax.swing.JLabel lModificarUsuario = new javax.swing.JLabel();
-        javax.swing.JLabel lModificarSede = new javax.swing.JLabel();
-        javax.swing.JLabel lInactivarUsuario = new javax.swing.JLabel();
-        javax.swing.JLabel lListarUsuarios = new javax.swing.JLabel();
-        label1 = new javax.swing.JLabel();
-        label2 = new javax.swing.JLabel();
-        panel4 = new javax.swing.JPanel();
+        lRegistrarUsuario = new javax.swing.JLabel();
+        lRegistrarSede = new javax.swing.JLabel();
+        lModificarUsuario = new javax.swing.JLabel();
+        lModificarSede = new javax.swing.JLabel();
+        lInactivarUsuario = new javax.swing.JLabel();
+        lListarUsuarios = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -105,10 +96,10 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Sistematización De Procesos - Empresa Flash");
 
-        jLabel11.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Registrar Sede");
+        jLabel12.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Pantalla General Gerente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,30 +109,31 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
-                .addGap(149, 149, 149)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addGap(148, 148, 148)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(584, 584, 584))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(246, 246, 246))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel11)))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -177,7 +169,7 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap(591, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +182,7 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, 80));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 950, 80));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -198,14 +190,19 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
         lRegistrarUsuario.setForeground(new java.awt.Color(102, 102, 102));
         lRegistrarUsuario.setText("-Registrar Usuario");
 
-        lRegristralSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lRegristralSede.setForeground(new java.awt.Color(255, 0, 0));
-        lRegristralSede.setText("-Registrar Nueva Sede");
-        lRegristralSede.setBorder(new javax.swing.border.MatteBorder(null));
-        lRegristralSede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        lRegristralSede.addMouseListener(new java.awt.event.MouseAdapter() {
+        lRegistrarSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lRegistrarSede.setForeground(new java.awt.Color(102, 102, 102));
+        lRegistrarSede.setText("-Registrar Nueva Sede");
+        lRegistrarSede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lRegistrarSede.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lRegristralSedeMouseClicked(evt);
+                lRegistrarSedeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lRegistrarSedeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lRegistrarSedeMouseExited(evt);
             }
         });
 
@@ -224,46 +221,37 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
         lListarUsuarios.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lListarUsuarios.setForeground(new java.awt.Color(102, 102, 102));
         lListarUsuarios.setText("-Listar Usuarios");
-
-        label1.setText("Panel1");
-        label1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lListarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label1MouseClicked(evt);
+                lListarUsuariosMouseClicked(evt);
             }
         });
 
-        label2.setText("Panel2");
-        label2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label2MouseClicked(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("<html>Secretaria<br>\nBORRAR ESTO\n</html>");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lModificarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lModificarSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lInactivarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(label1)
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(label2)
-                        .addGap(52, 52, 52))))
+                    .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lModificarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lModificarSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lInactivarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lRegristralSede)
+                    .addContainerGap(30, Short.MAX_VALUE)
+                    .addComponent(lRegistrarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(11, 11, 11)))
         );
         jPanel3Layout.setVerticalGroup(
@@ -279,23 +267,23 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
                 .addComponent(lInactivarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(label2)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(30, 30, 30)
-                    .addComponent(lRegristralSede, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lRegistrarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(455, Short.MAX_VALUE)))
         );
 
+        jLabel1.getAccessibleContext().setAccessibleName("Secretaria\nBORRAR ESTO");
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 180, 520));
 
-        panel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
-        panel4.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(panel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 620, 520));
+        contenedor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
+        contenedor.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 770, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -330,39 +318,63 @@ public class ListarUsuariosViejo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void lRegristralSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegristralSedeMouseClicked
+    private void lRegistrarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lRegristralSedeMouseClicked
-
-    private void label1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label1MouseClicked
-        //taUsuarios.setText("Poner algo en el TextArea");
-        //panel4.setBackground(Color.red);
         
-        panel02.setVisible(false);
-        panel01.setVisible(true);
-        panel4.add(panel01);
-        panel4.validate();
-        panel4.setVisible(true);
-        JOptionPane.showMessageDialog(null, "Mensaje 1");
-    }//GEN-LAST:event_label1MouseClicked
+        nuevaSede.setVisible(true);
+        listaUsuarios.setVisible(false);
+        
+        contenedor.add(nuevaSede);
+        contenedor.validate();
+        contenedor.setVisible(true);
+        
+        lInactivarUsuario.setEnabled(true);
+        lListarUsuarios.setEnabled(true);
+        lModificarSede.setEnabled(true);
+        lModificarUsuario.setEnabled(true);
+        lRegistrarSede.setEnabled(false);
+        lRegistrarUsuario.setEnabled(true);
 
-    private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
+    }//GEN-LAST:event_lRegistrarSedeMouseClicked
+
+    private void lRegistrarSedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseEntered
         // TODO add your handling code here:
-        panel01.setVisible(false);
-        panel02.setVisible(true);        
-        panel4.add(panel02);
-        panel4.validate();
-        panel4.setVisible(true);
-        JOptionPane.showMessageDialog(null, "Mensaje 2");
-    }//GEN-LAST:event_label2MouseClicked
+        //lRegistrarSede.setForeground(Color.red);
+    }//GEN-LAST:event_lRegistrarSedeMouseEntered
+
+    private void lRegistrarSedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseExited
+        // TODO add your handling code here:
+        //lRegistrarSede.setForeground(new Color(102, 102, 102));
+    }//GEN-LAST:event_lRegistrarSedeMouseExited
+
+    private void lListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lListarUsuariosMouseClicked
+        nuevaSede.setVisible(false);
+        listaUsuarios.setVisible(true);
+        
+        contenedor.add(listaUsuarios);
+        contenedor.validate();
+        contenedor.setVisible(true);
+        
+        lInactivarUsuario.setEnabled(true);
+        lListarUsuarios.setEnabled(false);        
+        lModificarSede.setEnabled(true);
+        lModificarUsuario.setEnabled(true);
+        lRegistrarSede.setEnabled(true);
+        lRegistrarUsuario.setEnabled(true);
+    
+    }//GEN-LAST:event_lListarUsuariosMouseClicked
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel label1;
-    public javax.swing.JLabel label2;
-    public javax.swing.JPanel panel4;
+    public javax.swing.JPanel contenedor;
+    public javax.swing.JLabel lInactivarUsuario;
+    public javax.swing.JLabel lListarUsuarios;
+    public javax.swing.JLabel lModificarSede;
+    public javax.swing.JLabel lModificarUsuario;
+    public javax.swing.JLabel lRegistrarSede;
+    public javax.swing.JLabel lRegistrarUsuario;
     // End of variables declaration//GEN-END:variables
 }

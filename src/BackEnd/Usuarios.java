@@ -51,8 +51,8 @@ public class Usuarios {
         }
     }
     
-    public boolean validarUsuario(String cedula, String contraseña) throws SQLException {
-        boolean usuarioValido = false;
+    public String validarUsuario(String cedula, String contraseña) throws SQLException {
+        String usuarioValido = "empty";
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -67,16 +67,18 @@ public class Usuarios {
                     + "WHERE cedula = \'" + cedula + "\'";
             
             ResultSet rs = stmt.executeQuery(sql);
-            String texto = " ";
+            String clave = "";
+            String cargo = "";
             
             while(rs.next()){
-                texto = rs.getString("contraseña");
+                clave = rs.getString("contraseña");
+                cargo = rs.getString("cargo");
             }
 
-            if( !(contraseña.compareTo(texto) == 0) )
+            if( !(contraseña.compareTo(clave) == 0) )
                 JOptionPane.showMessageDialog(null, "Cédula o contraseña invalida");
             else
-                usuarioValido = true;
+                usuarioValido = cargo;
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Failed to Connected");

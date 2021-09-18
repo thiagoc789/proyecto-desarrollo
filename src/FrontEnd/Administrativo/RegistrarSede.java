@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FrontEnd.Gerente;
+package FrontEnd.Administrativo;
 
-import FrontEnd.PantallaGeneralGerente;
+import FrontEnd.PantallaGerente;
 import BackEnd.Sedes;
 import java.awt.Color;
 import java.awt.MouseInfo;
@@ -204,7 +204,7 @@ public class RegistrarSede extends javax.swing.JPanel {
             Telefono.setText("");
 
         } catch (SQLException ex) {
-            Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_RegistrarMouseClicked
 
@@ -220,7 +220,7 @@ public class RegistrarSede extends javax.swing.JPanel {
 
     private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
         // TODO add your handling code here:
-        new PantallaGeneralGerente().setVisible(true);
+        new PantallaGerente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CancelarMouseClicked
 

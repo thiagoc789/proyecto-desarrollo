@@ -27,8 +27,8 @@ public class IngresoUsuario extends javax.swing.JFrame {
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lCancelar = new javax.swing.JLabel();
+        lEntrar = new javax.swing.JLabel();
         Cedula = new javax.swing.JFormattedTextField();
         Contraseña = new javax.swing.JPasswordField();
 
@@ -126,41 +126,41 @@ public class IngresoUsuario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Por favor ingrese su cédula y su contraseña");
 
-        jLabel3.setBackground(new java.awt.Color(0, 153, 102));
-        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("CANCELAR");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel3.setOpaque(true);
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        lCancelar.setBackground(new java.awt.Color(0, 153, 102));
+        lCancelar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        lCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        lCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lCancelar.setText("CANCELAR");
+        lCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lCancelar.setOpaque(true);
+        lCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                lCancelarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel3MouseEntered(evt);
+                lCancelarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel3MouseExited(evt);
+                lCancelarMouseExited(evt);
             }
         });
 
-        jLabel4.setBackground(new java.awt.Color(0, 153, 102));
-        jLabel4.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("ENTRAR");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel4.setOpaque(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lEntrar.setBackground(new java.awt.Color(0, 153, 102));
+        lEntrar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        lEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        lEntrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lEntrar.setText("ENTRAR");
+        lEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lEntrar.setOpaque(true);
+        lEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                lEntrarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
+                lEntrarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
+                lEntrarMouseExited(evt);
             }
         });
 
@@ -201,7 +201,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Contraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
                         .addGap(191, 191, 191))
@@ -211,7 +211,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(211, 211, 211)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(451, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -224,12 +224,12 @@ public class IngresoUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(224, 224, 224)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(118, 118, 118))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(408, 408, 408)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(lEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                     .addGap(120, 120, 120)))
         );
 
@@ -272,31 +272,34 @@ public class IngresoUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void lEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseClicked
         Usuarios validar = new Usuarios();
-        boolean usuariValido = false;
+        String usuariValido = "";
         try {
             usuariValido = validar.validarUsuario(Cedula.getText(), Contraseña.getText());
         } catch (SQLException ex) {
             Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(usuariValido){
-            new PantallaGeneralGerente().setVisible(true);
+        if( usuariValido.compareTo("Gerente") == 0 ){
+            new PantallaGerente().setVisible(true);
+            this.setVisible(false);
+        }else{
+            new PantallaSecretariaENPROCESO().setVisible(true);
             this.setVisible(false);
         }
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_lEntrarMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void lCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseClicked
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_lCancelarMouseClicked
 
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+    private void lEntrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseEntered
         // TODO add your handling code here:
-        jLabel4.setForeground(Color.red);
+        lEntrar.setForeground(Color.red);
 
 
-    }//GEN-LAST:event_jLabel4MouseEntered
+    }//GEN-LAST:event_lEntrarMouseEntered
 
     private void CedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusGained
         // TODO add your handling code here:
@@ -330,20 +333,20 @@ public class IngresoUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ContraseñaFocusLost
 
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+    private void lEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseExited
         // TODO add your handling code here:
-        jLabel4.setForeground(Color.white);
-    }//GEN-LAST:event_jLabel4MouseExited
+        lEntrar.setForeground(Color.white);
+    }//GEN-LAST:event_lEntrarMouseExited
 
-    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+    private void lCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseEntered
         // TODO add your handling code here:
-        jLabel3.setForeground(Color.red);
-    }//GEN-LAST:event_jLabel3MouseEntered
+        lCancelar.setForeground(Color.red);
+    }//GEN-LAST:event_lCancelarMouseEntered
 
-    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+    private void lCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseExited
         // TODO add your handling code here:
-        jLabel3.setForeground(Color.white);
-    }//GEN-LAST:event_jLabel3MouseExited
+        lCancelar.setForeground(Color.white);
+    }//GEN-LAST:event_lCancelarMouseExited
 
     /**
      * @param args the command line arguments
@@ -352,7 +355,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JFormattedTextField Cedula;
     javax.swing.JPasswordField Contraseña;
-    javax.swing.JLabel jLabel3;
-    javax.swing.JLabel jLabel4;
+    javax.swing.JLabel lCancelar;
+    javax.swing.JLabel lEntrar;
     // End of variables declaration//GEN-END:variables
 }

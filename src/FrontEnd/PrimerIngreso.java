@@ -365,7 +365,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PrimerIngreso.class.getName()).log(Level.SEVERE, null, ex);
         }
-        new PantallaGeneralGerente().setVisible(true);
+        new PantallaGerente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked
 
