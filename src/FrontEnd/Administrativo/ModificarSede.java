@@ -222,14 +222,12 @@ public class ModificarSede extends javax.swing.JPanel {
     }//GEN-LAST:event_DirecciónActionPerformed
 
     private void ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseClicked
-        // TODO add your handling code here:
-        //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
-        //modificar.registrarSedeNueva(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
-//            JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
-//            Id.setText("");
-//            Nombre.setText("");
-//            Dirección.setText("");
-//            Telefono.setText("");
+        try {
+            sede.modificarSede(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
+            areaSedes.setText( sede.listarSedes() );
+        } catch (SQLException ex) {
+            Logger.getLogger(ModificarSede.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ActualizarMouseClicked
 
     private void ActualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseEntered
@@ -260,7 +258,7 @@ public class ModificarSede extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JLabel Actualizar;
+    public javax.swing.JLabel Actualizar;
     javax.swing.JLabel Cancelar;
     javax.swing.JTextField Dirección;
     javax.swing.JTextField Id;

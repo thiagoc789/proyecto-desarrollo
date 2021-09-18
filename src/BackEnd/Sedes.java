@@ -65,19 +65,32 @@ public class Sedes {
             stmt = conexion.createStatement();
             sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50));";
             stmt.executeUpdate(sql);
-
-            sql = "INSERT INTO sedes(id, nombre, direccion, telefono) VALUES("
-                    + "\'" + id + "\',"
-                    + "\'" + nombre + "\',"
-                    + "\'" + direccion + "\',"
-                    + "\'" + telefono + "\'"
-                    + ");";
-            stmt.executeUpdate(sql);
+            
+            if( !(nombre.compareTo("")== 0) ){
+                sql = "UPDATE sedes "
+                    + "SET nombre = \'" + nombre + "\' "
+                    + "WHERE id = \'" + id + "\'";
+                stmt.executeUpdate(sql);
+            }
+            if( !(direccion.compareTo("")== 0) ){
+                sql = "UPDATE sedes "
+                    + "SET direccion = \'" + direccion + "\' "
+                    + "WHERE id = \'" + id + "\'";
+                stmt.executeUpdate(sql);
+            }
+            if( !(telefono.compareTo("")== 0) ){
+                sql = "UPDATE sedes "
+                    + "SET telefono = \'" + telefono + "\' "
+                    + "WHERE id = \'" + id + "\'";
+                stmt.executeUpdate(sql);
+            }
+            //stmt.executeUpdate(sql);
 
             conexion.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Failed to Connected");
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
     
