@@ -197,7 +197,7 @@ public class RegistrarSede extends javax.swing.JPanel {
         Sedes registrar = new Sedes();
         try {
             registrar.registrarSedeNueva(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
-            JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
             Id.setText("");
             Nombre.setText("");
             Dirección.setText("");

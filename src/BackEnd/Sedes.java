@@ -7,11 +7,11 @@ package BackEnd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author zanti
@@ -34,17 +34,14 @@ public class Sedes {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
             //JOptionPane.showMessageDialog(null, "Connected to Database");
             //conexion.close();
-            stmt = conexion.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50));";
-            stmt.executeUpdate(sql);
-
-            sql = "INSERT INTO sedes(id, nombre, direccion, telefono) VALUES("
-                    + "\'" + id + "\',"
-                    + "\'" + nombre + "\',"
-                    + "\'" + direccion + "\',"
-                    + "\'" + telefono + "\'"
-                    + ");";
-            stmt.executeUpdate(sql);
+            sql = "INSERT INTO sedes(id, nombre, direccion, telefono) VALUES(?, ?, ?, ?);";
+            PreparedStatement stmt = conexion.prepareStatement(sql);
+            stmt.setString(1, id);
+            stmt.setString(2, nombre);
+            stmt.setString(3, direccion);
+            stmt.setString(4, telefono);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Sede " + id + " Registrada Con Exitooo", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
 
             conexion.close();
 
