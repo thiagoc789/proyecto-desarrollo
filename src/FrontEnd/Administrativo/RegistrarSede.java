@@ -194,14 +194,17 @@ public class RegistrarSede extends javax.swing.JPanel {
 
     private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
         // TODO add your handling code here:
-        Sedes registrar = new Sedes();
+        Sedes sede = new Sedes();
         try {
-            registrar.registrarSedeNueva(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
-            JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
-            Id.setText("");
-            Nombre.setText("");
-            Dirección.setText("");
-            Telefono.setText("");
+            if( !( sede.idExiste(Id.getText()) ) ){
+                sede.registrarSedeNueva(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
+                JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                Id.setText("");
+                Nombre.setText("");
+                Dirección.setText("");
+                Telefono.setText("");
+            }else
+                JOptionPane.showMessageDialog(null, "El Id ya existe");
 
         } catch (SQLException ex) {
             //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);

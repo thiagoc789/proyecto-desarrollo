@@ -276,7 +276,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
         Usuarios validar = new Usuarios();
         String usuariValido = "";
         try {
-            usuariValido = validar.validarUsuario(Cedula.getText(), Contraseña.getText());
+            usuariValido = validar.validarIngreso(Cedula.getText(), Contraseña.getText());
         } catch (SQLException ex) {
             Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }

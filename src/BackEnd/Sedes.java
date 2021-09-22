@@ -22,6 +22,39 @@ public class Sedes {
     String sql = "";
     Connection conexion;
     Statement stmt;
+    String sedesActivasSoloId = "";
+    
+    public boolean idExiste(String id){
+        boolean existeId = false;
+        try{
+            Class.forName("org.postgresql.Driver");
+        }catch(ClassNotFoundException e){
+            e.getMessage();
+        }
+        
+        try {
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+
+            sql = "SELECT count(*) FROM sedes WHERE id = \'" + id +"\'";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            String texto = "";
+            
+            while(rs.next()){
+                texto = rs.getString("count");
+            }
+            
+            if( texto.compareTo("1") == 0 )
+                existeId = true;
+
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de coneción con base de datos");
+        }
+        return existeId;
+    }
 
     public void registrarSedeNueva(String id, String nombre, String direccion, String telefono) throws SQLException {
         try {
@@ -32,8 +65,6 @@ public class Sedes {
 
         try {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
-            //JOptionPane.showMessageDialog(null, "Connected to Database");
-            //conexion.close();
             stmt = conexion.createStatement();
             sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50));";
             stmt.executeUpdate(sql);
@@ -84,18 +115,15 @@ public class Sedes {
                     + "WHERE id = \'" + id + "\'";
                 stmt.executeUpdate(sql);
             }
-            //stmt.executeUpdate(sql);
-
             conexion.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Failed to Connected");
-            JOptionPane.showMessageDialog(null, ex);
         }
     }
     
     public String listarSedes(){
-        String sedesActivas = "";
+        String sedesActivasCompleto = "";
         try{
             Class.forName("org.postgresql.Driver");
         }catch(ClassNotFoundException e){
@@ -110,23 +138,17 @@ public class Sedes {
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()){
-                sedesActivas = sedesActivas + rs.getString("id");
-                sedesActivas = sedesActivas + "\t" + rs.getString("nombre");
-                sedesActivas = sedesActivas + "\t" + rs.getString("direccion");
-                sedesActivas = sedesActivas + "\t" + rs.getString("telefono") + "\n";
-            }
-            
-//            if( sedesActivas.compareTo("") == 0 ){
-//                //sedesActivas = true;
-//                JOptionPane.showMessageDialog(null, "Pues sí");
-//            }
-            
+                sedesActivasCompleto = sedesActivasCompleto + rs.getString("id");
+                sedesActivasCompleto = sedesActivasCompleto + "\t" + rs.getString("nombre");
+                sedesActivasCompleto = sedesActivasCompleto + "\t" + rs.getString("direccion");
+                sedesActivasCompleto = sedesActivasCompleto + "\t" + rs.getString("telefono") + "\n";
+            }            
             conexion.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de coneción con base de datos");
         }
-        return sedesActivas;
+        return sedesActivasCompleto;
     }
 
 }

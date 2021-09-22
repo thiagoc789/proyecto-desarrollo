@@ -1,8 +1,6 @@
 package FrontEnd;
 
-import FrontEnd.Administrativo.ListarUsuarios;
-import FrontEnd.Administrativo.ModificarSede;
-import FrontEnd.Administrativo.RegistrarSede;
+import FrontEnd.Administrativo.*;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -15,6 +13,9 @@ public class PantallaGerente extends javax.swing.JFrame {
     ListarUsuarios listaUsuarios = new ListarUsuarios();
     RegistrarSede nuevaSede = new RegistrarSede();
     ModificarSede actualizarSede = new ModificarSede();
+    RegistrarUsuario nuevoUsuario = new RegistrarUsuario();
+    ModificarUsuario modificarUsuario = new ModificarUsuario();
+    EstadoUsuario estadoUsuario = new EstadoUsuario();
 
     public PantallaGerente() {
         initComponents();
@@ -30,11 +31,13 @@ public class PantallaGerente extends javax.swing.JFrame {
         lModificarUsuario.setEnabled(true);
         lRegistrarSede.setEnabled(true);
         lRegistrarUsuario.setEnabled(true);
-        
-        nuevaSede.setVisible(false);
-        listaUsuarios.setVisible(false);
+
         actualizarSede.setVisible(false);
-        
+        estadoUsuario.setVisible(false);
+        listaUsuarios.setVisible(false);
+        modificarUsuario.setVisible(false);
+        nuevoUsuario.setVisible(false);
+        nuevaSede.setVisible(false);
     }
     
     public void visualizacionActual(String panel){
@@ -51,7 +54,21 @@ public class PantallaGerente extends javax.swing.JFrame {
             actualizarSede.setVisible(true);
             contenedor.add(actualizarSede);
             lModificarSede.setEnabled(false);
+        }else if(panel.compareTo("nuevoUsuario") == 0){
+            nuevoUsuario.setVisible(true);
+            contenedor.add(nuevoUsuario);
+            lRegistrarUsuario.setEnabled(false);
+        }else if(panel.compareTo("modificarUsuario") == 0){
+            modificarUsuario.setVisible(true);
+            contenedor.add(modificarUsuario);
+            lModificarUsuario.setEnabled(false);
+        }else if(panel.compareTo("estadoUsuario") == 0){
+            estadoUsuario.setVisible(true);
+            contenedor.add(estadoUsuario);
+            lInactivarUsuario.setEnabled(false);
         }
+        
+        //estadoUsuario
         
         contenedor.validate();
         contenedor.setVisible(true);
@@ -224,6 +241,11 @@ public class PantallaGerente extends javax.swing.JFrame {
         lRegistrarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lRegistrarUsuario.setForeground(new java.awt.Color(102, 102, 102));
         lRegistrarUsuario.setText("-Registrar Usuario");
+        lRegistrarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lRegistrarUsuarioMouseClicked(evt);
+            }
+        });
 
         lRegistrarSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lRegistrarSede.setForeground(new java.awt.Color(102, 102, 102));
@@ -244,6 +266,11 @@ public class PantallaGerente extends javax.swing.JFrame {
         lModificarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lModificarUsuario.setForeground(new java.awt.Color(102, 102, 102));
         lModificarUsuario.setText("-Modificar Usuario");
+        lModificarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lModificarUsuarioMouseClicked(evt);
+            }
+        });
 
         lModificarSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lModificarSede.setForeground(new java.awt.Color(102, 102, 102));
@@ -257,6 +284,11 @@ public class PantallaGerente extends javax.swing.JFrame {
         lInactivarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lInactivarUsuario.setForeground(new java.awt.Color(102, 102, 102));
         lInactivarUsuario.setText("-Inactivar Usuario");
+        lInactivarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lInactivarUsuarioMouseClicked(evt);
+            }
+        });
 
         lListarUsuarios.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lListarUsuarios.setForeground(new java.awt.Color(102, 102, 102));
@@ -369,6 +401,21 @@ public class PantallaGerente extends javax.swing.JFrame {
         cambioVisualizacion();
         visualizacionActual("actualizarSede");
     }//GEN-LAST:event_lModificarSedeMouseClicked
+
+    private void lRegistrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarUsuarioMouseClicked
+        cambioVisualizacion();
+        visualizacionActual("nuevoUsuario");
+    }//GEN-LAST:event_lRegistrarUsuarioMouseClicked
+
+    private void lModificarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lModificarUsuarioMouseClicked
+        cambioVisualizacion();
+        visualizacionActual("modificarUsuario");
+    }//GEN-LAST:event_lModificarUsuarioMouseClicked
+
+    private void lInactivarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lInactivarUsuarioMouseClicked
+        cambioVisualizacion();
+        visualizacionActual("estadoUsuario");
+    }//GEN-LAST:event_lInactivarUsuarioMouseClicked
 
     /**
      * @param args the command line arguments

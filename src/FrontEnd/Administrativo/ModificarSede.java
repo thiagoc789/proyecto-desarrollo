@@ -223,8 +223,11 @@ public class ModificarSede extends javax.swing.JPanel {
 
     private void ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseClicked
         try {
-            sede.modificarSede(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
-            areaSedes.setText( sede.listarSedes() );
+            if( sede.idExiste(Id.getText()) ){
+                sede.modificarSede(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
+                areaSedes.setText( sede.listarSedes() );
+            }else
+                JOptionPane.showMessageDialog(null, "No existe sede con esa Id");
         } catch (SQLException ex) {
             Logger.getLogger(ModificarSede.class.getName()).log(Level.SEVERE, null, ex);
         }

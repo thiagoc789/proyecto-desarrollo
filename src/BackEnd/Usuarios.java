@@ -22,8 +22,40 @@ public class Usuarios {
     String sql = "";
     Connection conexion;
     Statement stmt;
+    
+    public boolean cedulaExiste(String cedula){
+        boolean cedulaExiste = false;
+        try{
+            Class.forName("org.postgresql.Driver");
+        }catch(ClassNotFoundException e){
+            e.getMessage();
+        }
+        
+        try {
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
 
-    public void registrarUsuarioNuevo(String cedula, String nombre, String telefono, String contraseña, String cargo, String sede) throws SQLException {
+            sql = "SELECT count(*) FROM usuarios WHERE cedula = \'" + cedula +"\'";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            String respuestaQuery = "";
+            
+            while(rs.next()){
+                respuestaQuery = rs.getString("count");
+            }
+            
+            if( respuestaQuery.compareTo("1") == 0 )
+                cedulaExiste = true;
+
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de coneción con base de datos");
+        }
+        return cedulaExiste;
+    }
+
+    public void registrarUsuarioNuevo(String cedula, String nombre, String telefono, String contraseña, String cargo, String sede, String estado) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -34,13 +66,14 @@ public class Usuarios {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
             stmt = conexion.createStatement();
 
-            sql = "INSERT INTO usuarios(cedula, nombre, telefono, contraseña, cargo, sede) VALUES("
+            sql = "INSERT INTO usuarios(cedula, nombre, telefono, contraseña, cargo, sede, estado) VALUES("
                     + "\'" + cedula + "\',"
                     + "\'" + nombre + "\',"
                     + "\'" + telefono + "\',"
                     + "\'" + contraseña + "\',"
                     + "\'" + cargo + "\',"
-                    + "\'" + sede + "\'"
+                    + "\'" + sede + "\',"
+                    + "\'" + estado + "\'"
                     + ");";
             stmt.executeUpdate(sql);
 
@@ -51,7 +84,7 @@ public class Usuarios {
         }
     }
     
-    public String validarUsuario(String cedula, String contraseña) throws SQLException {
+    public String validarIngreso(String cedula, String contraseña) throws SQLException {
         String usuarioValido = "empty";
         try {
             Class.forName("org.postgresql.Driver");
@@ -69,14 +102,18 @@ public class Usuarios {
             ResultSet rs = stmt.executeQuery(sql);
             String clave = "";
             String cargo = "";
+            String estado = "";
             
             while(rs.next()){
                 clave = rs.getString("contraseña");
                 cargo = rs.getString("cargo");
+                estado = rs.getString("estado");
             }
 
             if( !(contraseña.compareTo(clave) == 0) )
                 JOptionPane.showMessageDialog(null, "Cédula o contraseña invalida");
+            else if( (estado.compareTo("Inactivo") == 0) )
+                JOptionPane.showMessageDialog(null, "El usuario esta inactivo");
             else
                 usuarioValido = cargo;
 
@@ -120,4 +157,86 @@ public class Usuarios {
         
         return usuarios;
     }
+    
+    public void modificarUsuario(String cedula, String nombre, String telefono, String correo, String cargo, String sede) throws SQLException {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.getMessage();
+        }
+
+        try {
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+            //sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50));";
+            //stmt.executeUpdate(sql);
+            
+            if( !(nombre.compareTo("")== 0) ){
+                sql = "UPDATE usuarios "
+                    + "SET nombre = \'" + nombre + "\' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }
+            if( !(telefono.compareTo("")== 0) ){
+                sql = "UPDATE usuarios "
+                    + "SET telefono = \'" + telefono + "\' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }
+//            if( !(correo.compareTo("")== 0) ){
+//                sql = "UPDATE usuarios "
+//                    + "SET correo = \'" + correo + "\' "
+//                    + "WHERE cedula = \'" + cedula + "\'";
+//                stmt.executeUpdate(sql);
+//            }
+            if( !(cargo.compareTo("")== 0) ){
+                sql = "UPDATE usuarios "
+                    + "SET cargo = \'" + cargo + "\' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }
+            if( !(sede.compareTo("")== 0) ){
+                sql = "UPDATE usuarios "
+                    + "SET sede = \'" + sede + "\' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Failed to Connected");
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    public void cambiarEstadoUsuario(String cedula, int estado) throws SQLException {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.getMessage();
+        }
+
+        try {
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+            
+            if( estado == 1 ){
+                sql = "UPDATE usuarios "
+                    + "SET estado = \'Activo' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }else{
+                sql = "UPDATE usuarios "
+                    + "SET estado = \'Inactivo' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Failed to Connected");
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
 }

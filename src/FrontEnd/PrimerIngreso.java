@@ -361,7 +361,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         Usuarios registrar = new Usuarios();
         try {
-            registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede");
+            registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede", "Activo");
         } catch (SQLException ex) {
             Logger.getLogger(PrimerIngreso.class.getName()).log(Level.SEVERE, null, ex);
         }
