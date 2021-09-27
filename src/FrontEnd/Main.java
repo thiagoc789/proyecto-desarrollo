@@ -34,8 +34,8 @@ import java.sql.SQLException;
 public class Main {
 
     public static void main(String args[]) throws SQLException {
-        ConexionBD conexion = new ConexionBD();
-        conexion.dbConecction();
+        //ConexionBD conexion = new ConexionBD();
+        //conexion.dbConecction();
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -63,7 +63,8 @@ public class Main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsuarioNuevo().setVisible(true);
+                new RegistrarEnvio().setVisible(true);
+                
             }
         });
     }
