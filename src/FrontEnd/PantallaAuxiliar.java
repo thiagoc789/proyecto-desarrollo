@@ -1,23 +1,20 @@
 package FrontEnd;
 
 import FrontEnd.Administrativo.*;
+import FrontEnd.Auxiliar.Funcion1Auxiliar;
+import FrontEnd.Operador.RegistrarEnvio;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
-public class PantallaGerente extends javax.swing.JFrame {
+public class PantallaAuxiliar extends javax.swing.JFrame {
 
     private int x;
     private int y;
     
-    ListarUsuarios listaUsuarios = new ListarUsuarios();
-    RegistrarSede nuevaSede = new RegistrarSede();
-    ModificarSede actualizarSede = new ModificarSede();
-    RegistrarUsuario nuevoUsuario = new RegistrarUsuario();
-    ModificarUsuario modificarUsuario = new ModificarUsuario();
-    EstadoUsuario estadoUsuario = new EstadoUsuario();
+    Funcion1Auxiliar panelFuncion1Auxiliar = new Funcion1Auxiliar();
 
-    public PantallaGerente() {
+    public PantallaAuxiliar() {
         initComponents();
         
         contenedor.setVisible(false);
@@ -25,47 +22,27 @@ public class PantallaGerente extends javax.swing.JFrame {
     }
     
     public void cambioVisualizacion(){
-        lInactivarUsuario.setEnabled(true);
-        lListarUsuarios.setEnabled(true);
-        lModificarSede.setEnabled(true);
-        lModificarUsuario.setEnabled(true);
-        lRegistrarSede.setEnabled(true);
-        lRegistrarUsuario.setEnabled(true);
-
-        actualizarSede.setVisible(false);
-        estadoUsuario.setVisible(false);
-        listaUsuarios.setVisible(false);
-        modificarUsuario.setVisible(false);
-        nuevoUsuario.setVisible(false);
-        nuevaSede.setVisible(false);
+        label2.setEnabled(true);
+        lFuncion1.setEnabled(true);
+        label3.setEnabled(true);
+        
+        panelFuncion1Auxiliar.setVisible(false);
     }
     
     public void visualizacionActual(String panel){
         
-        if(panel.compareTo("registrarSede") == 0){
-            nuevaSede.setVisible(true);
-            contenedor.add(nuevaSede);
-            lRegistrarSede.setEnabled(false);
-        }else if(panel.compareTo("listarUsuarios") == 0){
-            listaUsuarios.setVisible(true);
-            contenedor.add(listaUsuarios);
-            lListarUsuarios.setEnabled(false);
+        if(panel.compareTo("funcion1") == 0){
+            panelFuncion1Auxiliar.setVisible(true);
+            contenedor.add(panelFuncion1Auxiliar);
+            lFuncion1.setEnabled(false);
         }else if(panel.compareTo("actualizarSede") == 0){
-            actualizarSede.setVisible(true);
-            contenedor.add(actualizarSede);
-            lModificarSede.setEnabled(false);
+//            actualizarSede.setVisible(true);
+//            contenedor.add(actualizarSede);
+//            label2.setEnabled(false);
         }else if(panel.compareTo("nuevoUsuario") == 0){
-            nuevoUsuario.setVisible(true);
-            contenedor.add(nuevoUsuario);
-            lRegistrarUsuario.setEnabled(false);
-        }else if(panel.compareTo("modificarUsuario") == 0){
-            modificarUsuario.setVisible(true);
-            contenedor.add(modificarUsuario);
-            lModificarUsuario.setEnabled(false);
-        }else if(panel.compareTo("estadoUsuario") == 0){
-            estadoUsuario.setVisible(true);
-            contenedor.add(estadoUsuario);
-            lInactivarUsuario.setEnabled(false);
+//            nuevoUsuario.setVisible(true);
+//            contenedor.add(nuevoUsuario);
+//            label3.setEnabled(false);
         }
         
         //estadoUsuario
@@ -87,12 +64,9 @@ public class PantallaGerente extends javax.swing.JFrame {
         javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
-        lRegistrarUsuario = new javax.swing.JLabel();
-        lRegistrarSede = new javax.swing.JLabel();
-        lModificarUsuario = new javax.swing.JLabel();
-        lModificarSede = new javax.swing.JLabel();
-        lInactivarUsuario = new javax.swing.JLabel();
-        lListarUsuarios = new javax.swing.JLabel();
+        label3 = new javax.swing.JLabel();
+        label2 = new javax.swing.JLabel();
+        lFuncion1 = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -243,64 +217,30 @@ public class PantallaGerente extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
-        lRegistrarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lRegistrarUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        lRegistrarUsuario.setText("-Registrar Usuario");
-        lRegistrarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        label3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        label3.setForeground(new java.awt.Color(102, 102, 102));
+        label3.setText("-Funcion 3");
+        label3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lRegistrarUsuarioMouseClicked(evt);
+                label3MouseClicked(evt);
             }
         });
 
-        lRegistrarSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lRegistrarSede.setForeground(new java.awt.Color(102, 102, 102));
-        lRegistrarSede.setText("-Registrar Nueva Sede");
-        lRegistrarSede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        lRegistrarSede.addMouseListener(new java.awt.event.MouseAdapter() {
+        label2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        label2.setForeground(new java.awt.Color(102, 102, 102));
+        label2.setText("-Función2");
+        label2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lRegistrarSedeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lRegistrarSedeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lRegistrarSedeMouseExited(evt);
+                label2MouseClicked(evt);
             }
         });
 
-        lModificarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lModificarUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        lModificarUsuario.setText("-Modificar Usuario");
-        lModificarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        lFuncion1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lFuncion1.setForeground(new java.awt.Color(102, 102, 102));
+        lFuncion1.setText("-Función 1 Auxiliar");
+        lFuncion1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lModificarUsuarioMouseClicked(evt);
-            }
-        });
-
-        lModificarSede.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lModificarSede.setForeground(new java.awt.Color(102, 102, 102));
-        lModificarSede.setText("-Modificar Sede");
-        lModificarSede.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lModificarSedeMouseClicked(evt);
-            }
-        });
-
-        lInactivarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lInactivarUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        lInactivarUsuario.setText("-Inactivar Usuario");
-        lInactivarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lInactivarUsuarioMouseClicked(evt);
-            }
-        });
-
-        lListarUsuarios.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lListarUsuarios.setForeground(new java.awt.Color(102, 102, 102));
-        lListarUsuarios.setText("-Listar Usuarios");
-        lListarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lListarUsuariosMouseClicked(evt);
+                lFuncion1MouseClicked(evt);
             }
         });
 
@@ -309,39 +249,23 @@ public class PantallaGerente extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lModificarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lModificarSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lInactivarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lFuncion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(30, Short.MAX_VALUE)
-                    .addComponent(lRegistrarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(11, 11, 11)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(lModificarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(lFuncion1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lInactivarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(30, 30, 30)
-                    .addComponent(lRegistrarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(455, Short.MAX_VALUE)))
+                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(380, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 180, 520));
@@ -383,44 +307,20 @@ public class PantallaGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void lRegistrarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseClicked
-        // TODO add your handling code here:
-        cambioVisualizacion();
-        visualizacionActual("registrarSede");
-    }//GEN-LAST:event_lRegistrarSedeMouseClicked
-
-    private void lRegistrarSedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseEntered
-
-    }//GEN-LAST:event_lRegistrarSedeMouseEntered
-
-    private void lRegistrarSedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarSedeMouseExited
-
-    }//GEN-LAST:event_lRegistrarSedeMouseExited
-
-    private void lListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lListarUsuariosMouseClicked
-        cambioVisualizacion();
-        visualizacionActual("listarUsuarios");
-    }//GEN-LAST:event_lListarUsuariosMouseClicked
-
-    private void lModificarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lModificarSedeMouseClicked
+    private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
         cambioVisualizacion();
         visualizacionActual("actualizarSede");
-    }//GEN-LAST:event_lModificarSedeMouseClicked
+    }//GEN-LAST:event_label2MouseClicked
 
-    private void lRegistrarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarUsuarioMouseClicked
+    private void label3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label3MouseClicked
         cambioVisualizacion();
         visualizacionActual("nuevoUsuario");
-    }//GEN-LAST:event_lRegistrarUsuarioMouseClicked
+    }//GEN-LAST:event_label3MouseClicked
 
-    private void lModificarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lModificarUsuarioMouseClicked
+    private void lFuncion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lFuncion1MouseClicked
         cambioVisualizacion();
-        visualizacionActual("modificarUsuario");
-    }//GEN-LAST:event_lModificarUsuarioMouseClicked
-
-    private void lInactivarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lInactivarUsuarioMouseClicked
-        cambioVisualizacion();
-        visualizacionActual("estadoUsuario");
-    }//GEN-LAST:event_lInactivarUsuarioMouseClicked
+        visualizacionActual("funcion1");
+    }//GEN-LAST:event_lFuncion1MouseClicked
 
     private void lCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCerrarSesionMouseClicked
         new IngresoUsuario().setVisible(true);
@@ -433,11 +333,8 @@ public class PantallaGerente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel contenedor;
-    public javax.swing.JLabel lInactivarUsuario;
-    public javax.swing.JLabel lListarUsuarios;
-    public javax.swing.JLabel lModificarSede;
-    public javax.swing.JLabel lModificarUsuario;
-    public javax.swing.JLabel lRegistrarSede;
-    public javax.swing.JLabel lRegistrarUsuario;
+    public javax.swing.JLabel lFuncion1;
+    public javax.swing.JLabel label2;
+    public javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables
 }

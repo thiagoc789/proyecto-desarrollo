@@ -283,8 +283,14 @@ public class IngresoUsuario extends javax.swing.JFrame {
         if( usuariValido.compareTo("Gerente") == 0 ){
             new PantallaGerente().setVisible(true);
             this.setVisible(false);
-        }else{
-            new PantallaSecretariaENPROCESO().setVisible(true);
+        }else if( usuariValido.compareTo("Operador") == 0 ){
+            new PantallaOperador().setVisible(true);
+            this.setVisible(false);
+        }else if( usuariValido.compareTo("Secretaria") == 0 ){
+            new PantallaSecretaria().setVisible(true);
+            this.setVisible(false);
+        }else if( usuariValido.compareTo("Auxiliar") == 0 ){
+            new PantallaAuxiliar().setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_lEntrarMouseClicked

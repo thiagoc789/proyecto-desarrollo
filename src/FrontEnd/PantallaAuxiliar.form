@@ -186,7 +186,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" pref="112" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" pref="132" max="-2" attributes="0"/>
+                  <Component id="lCerrarSesion" min="-2" pref="132" max="-2" attributes="0"/>
                   <EmptySpace pref="591" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -198,7 +198,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="lCerrarSesion" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -206,7 +206,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="lCerrarSesion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="99" red="0" type="rgb"/>
@@ -221,6 +221,9 @@
             <Property name="text" type="java.lang.String" value="Cerrar Sesi&#xf3;n"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lCerrarSesionMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -279,57 +282,30 @@
               <Group type="102" attributes="0">
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lRegistrarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="lModificarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="lListarUsuarios" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="lModificarSede" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="lInactivarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="label3" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="label2" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="lFuncion1" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="137" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
-                      <Component id="lRegistrarSede" min="-2" pref="135" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="lModificarSede" min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lFuncion1" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lRegistrarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="label2" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lModificarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lInactivarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lListarUsuarios" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="90" max="-2" attributes="0"/>
-                  <EmptySpace pref="125" max="32767" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="lRegistrarSede" min="-2" pref="31" max="-2" attributes="0"/>
-                      <EmptySpace pref="455" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="label3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace pref="380" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lRegistrarUsuario">
+        <Component class="javax.swing.JLabel" name="label3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -337,37 +313,17 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="-Registrar Usuario"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lRegistrarSede">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="-Registrar Nueva Sede"/>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor Por defecto"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="-Funcion 3"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lRegistrarSedeMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lRegistrarSedeMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lRegistrarSedeMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="label3MouseClicked"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lModificarUsuario">
+        <Component class="javax.swing.JLabel" name="label2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -375,72 +331,33 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="66" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="-Modificar Usuario"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lModificarSede">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="-Modificar Sede"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lInactivarUsuario">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="-Inactivar Usuario"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lListarUsuarios">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="-Listar Usuarios"/>
+            <Property name="text" type="java.lang.String" value="-Funci&#xf3;n2"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lListarUsuariosMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="label2MouseClicked"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lFuncion1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Ubuntu" size="24" style="1"/>
+              <Font name="Arial" size="12" style="1"/>
             </Property>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;Secretaria&lt;br&gt;&#xa;BORRAR ESTO&#xa;&lt;/html&gt;"/>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="-Funci&#xf3;n 1 Auxiliar"/>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Secretaria&#xa;BORRAR ESTO"/>
-          </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lFuncion1MouseClicked"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

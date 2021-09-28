@@ -116,6 +116,8 @@ public class Usuarios {
                 JOptionPane.showMessageDialog(null, "El usuario esta inactivo");
             else
                 usuarioValido = cargo;
+            
+            conexion.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Failed to Connected");
