@@ -360,11 +360,7 @@ public class UsuarioNuevo extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         Usuarios registrar = new Usuarios();
-        try {
-            registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede");
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioNuevo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  
         new PantallaGeneralGerente().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel4MouseClicked

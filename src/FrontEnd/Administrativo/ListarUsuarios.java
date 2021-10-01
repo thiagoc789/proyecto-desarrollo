@@ -10,7 +10,7 @@ import FrontEnd.PantallaGerente;
 import BackEnd.Sedes;
 import BackEnd.Usuarios;
 import FrontEnd.PantallaSecretaria;
-import com.sun.jdi.connect.spi.Connection;
+//import com.sun.jdi.connect.spi.Connection;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
