@@ -1,3 +1,0 @@
-String url = "jdbc:postgresql://ziggy.db.elephantsql.com:5432/hlucabdv";
-String user = "hlucabdv";
-String password = "uIhPd-sKJsprMUCLg3JOsqkqi1d7kSMJ";
