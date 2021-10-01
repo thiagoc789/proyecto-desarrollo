@@ -14,7 +14,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     
     String idUsuario;
     
-    Funcion1Secretaria panelFuncion1Secretaria = new Funcion1Secretaria();
+    ListarUsuariosTabulados panelListarUsuarios = new ListarUsuariosTabulados();
 
     public PantallaSecretaria() {
         initComponents();
@@ -29,18 +29,18 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     
     public void cambioVisualizacion(){
         label2.setEnabled(true);
-        lFuncion1.setEnabled(true);
+        lListarUsuarios.setEnabled(true);
         label3.setEnabled(true);
-        
-        panelFuncion1Secretaria.setVisible(false);
+
+        panelListarUsuarios.setVisible(false);
     }
     
     public void visualizacionActual(String panel){
         
-        if(panel.compareTo("funcion1") == 0){
-            panelFuncion1Secretaria.setVisible(true);
-            contenedor.add(panelFuncion1Secretaria);
-            lFuncion1.setEnabled(false);
+        if(panel.compareTo("listarUsuarios") == 0){
+            panelListarUsuarios.setVisible(true);
+            contenedor.add( panelListarUsuarios );
+            lListarUsuarios.setEnabled(false);
         }else if(panel.compareTo("actualizarSede") == 0){
 //            actualizarSede.setVisible(true);
 //            contenedor.add(actualizarSede);
@@ -50,8 +50,6 @@ public class PantallaSecretaria extends javax.swing.JFrame {
 //            contenedor.add(nuevoUsuario);
 //            label3.setEnabled(false);
         }
-        
-        //estadoUsuario
         
         contenedor.validate();
         contenedor.setVisible(true);
@@ -72,7 +70,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
         label3 = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
-        lFuncion1 = new javax.swing.JLabel();
+        lListarUsuarios = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,7 +129,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Pantalla General Gerente");
+        jLabel12.setText("Pantalla General Secretaria");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,12 +244,12 @@ public class PantallaSecretaria extends javax.swing.JFrame {
             }
         });
 
-        lFuncion1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lFuncion1.setForeground(new java.awt.Color(102, 102, 102));
-        lFuncion1.setText("-Función 1 Secre");
-        lFuncion1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lListarUsuarios.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lListarUsuarios.setForeground(new java.awt.Color(102, 102, 102));
+        lListarUsuarios.setText("-Listar Usuarios");
+        lListarUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lFuncion1MouseClicked(evt);
+                lListarUsuariosMouseClicked(evt);
             }
         });
 
@@ -264,14 +262,14 @@ public class PantallaSecretaria extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lFuncion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(lFuncion1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,18 +318,18 @@ public class PantallaSecretaria extends javax.swing.JFrame {
 
     private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
         cambioVisualizacion();
-        visualizacionActual("actualizarSede");
+        visualizacionActual("otraFuncion1");
     }//GEN-LAST:event_label2MouseClicked
 
     private void label3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label3MouseClicked
         cambioVisualizacion();
-        visualizacionActual("nuevoUsuario");
+        visualizacionActual("otraFuncion2");
     }//GEN-LAST:event_label3MouseClicked
 
-    private void lFuncion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lFuncion1MouseClicked
+    private void lListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lListarUsuariosMouseClicked
         cambioVisualizacion();
-        visualizacionActual("funcion1");
-    }//GEN-LAST:event_lFuncion1MouseClicked
+        visualizacionActual("listarUsuarios");
+    }//GEN-LAST:event_lListarUsuariosMouseClicked
 
     private void lCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCerrarSesionMouseClicked
         new IngresoUsuario().setVisible(true);
@@ -349,7 +347,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel contenedor;
-    public javax.swing.JLabel lFuncion1;
+    public javax.swing.JLabel lListarUsuarios;
     public javax.swing.JLabel label2;
     public javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables

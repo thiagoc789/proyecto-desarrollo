@@ -2,6 +2,7 @@ package FrontEnd;
 
 import FrontEnd.Administrativo.*;
 import FrontEnd.Auxiliar.Funcion1Auxiliar;
+import FrontEnd.Auxiliar.ListarEnvios;
 import FrontEnd.Operador.RegistrarEnvio;
 import java.awt.Color;
 import java.awt.MouseInfo;
@@ -14,7 +15,7 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
     
     String idUsuario;
     
-    Funcion1Auxiliar panelFuncion1Auxiliar = new Funcion1Auxiliar();
+    ListarEnvios panelListarEnviosDia = new ListarEnvios();
 
     public PantallaAuxiliar() {
         initComponents();
@@ -28,24 +29,24 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
     }
     
     public void cambioVisualizacion(){
+        jlListarEnviosDia.setEnabled(true);
         label2.setEnabled(true);
-        lFuncion1.setEnabled(true);
         label3.setEnabled(true);
         
-        panelFuncion1Auxiliar.setVisible(false);
+        panelListarEnviosDia.setVisible(false);
     }
     
     public void visualizacionActual(String panel){
         
-        if(panel.compareTo("funcion1") == 0){
-            panelFuncion1Auxiliar.setVisible(true);
-            contenedor.add(panelFuncion1Auxiliar);
-            lFuncion1.setEnabled(false);
-        }else if(panel.compareTo("actualizarSede") == 0){
+        if(panel.compareTo("listarEnviosDia") == 0){
+            panelListarEnviosDia.setVisible(true);
+            contenedor.add( panelListarEnviosDia );
+            jlListarEnviosDia.setEnabled(false);
+        }else if(panel.compareTo("otraFuncion1") == 0){
 //            actualizarSede.setVisible(true);
 //            contenedor.add(actualizarSede);
 //            label2.setEnabled(false);
-        }else if(panel.compareTo("nuevoUsuario") == 0){
+        }else if(panel.compareTo("otraFuncion2") == 0){
 //            nuevoUsuario.setVisible(true);
 //            contenedor.add(nuevoUsuario);
 //            label3.setEnabled(false);
@@ -72,7 +73,7 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
         label3 = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
-        lFuncion1 = new javax.swing.JLabel();
+        jlListarEnviosDia = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,7 +132,7 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Pantalla General Gerente");
+        jLabel12.setText("Pantalla General Auxiliar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,12 +247,12 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
             }
         });
 
-        lFuncion1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lFuncion1.setForeground(new java.awt.Color(102, 102, 102));
-        lFuncion1.setText("-Función 1 Auxiliar");
-        lFuncion1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlListarEnviosDia.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jlListarEnviosDia.setForeground(new java.awt.Color(102, 102, 102));
+        jlListarEnviosDia.setText("-Listar Envios día");
+        jlListarEnviosDia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lFuncion1MouseClicked(evt);
+                jlListarEnviosDiaMouseClicked(evt);
             }
         });
 
@@ -264,14 +265,14 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lFuncion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlListarEnviosDia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(lFuncion1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlListarEnviosDia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,18 +321,18 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
 
     private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
         cambioVisualizacion();
-        visualizacionActual("actualizarSede");
+        visualizacionActual("otraFuncion1");
     }//GEN-LAST:event_label2MouseClicked
 
     private void label3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label3MouseClicked
         cambioVisualizacion();
-        visualizacionActual("nuevoUsuario");
+        visualizacionActual("otraFuncion2");
     }//GEN-LAST:event_label3MouseClicked
 
-    private void lFuncion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lFuncion1MouseClicked
+    private void jlListarEnviosDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlListarEnviosDiaMouseClicked
         cambioVisualizacion();
-        visualizacionActual("funcion1");
-    }//GEN-LAST:event_lFuncion1MouseClicked
+        visualizacionActual("listarEnviosDia");
+    }//GEN-LAST:event_jlListarEnviosDiaMouseClicked
 
     private void lCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCerrarSesionMouseClicked
         new IngresoUsuario().setVisible(true);
@@ -349,7 +350,7 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel contenedor;
-    public javax.swing.JLabel lFuncion1;
+    public javax.swing.JLabel jlListarEnviosDia;
     public javax.swing.JLabel label2;
     public javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables

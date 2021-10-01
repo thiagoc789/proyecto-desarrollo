@@ -27,6 +27,14 @@ public class ConexionBD {
     String password = "uIhPd-sKJsprMUCLg3JOsqkqi1d7kSMJ";
 
     String sql = "";
+    
+    public Connection getConexion(){
+        return this.conexion;
+    }
+    
+    public Statement getStm(){
+        return this.stmt;
+    }
 
     public Connection dbConecction() {
 

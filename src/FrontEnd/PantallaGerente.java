@@ -12,12 +12,13 @@ public class PantallaGerente extends javax.swing.JFrame {
     
     String idUsuario;
     
-    ListarUsuarios listaUsuarios = new ListarUsuarios();
-    RegistrarSede nuevaSede = new RegistrarSede();
-    ModificarSede actualizarSede = new ModificarSede();
-    RegistrarUsuario nuevoUsuario = new RegistrarUsuario();
-    ModificarUsuario modificarUsuario = new ModificarUsuario();
-    EstadoUsuario estadoUsuario = new EstadoUsuario();
+    //ListarUsuarios panelListaUsuarios = new ListarUsuarios();
+    RegistrarSede panelNuevaSede = new RegistrarSede();
+    ModificarSede panelActualizarSede = new ModificarSede();
+    RegistrarUsuario panelNuevoUsuario = new RegistrarUsuario();
+    ModificarUsuario panelModificarUsuario = new ModificarUsuario();
+    EstadoUsuario panelEstadoUsuario = new EstadoUsuario();
+    ListarUsuariosTabulados panelListaUsuariosTabulados = new ListarUsuariosTabulados();
 
     public PantallaGerente() {
         initComponents();
@@ -40,43 +41,41 @@ public class PantallaGerente extends javax.swing.JFrame {
         lRegistrarSede.setEnabled(true);
         lRegistrarUsuario.setEnabled(true);
 
-        actualizarSede.setVisible(false);
-        estadoUsuario.setVisible(false);
-        listaUsuarios.setVisible(false);
-        modificarUsuario.setVisible(false);
-        nuevoUsuario.setVisible(false);
-        nuevaSede.setVisible(false);
+        panelActualizarSede.setVisible(false);
+        panelEstadoUsuario.setVisible(false);
+        panelModificarUsuario.setVisible(false);
+        panelNuevoUsuario.setVisible(false);
+        panelNuevaSede.setVisible(false);
+        panelListaUsuariosTabulados.setVisible(false);
     }
     
     public void visualizacionActual(String panel){
         
         if(panel.compareTo("registrarSede") == 0){
-            nuevaSede.setVisible(true);
-            contenedor.add(nuevaSede);
+            panelNuevaSede.setVisible(true);
+            contenedor.add(panelNuevaSede);
             lRegistrarSede.setEnabled(false);
-        }else if(panel.compareTo("listarUsuarios") == 0){
-            listaUsuarios.setVisible(true);
-            contenedor.add(listaUsuarios);
-            lListarUsuarios.setEnabled(false);
         }else if(panel.compareTo("actualizarSede") == 0){
-            actualizarSede.setVisible(true);
-            contenedor.add(actualizarSede);
+            panelActualizarSede.setVisible(true);
+            contenedor.add(panelActualizarSede);
             lModificarSede.setEnabled(false);
         }else if(panel.compareTo("nuevoUsuario") == 0){
-            nuevoUsuario.setVisible(true);
-            contenedor.add(nuevoUsuario);
+            panelNuevoUsuario.setVisible(true);
+            contenedor.add(panelNuevoUsuario);
             lRegistrarUsuario.setEnabled(false);
         }else if(panel.compareTo("modificarUsuario") == 0){
-            modificarUsuario.setVisible(true);
-            contenedor.add(modificarUsuario);
+            panelModificarUsuario.setVisible(true);
+            contenedor.add(panelModificarUsuario);
             lModificarUsuario.setEnabled(false);
         }else if(panel.compareTo("estadoUsuario") == 0){
-            estadoUsuario.setVisible(true);
-            contenedor.add(estadoUsuario);
+            panelEstadoUsuario.setVisible(true);
+            contenedor.add(panelEstadoUsuario);
             lInactivarUsuario.setEnabled(false);
+        }else if(panel.compareTo("listarUsuarios") == 0){
+            panelListaUsuariosTabulados.setVisible(true);
+            contenedor.add( panelListaUsuariosTabulados );
+            lListarUsuarios.setEnabled(false);
         }
-        
-        //estadoUsuario
         
         contenedor.validate();
         contenedor.setVisible(true);
@@ -322,13 +321,13 @@ public class PantallaGerente extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lModificarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lModificarSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lInactivarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lInactivarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -410,11 +409,6 @@ public class PantallaGerente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lRegistrarSedeMouseExited
 
-    private void lListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lListarUsuariosMouseClicked
-        cambioVisualizacion();
-        visualizacionActual("listarUsuarios");
-    }//GEN-LAST:event_lListarUsuariosMouseClicked
-
     private void lModificarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lModificarSedeMouseClicked
         cambioVisualizacion();
         visualizacionActual("actualizarSede");
@@ -444,6 +438,11 @@ public class PantallaGerente extends javax.swing.JFrame {
         new SesionBloqueada( idUsuario ).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlBloquearMouseClicked
+
+    private void lListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lListarUsuariosMouseClicked
+        cambioVisualizacion();
+        visualizacionActual("listarUsuarios");
+    }//GEN-LAST:event_lListarUsuariosMouseClicked
 
     /**
      * @param args the command line arguments
