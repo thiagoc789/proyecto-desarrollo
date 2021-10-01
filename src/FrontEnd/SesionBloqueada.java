@@ -8,13 +8,21 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class IngresoUsuario extends javax.swing.JFrame {
+public class SesionBloqueada extends javax.swing.JFrame {
 
     private int x;
     private int y;
+    
+    String idUsuario;
 
-    public IngresoUsuario() {
+//    public SesionBloqueada() {
+//        initComponents();
+//    }
+    
+    public SesionBloqueada(String idUsuario) {
         initComponents();
+        Cedula.setText(idUsuario);
+        this.idUsuario = idUsuario;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -31,6 +39,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
         lEntrar = new javax.swing.JLabel();
         Cedula = new javax.swing.JFormattedTextField();
         Contraseña = new javax.swing.JPasswordField();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -88,7 +97,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Inicio De Sesión");
+        jLabel6.setText("Sesión bloqueada");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,7 +133,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Por favor ingrese su cédula y su contraseña");
+        jLabel2.setText("Por favor ingrese su su contraseña");
 
         lCancelar.setBackground(new java.awt.Color(0, 153, 102));
         lCancelar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
@@ -166,6 +175,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
 
         Cedula.setForeground(new java.awt.Color(153, 153, 153));
         Cedula.setText("Cedula");
+        Cedula.setEnabled(false);
         Cedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 CedulaFocusGained(evt);
@@ -192,12 +202,16 @@ public class IngresoUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("para desbloquear la sesión");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
+                .addContainerGap(207, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -207,7 +221,10 @@ public class IngresoUsuario extends javax.swing.JFrame {
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(177, 177, 177))))
+                        .addGap(229, 229, 229))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(266, 266, 266))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(211, 211, 211)
@@ -217,8 +234,10 @@ public class IngresoUsuario extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel2)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -276,22 +295,21 @@ public class IngresoUsuario extends javax.swing.JFrame {
         Usuarios validar = new Usuarios();
         String usuariValido = "";
         try {
-            usuariValido = validar.validarIngreso(Cedula.getText(), Contraseña.getText());
+            usuariValido = validar.validarIngreso(idUsuario, Contraseña.getText());
         } catch (SQLException ex) {
-            Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SesionBloqueada.class.getName()).log(Level.SEVERE, null, ex);
         }
         if( usuariValido.compareTo("Gerente") == 0 ){
-            //new PantallaGerente().setVisible(true);
-            new PantallaGerente( Cedula.getText() ).setVisible(true);
+            new PantallaGerente().setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Operador") == 0 ){
-            new PantallaOperador( Cedula.getText() ).setVisible(true);
+            new PantallaOperador().setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Secretaria") == 0 ){
-            new PantallaSecretaria( Cedula.getText() ).setVisible(true);
+            new PantallaSecretaria().setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Auxiliar") == 0 ){
-            new PantallaAuxiliar( Cedula.getText() ).setVisible(true);
+            new PantallaAuxiliar().setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_lEntrarMouseClicked

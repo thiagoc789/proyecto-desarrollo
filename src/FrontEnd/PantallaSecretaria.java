@@ -12,19 +12,19 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     private int x;
     private int y;
     
+    String idUsuario;
+    
     Funcion1Secretaria panelFuncion1Secretaria = new Funcion1Secretaria();
-//    ListarUsuarios listaUsuarios = new ListarUsuarios();
-//    RegistrarSede nuevaSede = new RegistrarSede();
-//    ModificarSede actualizarSede = new ModificarSede();
-//    RegistrarUsuario nuevoUsuario = new RegistrarUsuario();
-//    ModificarUsuario modificarUsuario = new ModificarUsuario();
-//    EstadoUsuario estadoUsuario = new EstadoUsuario();
 
     public PantallaSecretaria() {
         initComponents();
-        
         contenedor.setVisible(false);
-
+    }
+    
+     public PantallaSecretaria(String idUsuario) {
+        initComponents();
+        contenedor.setVisible(false);
+        this.idUsuario = idUsuario;
     }
     
     public void cambioVisualizacion(){
@@ -67,7 +67,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         javax.swing.JLabel jLabel12 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
         javax.swing.JLabel lCerrarSesion = new javax.swing.JLabel();
-        javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
+        javax.swing.JLabel jlBloquear = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
         label3 = new javax.swing.JLabel();
@@ -181,12 +181,17 @@ public class PantallaSecretaria extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setBackground(new java.awt.Color(0, 153, 102));
-        jLabel6.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Bloquear");
-        jLabel6.setOpaque(true);
+        jlBloquear.setBackground(new java.awt.Color(0, 153, 102));
+        jlBloquear.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        jlBloquear.setForeground(new java.awt.Color(255, 255, 255));
+        jlBloquear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlBloquear.setText("Bloquear");
+        jlBloquear.setOpaque(true);
+        jlBloquear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlBloquearMouseClicked(evt);
+            }
+        });
 
         jLabel7.setBackground(new java.awt.Color(153, 153, 153));
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
@@ -203,7 +208,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlBloquear, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(591, Short.MAX_VALUE))
@@ -214,7 +219,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlBloquear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -332,6 +337,11 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         new IngresoUsuario().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lCerrarSesionMouseClicked
+
+    private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
+        new SesionBloqueada( idUsuario ).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jlBloquearMouseClicked
 
     /**
      * @param args the command line arguments
