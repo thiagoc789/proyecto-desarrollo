@@ -24,9 +24,8 @@ package FrontEnd;
 //-El gerente desea poder registrar una nueva sede de la empresa
 
 import BackEnd.ConexionBD;
-import BackEnd.Usuarios;
+import BackEnd.RegistrarUsuario;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,18 +34,8 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static void main(String args[]) throws SQLException {
-        boolean gerente = false;
-        
-        ConexionBD conexion = new ConexionBD();
-        conexion.dbConecction();
-        
-        gerente = conexion.getCantidadUsuarios();
-        
-//        if(gerente){
-//            JOptionPane.showMessageDialog(null, "Gerente existe", "", JOptionPane.INFORMATION_MESSAGE);
-//        };
-        
-        //JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos", "Sistematizacion De Procesos - Flash", JOptionPane.ERROR_MESSAGE);
+        //ConexionBD conexion = new ConexionBD();
+        //conexion.dbConecction();
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -72,19 +61,12 @@ public class Main {
         //</editor-fold>
 
         /* Create and display the form */
-        if(gerente){
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new IngresoUsuario().setVisible(true);
-                }
-            });
-        }
-        else
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new UsuarioNuevo().setVisible(true);
-                }
-            });
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RegistrarEnvio().setVisible(true);
+                
+            }
+        });
     }
 
 }
