@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 /**
@@ -149,6 +150,33 @@ public class Sedes {
             JOptionPane.showMessageDialog(null, "Error de coneción con base de datos");
         }
         return sedesActivasCompleto;
+    }
+    
+    public Vector getNombreSedes(){
+        Vector nombresSedes = null;
+        String sedesActivasCompleto = "";
+        try{
+            Class.forName("org.postgresql.Driver");
+        }catch(ClassNotFoundException e){
+            e.getMessage();
+        }
+        
+        try {
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+
+            sql = "SELECT * FROM sedes";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                nombresSedes.add( rs.getString("nombre") );
+            }            
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de coneción con base de datos");
+        }
+        return nombresSedes;
     }
 
 }
