@@ -2,5 +2,3 @@
 JOptionPane.showMessageDialog(null, jcbEstado.getItemAt(jcbEstado.getSelectedIndex()) )
 
 Probado OK. Probando el merge, esto lo he añadido en la rama 'alejo'
-
-Aquí probando el 'git push origin principal' desde alejo
