@@ -1,2 +1,0 @@
-
-JOptionPane.showMessageDialog(null, jcbEstado.getItemAt(jcbEstado.getSelectedIndex()) )
