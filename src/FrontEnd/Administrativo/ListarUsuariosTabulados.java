@@ -37,6 +37,8 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
 
         initComponents();
         
+        listarPorSede.setBackground(Color.red);
+        
     }
 
     /**
@@ -53,9 +55,9 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         listarPorSede = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTbl_usuarios = new javax.swing.JTable();
-        Jtxt_nmSede = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jcbSedes = new javax.swing.JComboBox<>();
+        bCargarSedes = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -84,6 +86,7 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         listarPorSede.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         listarPorSede.setText("Usuarios por sede");
         listarPorSede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listarPorSede.setEnabled(false);
         listarPorSede.setOpaque(true);
         listarPorSede.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -131,24 +134,27 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
             jTbl_usuarios.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        Jtxt_nmSede.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Jtxt_nmSedeActionPerformed(evt);
-            }
-        });
-
         jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Ingresar ID");
 
-        jLabel16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel16.setText("Nombre de la Sede:");
+        bCargarSedes.setText("Cargar sedes");
+        bCargarSedes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bCargarSedesMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(listarPorSede, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,16 +162,10 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Jtxt_nmSede, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(listarPorSede, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122))
+                        .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bCargarSedes)
+                        .addGap(88, 88, 88))))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(352, 352, 352)
@@ -181,11 +181,11 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(listarPorSede, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Jtxt_nmSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                    .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bCargarSedes))
+                .addGap(50, 50, 50))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(253, 253, 253)
@@ -284,7 +284,8 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         String sql = "";
         java.sql.Connection conexion = con.getConexion();
         java.sql.Statement stmt = con.getStm();
-        String nombreSede = Jtxt_nmSede.getText();
+        //String nombreSede = Jtxt_nmSede.getText();
+        String nombreSede = jcbSedes.getItemAt(jcbSedes.getSelectedIndex());
 
         String[] nmClm = {"id", "nombre", "telefono", "contraseña", "cargo", "sede", "estado"};
 
@@ -341,19 +342,29 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         //listarPorSede.setForeground(Color.white);
     }//GEN-LAST:event_listarPorSedeMouseExited
 
-    private void Jtxt_nmSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Jtxt_nmSedeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Jtxt_nmSedeActionPerformed
+    private void bCargarSedesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bCargarSedesMouseClicked
+        Sedes sede = new Sedes();
+        String listaDeNombres[] = sede.getNombreSedes().split(":");
+        
+        jcbSedes.removeAllItems();
+        for(int i=0; i< listaDeNombres.length ;i++){
+            jcbSedes.addItem( listaDeNombres[i] );
+        }
+        listarPorSede.setEnabled(true);
+        listarPorSede.setBackground(new Color(0, 153, 102));
+        
+        //(0, 153, 102)
+    }//GEN-LAST:event_bCargarSedesMouseClicked
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Jtxt_nmSede;
+    public javax.swing.JButton bCargarSedes;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTbl_usuarios;
+    public javax.swing.JComboBox<String> jcbSedes;
     javax.swing.JLabel listarPorSede;
     javax.swing.JLabel listarTotales;
     // End of variables declaration//GEN-END:variables

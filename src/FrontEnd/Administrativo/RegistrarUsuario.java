@@ -380,18 +380,6 @@ public class RegistrarUsuario extends javax.swing.JPanel {
         for(int i=0; i< listaDeNombres.length ;i++){
             jcbSedes.addItem( listaDeNombres[i] );
         }
-//        Sedes sede = new Sedes();
-//        
-//        JOptionPane.showMessageDialog(null, sede.getNombreSedes());
-//        
-//        Stream<String> lines = sede.getNombreSedes().lines();
-//        
-//        //JOptionPane.showMessageDialog(null, sede.getNombreSedes().size()); //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
-//        JOptionPane.showMessageDialog(null, "Hola mundo");
-//        jcbSedes.removeAllItems();        
-////        for(int i=0;i<sede.getNombreSedes().size();i++){
-////            jcbSedes.addItem((String) sede.getNombreSedes().elementAt(i));
-////        }
     }//GEN-LAST:event_bCargarSedesMouseClicked
 
 
