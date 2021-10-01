@@ -152,9 +152,10 @@ public class Sedes {
         return sedesActivasCompleto;
     }
     
-    public Vector getNombreSedes(){
+    public String getNombreSedes(){
         Vector nombresSedes = null;
-        String sedesActivasCompleto = "";
+        String nombreSedes = "";
+
         try{
             Class.forName("org.postgresql.Driver");
         }catch(ClassNotFoundException e){
@@ -168,15 +169,18 @@ public class Sedes {
             sql = "SELECT * FROM sedes";
             ResultSet rs = stmt.executeQuery(sql);
             
+//            while(rs.next()){
+//                boolean add = nombresSedes.add( rs.getString("nombre") );
+//            }
+
             while(rs.next()){
-                nombresSedes.add( rs.getString("nombre") );
-            }            
+                nombreSedes = nombreSedes + rs.getString("nombre") + ":";
+            } 
             conexion.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de coneción con base de datos");
+            JOptionPane.showMessageDialog(null, "Error de conexión con base de datos");
         }
-        return nombresSedes;
+        return nombreSedes;
     }
-
 }
