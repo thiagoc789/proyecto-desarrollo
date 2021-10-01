@@ -11,8 +11,7 @@ public class PantallaGerente extends javax.swing.JFrame {
     private int y;
     
     String idUsuario;
-    
-    //ListarUsuarios panelListaUsuarios = new ListarUsuarios();
+
     RegistrarSede panelNuevaSede = new RegistrarSede();
     ModificarSede panelActualizarSede = new ModificarSede();
     RegistrarUsuario panelNuevoUsuario = new RegistrarUsuario();
