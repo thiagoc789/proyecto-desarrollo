@@ -152,7 +152,7 @@ public class ModificarSede extends javax.swing.JPanel {
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel17.setText("Sede");
+        jLabel17.setText("Id Sede");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
