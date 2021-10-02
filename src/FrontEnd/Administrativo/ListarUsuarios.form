@@ -67,6 +67,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                   <Component id="listarTotales" min="-2" pref="168" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="generarReporte" min="-2" pref="148" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="listarPorSede" min="-2" pref="174" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
@@ -89,6 +91,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="listarPorSede" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="listarTotales" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="generarReporte" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -254,6 +257,17 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nombre de la Sede:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="generarReporte">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="bb" red="bb" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Generar Reporte"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="generarReporteMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

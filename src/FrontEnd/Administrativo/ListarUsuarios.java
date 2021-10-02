@@ -10,6 +10,7 @@ import FrontEnd.PantallaGerente;
 import BackEnd.Sedes;
 import BackEnd.Usuarios;
 import FrontEnd.PantallaSecretaria;
+import Reportes.GenerarReporte;
 //import com.sun.jdi.connect.spi.Connection;
 import java.awt.Color;
 import java.awt.MouseInfo;
@@ -36,8 +37,9 @@ public class ListarUsuarios extends javax.swing.JPanel {
     public ListarUsuarios() {
 
         initComponents();
-        Jtxt_nmSede.setVisible(false);
+        //Jtxt_nmSede.setVisible(false);
     }
+    private GenerarReporte GeneraReporte = new GenerarReporte();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +58,7 @@ public class ListarUsuarios extends javax.swing.JPanel {
         Jtxt_nmSede = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        generarReporte = new javax.swing.JLabel();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -145,6 +148,14 @@ public class ListarUsuarios extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
         jLabel16.setText("Nombre de la Sede:");
 
+        generarReporte.setForeground(new java.awt.Color(187, 187, 0));
+        generarReporte.setText("Generar Reporte");
+        generarReporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                generarReporteMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -163,6 +174,8 @@ public class ListarUsuarios extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(generarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(listarPorSede, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122))
@@ -180,7 +193,8 @@ public class ListarUsuarios extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(listarPorSede, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Jtxt_nmSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,10 +359,16 @@ public class ListarUsuarios extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Jtxt_nmSedeActionPerformed
 
+    private void generarReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generarReporteMouseClicked
+        // TODO add your handling code here:
+        GeneraReporte.crearJasperReport();
+    }//GEN-LAST:event_generarReporteMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Jtxt_nmSede;
+    private javax.swing.JLabel generarReporte;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel4;
