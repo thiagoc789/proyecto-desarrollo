@@ -383,8 +383,14 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         try{
             String ruta = System.getProperty("user.home");
             JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
-            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Prueba.pdf"));
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
+            try{
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Prueba.pdf"));
+            } catch( DocumentException | FileNotFoundException ex ){}
+            try{
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
+            } catch( DocumentException | FileNotFoundException ex ){}
+            
+            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
             documento.open();
             
             PdfPTable tabla = new PdfPTable(4);
@@ -406,17 +412,10 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                 ResultSet rstm = stmt.executeQuery(sql);
 
                 while (rstm.next()) {
-                    tabla.addCell( rstm.getString(1) );
-                    //tabla.addCell( rstm.getString("id") );
-                    
-                    tabla.addCell( rstm.getString(2) );
-                    //tabla.addCell( rstm.getString("nombre") );
-                    
-                    tabla.addCell( rstm.getString(3) );
-                    //tabla.addCell( rstm.getString("direccion") );
-                    
-                    tabla.addCell( rstm.getString(4) );
-                    //tabla.addCell( rstm.getString("telefono") );
+                    tabla.addCell( rstm.getString("id") );
+                    tabla.addCell( rstm.getString("nombre") );
+                    tabla.addCell( rstm.getString("direccion") );
+                    tabla.addCell( rstm.getString("telefono") );
                 }
                 Paragraph titulo = new Paragraph("Tabla sedes\n", FontFactory.getFont("arial",22,Font.BOLD,BaseColor.BLACK));
                 
@@ -438,7 +437,7 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
             }
             documento.close();
             JOptionPane.showMessageDialog(null, "Creado PDF");
-        } catch(DocumentException | HeadlessException | FileNotFoundException e){
+        } catch(HeadlessException ex){
             JOptionPane.showMessageDialog(null, "Aquí 2");
         }
         
