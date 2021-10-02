@@ -64,6 +64,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
+                          <Component id="jbPrueba" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                           <Component id="jcbSedes" min="-2" pref="137" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="bCargarSedes" min="-2" max="-2" attributes="0"/>
@@ -94,6 +96,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jcbSedes" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bCargarSedes" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbPrueba" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
@@ -261,6 +264,14 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbPrueba">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Prueba"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jbPruebaMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -24,6 +24,16 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+//import com.itextpdf.text.Document;
+//import com.itextpdf.text.DocumentException;
+//import com.itextpdf.text.pdf.PdfPTable;
+//import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 /**
  *
  * @author alejandro
@@ -58,6 +68,7 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jcbSedes = new javax.swing.JComboBox<>();
         bCargarSedes = new javax.swing.JButton();
+        jbPrueba = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -145,6 +156,13 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
             }
         });
 
+        jbPrueba.setText("Prueba");
+        jbPrueba.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbPruebaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -162,6 +180,8 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jbPrueba)
+                        .addGap(65, 65, 65)
                         .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bCargarSedes)
@@ -184,7 +204,8 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bCargarSedes))
+                    .addComponent(bCargarSedes)
+                    .addComponent(jbPrueba))
                 .addGap(50, 50, 50))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
@@ -356,6 +377,120 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         //(0, 153, 102)
     }//GEN-LAST:event_bCargarSedesMouseClicked
 
+    private void jbPruebaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPruebaMouseClicked
+        Document documento = new Document();
+        
+        try{
+            String ruta = System.getProperty("user.home");
+            JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
+            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Prueba.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
+            documento.open();
+            
+            PdfPTable tabla = new PdfPTable(4);
+            tabla.addCell("Id");
+            tabla.addCell("Nombre");
+            tabla.addCell("Dirección");
+            tabla.addCell("Teléfono");
+            
+            try{
+                ConexionBD con = new ConexionBD();
+                java.sql.Connection conexion = con.getConexion();
+                java.sql.Statement stmt = con.getStm();
+                conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
+                
+                stmt = conexion.createStatement();
+                
+                String sql = "SELECT * FROM sedes";
+
+                ResultSet rstm = stmt.executeQuery(sql);
+
+                while (rstm.next()) {
+                    tabla.addCell( rstm.getString(1) );
+                    //tabla.addCell( rstm.getString("id") );
+                    
+                    tabla.addCell( rstm.getString(2) );
+                    //tabla.addCell( rstm.getString("nombre") );
+                    
+                    tabla.addCell( rstm.getString(3) );
+                    //tabla.addCell( rstm.getString("direccion") );
+                    
+                    tabla.addCell( rstm.getString(4) );
+                    //tabla.addCell( rstm.getString("telefono") );
+                }
+                Paragraph titulo = new Paragraph("Tabla sedes\n", FontFactory.getFont("arial",22,Font.BOLD,BaseColor.BLACK));
+                
+                String texto = "Señores: Cliente\n"
+                        + "Les presentamos la lista de las sedes\n\n";
+                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial",12,Font.BOLD,BaseColor.BLACK));
+                
+                documento.add(titulo);
+                
+                documento.add(parrafo);
+                
+                documento.add(tabla);
+                
+                conexion.close();
+                
+
+            } catch(DocumentException | SQLException e){
+                JOptionPane.showMessageDialog(null, "Aquí 1");
+            }
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Creado PDF");
+        } catch(DocumentException | HeadlessException | FileNotFoundException e){
+            JOptionPane.showMessageDialog(null, "Aquí 2");
+        }
+        
+        /*
+        ConexionBD con = new ConexionBD();
+        String sql = "";
+        java.sql.Connection conexion = con.getConexion();
+        java.sql.Statement stmt = con.getStm();
+
+        try {
+            conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String[] nmClm = {"id", "nombre", "telefono", "contraseña", "cargo", "sede", "estado"};
+
+        sql = "SELECT * FROM usuarios";
+
+        modelo = (DefaultTableModel) jTbl_usuarios.getModel();
+
+        modelo.setColumnIdentifiers(nmClm);
+
+        jTbl_usuarios.setModel(modelo);
+
+        String[] registro = new String[7];
+
+        try {
+            stmt = conexion.createStatement();
+
+            ResultSet rstm = stmt.executeQuery(sql);
+
+            while (rstm.next()) {
+                registro[0] = rstm.getString(1);
+                registro[1] = rstm.getString(2);
+                registro[2] = rstm.getString(3);
+                registro[3] = rstm.getString(4);
+                registro[4] = rstm.getString(5);
+                registro[5] = rstm.getString(6);
+                registro[6] = rstm.getString(7);
+                modelo.addRow(registro);
+            }
+            jTbl_usuarios.setVisible(true);
+
+            conexion.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        */
+    }//GEN-LAST:event_jbPruebaMouseClicked
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -364,6 +499,7 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTbl_usuarios;
+    private javax.swing.JButton jbPrueba;
     public javax.swing.JComboBox<String> jcbSedes;
     javax.swing.JLabel listarPorSede;
     javax.swing.JLabel listarTotales;
