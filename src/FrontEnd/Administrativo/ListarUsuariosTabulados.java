@@ -380,15 +380,26 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
     private void jbPruebaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbPruebaMouseClicked
         Document documento = new Document();
         
+        String rutaCompleta = "";
+        
         try{
             String ruta = System.getProperty("user.home");
-            JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
+            //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
             try{
                 PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Prueba.pdf"));
-            } catch( DocumentException | FileNotFoundException ex ){}
-            try{
+                rutaCompleta = ruta + "/Desktop/Reporte_Prueba.pdf";
+            } catch( DocumentException | FileNotFoundException ex1 ){
+                try{
                 PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
-            } catch( DocumentException | FileNotFoundException ex ){}
+                rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
+                } catch( DocumentException | FileNotFoundException ex2 ){
+                    try{
+                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
+                        rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
+                    } catch( DocumentException | FileNotFoundException ex3 ){}
+                }
+            }
+            
             
             //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
             documento.open();
@@ -436,7 +447,7 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Aquí 1");
             }
             documento.close();
-            JOptionPane.showMessageDialog(null, "Creado PDF");
+            JOptionPane.showMessageDialog(null, "PDF Creado. Se guardó en " + rutaCompleta);
         } catch(HeadlessException ex){
             JOptionPane.showMessageDialog(null, "Aquí 2");
         }
