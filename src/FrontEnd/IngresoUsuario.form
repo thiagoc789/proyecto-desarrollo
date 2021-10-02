@@ -174,7 +174,7 @@
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="lCancelar" min="-2" pref="158" max="-2" attributes="0"/>
                               <Component id="Cedula" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Contraseña" alignment="0" pref="422" max="32767" attributes="0"/>
+                              <Component id="Contrasena" alignment="0" pref="422" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
                       </Group>
@@ -201,7 +201,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="Cedula" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="Contraseña" min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="Contrasena" min="-2" pref="27" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
                   <Component id="lCancelar" pref="126" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
@@ -298,7 +298,7 @@
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="Contrase&#xf1;a">
+        <Component class="javax.swing.JPasswordField" name="Contrasena">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -309,8 +309,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Contrase&#xf1;aFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="Contrase&#xf1;aFocusLost"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="ContrasenaFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="ContrasenaFocusLost"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>

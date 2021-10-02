@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class PrimerIngreso extends javax.swing.JFrame {
 
@@ -15,6 +16,34 @@ public class PrimerIngreso extends javax.swing.JFrame {
 
     public PrimerIngreso() {
         initComponents();
+    }
+
+    public boolean validador(){
+        boolean validacion = true;
+        String respuesta = "Por favor verifique:";
+        
+        if( Nombre.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar un nombre";
+            validacion = false;
+        }
+        if( Cedula.getText().length()<1 || !(Cedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
+            Cedula.setText("");
+            validacion = false;
+        }
+        if( Telefono.getText().length()<1 || !(Telefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Teléfono ingresado, deben ser solo números";
+            Telefono.setText("");
+            validacion = false;
+        }
+        if( Contrasena.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar una contraseña";
+            validacion = false;
+        }
+        if( !validacion )
+            JOptionPane.showMessageDialog(null, respuesta);
+        
+        return validacion;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,7 +63,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
         Telefono = new javax.swing.JFormattedTextField();
         Nombre = new javax.swing.JFormattedTextField();
         Correo = new javax.swing.JFormattedTextField();
-        Contraseña = new javax.swing.JPasswordField();
+        Contrasena = new javax.swing.JPasswordField();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -237,15 +266,15 @@ public class PrimerIngreso extends javax.swing.JFrame {
             }
         });
 
-        Contraseña.setForeground(new java.awt.Color(153, 153, 153));
-        Contraseña.setText("Contraseña");
-        Contraseña.setHighlighter(null);
-        Contraseña.addFocusListener(new java.awt.event.FocusAdapter() {
+        Contrasena.setForeground(new java.awt.Color(153, 153, 153));
+        Contrasena.setText("Contraseña");
+        Contrasena.setHighlighter(null);
+        Contrasena.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                ContraseñaFocusGained(evt);
+                ContrasenaFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                ContraseñaFocusLost(evt);
+                ContrasenaFocusLost(evt);
             }
         });
 
@@ -268,7 +297,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
                             .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Nombre)
                             .addComponent(Correo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                            .addComponent(Contraseña, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(Contrasena, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,7 +331,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
@@ -361,12 +390,15 @@ public class PrimerIngreso extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         Usuarios registrar = new Usuarios();
         try {
-            registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contraseña.getText(), "Gerente", "Sin Sede", "Activo");
+            if( validador() ){
+                registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contrasena.getText(), "Gerente", "Sin Sede", "Activo");
+                new PantallaGerente().setVisible(true);
+                this.setVisible(false);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PrimerIngreso.class.getName()).log(Level.SEVERE, null, ex);
         }
-        new PantallaGerente().setVisible(true);
-        this.setVisible(false);
+
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -454,21 +486,21 @@ public class PrimerIngreso extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CorreoFocusLost
 
-    private void ContraseñaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContraseñaFocusGained
+    private void ContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusGained
         // TODO add your handling code here:
-        if (Contraseña.getText().equals("Contraseña")) {
-            Contraseña.setText("");
-            Contraseña.setForeground(new Color(0, 0, 0));
+        if (Contrasena.getText().equals("Contraseña")) {
+            Contrasena.setText("");
+            Contrasena.setForeground(new Color(0, 0, 0));
         }
-    }//GEN-LAST:event_ContraseñaFocusGained
+    }//GEN-LAST:event_ContrasenaFocusGained
 
-    private void ContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContraseñaFocusLost
+    private void ContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusLost
         // TODO add your handling code here:
-        if (Contraseña.getText().equals("")) {
-            Contraseña.setText("Contraseña");
-            Contraseña.setForeground(new Color(153, 153, 153));
+        if (Contrasena.getText().equals("")) {
+            Contrasena.setText("Contraseña");
+            Contrasena.setForeground(new Color(153, 153, 153));
         }
-    }//GEN-LAST:event_ContraseñaFocusLost
+    }//GEN-LAST:event_ContrasenaFocusLost
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
@@ -491,7 +523,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JFormattedTextField Cedula;
-    javax.swing.JPasswordField Contraseña;
+    javax.swing.JPasswordField Contrasena;
     javax.swing.JFormattedTextField Correo;
     javax.swing.JFormattedTextField Nombre;
     javax.swing.JFormattedTextField Telefono;

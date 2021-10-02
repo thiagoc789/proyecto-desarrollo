@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class SesionBloqueada extends javax.swing.JFrame {
 
@@ -24,6 +25,20 @@ public class SesionBloqueada extends javax.swing.JFrame {
         Cedula.setText(idUsuario);
         this.idUsuario = idUsuario;
     }
+    
+    public boolean validador(){
+        boolean validacion = true;
+        String respuesta = "Por favor verifique:";
+
+        if( Contrasena.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar una contraseña";
+            validacion = false;
+        }
+        if( !validacion )
+            JOptionPane.showMessageDialog(null, respuesta);
+        
+        return validacion;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,7 +53,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
         lCancelar = new javax.swing.JLabel();
         lEntrar = new javax.swing.JLabel();
         Cedula = new javax.swing.JFormattedTextField();
-        Contraseña = new javax.swing.JPasswordField();
+        Contrasena = new javax.swing.JPasswordField();
         javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -190,15 +205,15 @@ public class SesionBloqueada extends javax.swing.JFrame {
             }
         });
 
-        Contraseña.setForeground(new java.awt.Color(153, 153, 153));
-        Contraseña.setText("Contraseña");
-        Contraseña.setHighlighter(null);
-        Contraseña.addFocusListener(new java.awt.event.FocusAdapter() {
+        Contrasena.setForeground(new java.awt.Color(153, 153, 153));
+        Contrasena.setText("Contraseña");
+        Contrasena.setHighlighter(null);
+        Contrasena.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                ContraseñaFocusGained(evt);
+                ContrasenaFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                ContraseñaFocusLost(evt);
+                ContrasenaFocusLost(evt);
             }
         });
 
@@ -217,7 +232,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Contraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+                            .addComponent(Contrasena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -241,7 +256,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(224, 224, 224)
                 .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(118, 118, 118))
@@ -295,7 +310,8 @@ public class SesionBloqueada extends javax.swing.JFrame {
         Usuarios validar = new Usuarios();
         String usuariValido = "";
         try {
-            usuariValido = validar.validarIngreso(idUsuario, Contraseña.getText());
+            if( validador() )
+                usuariValido = validar.validarIngreso(idUsuario, Contrasena.getText());
         } catch (SQLException ex) {
             Logger.getLogger(SesionBloqueada.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -342,21 +358,21 @@ public class SesionBloqueada extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CedulaFocusLost
 
-    private void ContraseñaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContraseñaFocusGained
+    private void ContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusGained
         // TODO add your handling code here:
-        if (Contraseña.getText().equals("Contraseña")) {
-            Contraseña.setText("");
-            Contraseña.setForeground(new Color(0, 0, 0));
+        if (Contrasena.getText().equals("Contraseña")) {
+            Contrasena.setText("");
+            Contrasena.setForeground(new Color(0, 0, 0));
         }
-    }//GEN-LAST:event_ContraseñaFocusGained
+    }//GEN-LAST:event_ContrasenaFocusGained
 
-    private void ContraseñaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContraseñaFocusLost
+    private void ContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusLost
         // TODO add your handling code here:
-        if (Contraseña.getText().equals("")) {
-            Contraseña.setText("Contraseña");
-            Contraseña.setForeground(new Color(153, 153, 153));
+        if (Contrasena.getText().equals("")) {
+            Contrasena.setText("Contraseña");
+            Contrasena.setForeground(new Color(153, 153, 153));
         }
-    }//GEN-LAST:event_ContraseñaFocusLost
+    }//GEN-LAST:event_ContrasenaFocusLost
 
     private void lEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseExited
         // TODO add your handling code here:
@@ -379,7 +395,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JFormattedTextField Cedula;
-    javax.swing.JPasswordField Contraseña;
+    javax.swing.JPasswordField Contrasena;
     javax.swing.JLabel lCancelar;
     javax.swing.JLabel lEntrar;
     // End of variables declaration//GEN-END:variables

@@ -153,9 +153,7 @@ public class Sedes {
     }
     
     public String getNombreSedes(){
-        Vector nombresSedes = null;
         String nombreSedes = "";
-
         try{
             Class.forName("org.postgresql.Driver");
         }catch(ClassNotFoundException e){
@@ -168,10 +166,6 @@ public class Sedes {
 
             sql = "SELECT * FROM sedes";
             ResultSet rs = stmt.executeQuery(sql);
-            
-//            while(rs.next()){
-//                boolean add = nombresSedes.add( rs.getString("nombre") );
-//            }
 
             while(rs.next()){
                 nombreSedes = nombreSedes + rs.getString("nombre") + ":";
@@ -182,5 +176,31 @@ public class Sedes {
             JOptionPane.showMessageDialog(null, "Error de conexión con base de datos");
         }
         return nombreSedes;
+    }
+    
+    public String getIdSedes(){
+        String idSedes = "";
+        try{
+            Class.forName("org.postgresql.Driver");
+        }catch(ClassNotFoundException e){
+            e.getMessage();
+        }
+        
+        try {
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+
+            sql = "SELECT * FROM sedes";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while(rs.next()){
+                idSedes = idSedes + rs.getString("id") + ":";
+            } 
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexión con base de datos");
+        }
+        return idSedes;
     }
 }
