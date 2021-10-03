@@ -5,6 +5,7 @@
  */
 package FrontEnd.Administrativo;
 
+import BackEnd.Sedes;
 import FrontEnd.PantallaGerente;
 import BackEnd.Usuarios;
 import java.awt.Color;
@@ -22,14 +23,54 @@ import javax.swing.JOptionPane;
  */
 public class ModificarUsuario extends javax.swing.JPanel {
     Usuarios usuario = new Usuarios();
+    String usuarioActual = "";
+    String stringCargo = "";
+    String stringSede = "";
 
     /**
      * Creates new form RegistrarSede
+     * @param usuarioActual
      */
-    public ModificarUsuario() {
+    public ModificarUsuario(String usuarioActual) {
         initComponents();
+        this.usuarioActual = usuarioActual;
+        
+//        jcbCargo.addItem("No cambiar");
+//        jcbCargo.addItem("Secretaria");
+//        jcbCargo.addItem("Auxiliar");
+//        jcbCargo.addItem("Operador");
 
         //areaSedes.setText(usuario.listarSedes() );
+    }
+    
+    public boolean validador(){
+        boolean validacion = true;
+        String respuesta = "Por favor verifique:";
+
+        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
+            jtfCedula.setText("");
+            validacion = false;
+        }
+        if( jtfTelefono.getText().length()>0 && !(jtfTelefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Teléfono ingresado, deben ser solo números";
+            jtfTelefono.setText("");
+            validacion = false;
+        }
+        if( jtfCorreo.getText().length()>0 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
+            respuesta = respuesta + "\n   - Verifique el correo ingresado";
+            validacion = false;
+        }
+        if ( jcbSede.getItemAt(jcbSede.getSelectedIndex()).compareTo("No cambiar") != 0 ){
+            stringSede = jcbSede.getItemAt(jcbSede.getSelectedIndex());
+        }
+        if ( jcbCargo.getItemAt(jcbCargo.getSelectedIndex()).compareTo("No cambiar") != 0 ){
+            stringCargo = jcbCargo.getItemAt(jcbCargo.getSelectedIndex());
+        }
+        if( !validacion )
+            JOptionPane.showMessageDialog(null, respuesta);
+        
+        return validacion;
     }
 
     /**
@@ -56,9 +97,10 @@ public class ModificarUsuario extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         areaSedes = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
-        jtfCargo = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jtfSede = new javax.swing.JTextField();
+        jcbCargo = new javax.swing.JComboBox<>();
+        bCargarSedes = new javax.swing.JButton();
+        jcbSede = new javax.swing.JComboBox<>();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -137,6 +179,22 @@ public class ModificarUsuario extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Nueva sede");
 
+        jcbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No cambiar", "Secretaria", "Auxiliar", "Operador" }));
+        jcbCargo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jcbCargoMousePressed(evt);
+            }
+        });
+
+        bCargarSedes.setText("Cargar sedes");
+        bCargarSedes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bCargarSedesMouseClicked(evt);
+            }
+        });
+
+        jcbSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No cambiar" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -150,42 +208,52 @@ public class ModificarUsuario extends javax.swing.JPanel {
                         .addGap(31, 31, 31)
                         .addComponent(jLabel15)
                         .addGap(36, 36, 36)
-                        .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel17)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jtfSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel16)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jtfCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel16)
+                                        .addComponent(jLabel12))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(23, 23, 23)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel17))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(jcbSede, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(bCargarSedes)))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(28, 28, 28))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,18 +275,18 @@ public class ModificarUsuario extends javax.swing.JPanel {
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(jcbSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bCargarSedes))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -229,7 +297,7 @@ public class ModificarUsuario extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGap(0, 719, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -241,9 +309,9 @@ public class ModificarUsuario extends javax.swing.JPanel {
             .addGap(0, 526, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 1, Short.MAX_VALUE)
+                    .addGap(0, 2, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                    .addGap(0, 2, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -253,17 +321,20 @@ public class ModificarUsuario extends javax.swing.JPanel {
 
     private void ActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseClicked
         try {
-            if( usuario.cedulaExiste(jtfCedula.getText()) ){
-                usuario.modificarUsuario(   jtfCedula.getText(),
-                                            jtfNombre.getText(),
-                                            jtfTelefono.getText(),
-                                            jtfCorreo.getText(),
-                                            jtfCargo.getText(),
-                                            jtfSede.getText()
-                );
-                //areaSedes.setText(usuario.listarSedes() );
-            }else
-                JOptionPane.showMessageDialog(null, "No existe usuario con esa cédula");
+            if ( validador() ){
+                if( usuario.cedulaExiste(jtfCedula.getText()) ){
+
+                    usuario.modificarUsuario(jtfCedula.getText(),
+                                                jtfNombre.getText(),
+                                                jtfTelefono.getText(),
+                                                jtfCorreo.getText(),
+                                                stringCargo,
+                                                stringSede
+                    );
+                    //areaSedes.setText(usuario.listarSedes() );
+                }else
+                    JOptionPane.showMessageDialog(null, "No existe usuario con esa cédula");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ModificarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -281,7 +352,7 @@ public class ModificarUsuario extends javax.swing.JPanel {
 
     private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
         // TODO add your handling code here:
-        new PantallaGerente().setVisible(true);
+        new PantallaGerente("Gerente").setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CancelarMouseClicked
 
@@ -295,11 +366,27 @@ public class ModificarUsuario extends javax.swing.JPanel {
         Cancelar.setForeground(Color.white);
     }//GEN-LAST:event_CancelarMouseExited
 
+    private void jcbCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbCargoMousePressed
+        jcbCargo.addItem("Gerente");
+        jcbCargo.addItem("Secretaria");
+    }//GEN-LAST:event_jcbCargoMousePressed
+
+    private void bCargarSedesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bCargarSedesMouseClicked
+        Sedes sede = new Sedes();
+        String[] listaDeINombres = sede.getNombreSedes().split(":");
+
+        jcbSede.removeAllItems();
+        for(int i=0; i< listaDeINombres.length ;i++){
+            jcbSede.addItem(listaDeINombres[i] );
+        }
+    }//GEN-LAST:event_bCargarSedesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel Actualizar;
     javax.swing.JLabel Cancelar;
     public javax.swing.JTextArea areaSedes;
+    public javax.swing.JButton bCargarSedes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -309,11 +396,11 @@ public class ModificarUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    javax.swing.JTextField jtfCargo;
+    public javax.swing.JComboBox<String> jcbCargo;
+    public javax.swing.JComboBox<String> jcbSede;
     javax.swing.JTextField jtfCedula;
     javax.swing.JTextField jtfCorreo;
     javax.swing.JTextField jtfNombre;
-    javax.swing.JTextField jtfSede;
     javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 }

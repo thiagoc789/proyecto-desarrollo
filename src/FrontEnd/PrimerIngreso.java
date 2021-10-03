@@ -40,6 +40,11 @@ public class PrimerIngreso extends javax.swing.JFrame {
             respuesta = respuesta + "\n   - Debe ingresar una contraseña";
             validacion = false;
         }
+        if( Correo.getText().length()<1 || !Correo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
+            respuesta = respuesta + "\n   - Ingrese un correo válido";
+            validacion = false;
+        }
+        
         if( !validacion )
             JOptionPane.showMessageDialog(null, respuesta);
         
@@ -392,7 +397,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
         try {
             if( validador() ){
                 registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contrasena.getText(), "Gerente", "Sin Sede", "Activo");
-                new PantallaGerente().setVisible(true);
+                new PantallaGerente("Gerente").setVisible(true);
                 this.setVisible(false);
             }
         } catch (SQLException ex) {

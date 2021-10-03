@@ -279,7 +279,7 @@ public class ModificarSede extends javax.swing.JPanel {
 
     private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
         // TODO add your handling code here:
-        new PantallaGerente().setVisible(true);
+        new PantallaGerente("Gerente").setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CancelarMouseClicked
 

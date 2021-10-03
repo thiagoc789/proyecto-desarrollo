@@ -316,7 +316,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
             Logger.getLogger(SesionBloqueada.class.getName()).log(Level.SEVERE, null, ex);
         }
         if( usuariValido.compareTo("Gerente") == 0 ){
-            new PantallaGerente().setVisible(true);
+            new PantallaGerente("Gerente").setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Operador") == 0 ){
             new PantallaOperador().setVisible(true);

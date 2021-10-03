@@ -51,6 +51,8 @@ public class IngresoUsuario extends javax.swing.JFrame {
         lEntrar = new javax.swing.JLabel();
         Cedula = new javax.swing.JFormattedTextField();
         Contrasena = new javax.swing.JPasswordField();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -212,6 +214,15 @@ public class IngresoUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("PROBANDO VALIDACIONES PRIMER INGRESO");
+
+        jButton3.setText("Pasar a primer ingreso SOLO PRUEBA, LUEGO SE BORRA");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -228,6 +239,14 @@ public class IngresoUsuario extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(177, 177, 177))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel1)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(211, 211, 211)
@@ -243,7 +262,11 @@ public class IngresoUsuario extends javax.swing.JFrame {
                 .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(224, 224, 224)
+                .addGap(64, 64, 64)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addGap(108, 108, 108)
                 .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(118, 118, 118))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,6 +399,11 @@ public class IngresoUsuario extends javax.swing.JFrame {
         lCancelar.setForeground(Color.white);
     }//GEN-LAST:event_lCancelarMouseExited
 
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        this.setVisible(false);
+        new PrimerIngreso().setVisible(true);
+    }//GEN-LAST:event_jButton3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -383,6 +411,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JFormattedTextField Cedula;
     javax.swing.JPasswordField Contrasena;
+    public javax.swing.JButton jButton3;
     javax.swing.JLabel lCancelar;
     javax.swing.JLabel lEntrar;
     // End of variables declaration//GEN-END:variables

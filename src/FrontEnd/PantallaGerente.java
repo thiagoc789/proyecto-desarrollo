@@ -15,21 +15,16 @@ public class PantallaGerente extends javax.swing.JFrame {
     RegistrarSede panelNuevaSede = new RegistrarSede();
     ModificarSede panelActualizarSede = new ModificarSede();
     RegistrarUsuario panelNuevoUsuario = new RegistrarUsuario();
-    ModificarUsuario panelModificarUsuario = new ModificarUsuario();
+    ModificarUsuario panelModificarUsuario = new ModificarUsuario("Gerente");
     EstadoUsuario panelEstadoUsuario = new EstadoUsuario();
     ListarUsuariosTabulados panelListaUsuariosTabulados = new ListarUsuariosTabulados();
-
-    public PantallaGerente() {
-        initComponents();
-        
-        contenedor.setVisible(false);
-
-    }
     
     public PantallaGerente(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
         this.idUsuario = idUsuario;
+        
+        contenedor.setVisible(false);
     }
     
     public void cambioVisualizacion(){

@@ -36,6 +36,38 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     public RegistrarEnvio() {
         initComponents();
     }
+    
+    public boolean validador(){
+        boolean validacion = true;
+        String respuesta = "Por favor verifique:";
+        
+        //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
+
+        if( valorEnvio.getText().length()<1 || !(valorEnvio.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Verificar el valor del envío";
+            valorEnvio.setText("");
+            validacion = false;
+        }
+        if( valorPaquete.getText().length()<1 || !(valorPaquete.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Verificar el valor del paquete";
+            valorPaquete.setText("");
+            validacion = false;
+        }
+        if( valorImpuesto.getText().length()<1 || !(valorImpuesto.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Verificar el valor del impuesto";
+            valorImpuesto.setText("");
+            validacion = false;
+        }
+        if( valorSeguro.getText().length()<1 || !(valorSeguro.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Verificar el valor del seguro";
+            valorSeguro.setText("");
+            validacion = false;
+        }
+        
+        if( !validacion )
+            JOptionPane.showMessageDialog(null, respuesta);
+        return validacion;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -400,11 +432,12 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
         // TODO add your handling code here:
         // AQUI SE REGISTRA EL ENVIO
-        Envios registrar = new Envios();
+        Envios envio = new Envios();
         try {
-            registrar.registrarEnvio(metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
-            JOptionPane.showMessageDialog(null, "Envio registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
-
+            if( validador() ){
+                envio.registrarEnvio(metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
+                JOptionPane.showMessageDialog(null, "Envio registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
         }
