@@ -22,7 +22,7 @@ public class Envios {
     Connection conexion;
     Statement stmt;
 
-    public void registrarEnvio(String metodoPago, int valorEnvios, int valorPaquetes, int valorImpuestos, int valorSeguros, int numeroEnvios) throws SQLException {
+    public void registrarEnvio(int id, int cedula_cliente, String metodoPago, int valorEnvios, int valorPaquetes, int valorImpuestos, int valorSeguros, int numeroEnvios) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -34,10 +34,12 @@ public class Envios {
             //JOptionPane.showMessageDialog(null, "Connected to Database");
             //conexion.close();
             stmt = conexion.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS envios (metodo_Pago VARCHAR(50), valor_Envios INT, valor_Paquetes INT, valor_Impuestos INT, valor_Seguros INT, numero_Envios int);";
+            sql = "CREATE TABLE IF NOT EXISTS envios (id_envio INT, cedula_cliente INT, metodo_Pago VARCHAR(50), valor_Envios INT, valor_Paquetes INT, valor_Impuestos INT, valor_Seguros INT, numero_Envios int);";
             stmt.executeUpdate(sql);
 
-            sql = "INSERT INTO envios(metodo_Pago, valor_Envios, valor_Paquetes, valor_Impuestos, valor_Seguros, numero_Envios) VALUES("
+            sql = "INSERT INTO envios(id_envio, cedula_cliente, metodo_Pago, valor_Envios, valor_Paquetes, valor_Impuestos, valor_Seguros, numero_Envios) VALUES("
+                    + "\'" + id + "\',"
+                    + "\'" + cedula_cliente + "\',"
                     + "\'" + metodoPago + "\',"
                     + "\'" + valorEnvios + "\',"
                     + "\'" + valorPaquetes + "\',"

@@ -2,6 +2,7 @@ package FrontEnd;
 
 import FrontEnd.Administrativo.*;
 import FrontEnd.Operador.RegistrarEnvio;
+import FrontEnd.Operador.RegistrarClientes;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -10,46 +11,56 @@ public class PantallaOperador extends javax.swing.JFrame {
 
     private int x;
     private int y;
-    
+
     String idUsuario;
-    
+
     RegistrarEnvio panelRegistrarEnvio = new RegistrarEnvio();
+    RegistrarClientes panelRegistrarClientes = new RegistrarClientes();
 
     public PantallaOperador() {
+
         initComponents();
         contenedor.setVisible(false);
     }
-    
+
     public PantallaOperador(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
         this.idUsuario = idUsuario;
     }
-    
-    public void cambioVisualizacion(){
+
+    public void cambioVisualizacion() {
         label2.setEnabled(true);
         jlRegistrarEnvio.setEnabled(true);
-        label3.setEnabled(true);
+
     }
-    
-    public void visualizacionActual(String panel){
-        
-        if(panel.compareTo("registrarEnvio") == 0){
+
+    public void cambioVisualizacion2() {
+        jlRegistrarEnvio.setEnabled(true);
+        label2.setEnabled(true);
+
+    }
+
+    public void visualizacionActual(String panel) {
+
+
+        if (panel.compareTo("registrarEnvio") == 0) {
             panelRegistrarEnvio.setVisible(true);
+            panelRegistrarClientes.setVisible(false);
             contenedor.add(panelRegistrarEnvio);
             jlRegistrarEnvio.setEnabled(false);
-        }else if(panel.compareTo("actualizarSede") == 0){
-//            actualizarSede.setVisible(true);
-//            contenedor.add(actualizarSede);
-//            label2.setEnabled(false);
-        }else if(panel.compareTo("nuevoUsuario") == 0){
+        } else if (panel.compareTo("registrarClientes") == 0) {
+            panelRegistrarClientes.setVisible(true);
+            panelRegistrarEnvio.setVisible(false);
+            contenedor.add(panelRegistrarClientes);
+            label2.setEnabled(false);
+        } else if (panel.compareTo("nuevoUsuario") == 0) {
 //            nuevoUsuario.setVisible(true);
 //            contenedor.add(nuevoUsuario);
 //            label3.setEnabled(false);
         }
-        
+
         //estadoUsuario
-        
         contenedor.validate();
         contenedor.setVisible(true);
     }
@@ -67,7 +78,6 @@ public class PantallaOperador extends javax.swing.JFrame {
         javax.swing.JLabel jlBloquear = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
-        label3 = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
         jlRegistrarEnvio = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
@@ -221,22 +231,13 @@ public class PantallaOperador extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 950, 80));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 950, 60));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
-        label3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        label3.setForeground(new java.awt.Color(102, 102, 102));
-        label3.setText("-Funcion 3");
-        label3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label3MouseClicked(evt);
-            }
-        });
-
         label2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         label2.setForeground(new java.awt.Color(102, 102, 102));
-        label2.setText("-Función2");
+        label2.setText("-Registrar Clientes");
         label2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 label2MouseClicked(evt);
@@ -245,7 +246,7 @@ public class PantallaOperador extends javax.swing.JFrame {
 
         jlRegistrarEnvio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jlRegistrarEnvio.setForeground(new java.awt.Color(102, 102, 102));
-        jlRegistrarEnvio.setText("-Registrar envío");
+        jlRegistrarEnvio.setText("-Registrar Envío");
         jlRegistrarEnvio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlRegistrarEnvioMouseClicked(evt);
@@ -257,9 +258,8 @@ public class PantallaOperador extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlRegistrarEnvio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -267,20 +267,17 @@ public class PantallaOperador extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jlRegistrarEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(29, 29, 29)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(380, Short.MAX_VALUE))
+                .addComponent(jlRegistrarEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(439, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 180, 520));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 180, 540));
 
-        contenedor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
         contenedor.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 770, 520));
+        getContentPane().add(contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 770, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -317,13 +314,8 @@ public class PantallaOperador extends javax.swing.JFrame {
 
     private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
         cambioVisualizacion();
-        visualizacionActual("actualizarSede");
+        visualizacionActual("registrarClientes");
     }//GEN-LAST:event_label2MouseClicked
-
-    private void label3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label3MouseClicked
-        cambioVisualizacion();
-        visualizacionActual("nuevoUsuario");
-    }//GEN-LAST:event_label3MouseClicked
 
     private void jlRegistrarEnvioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlRegistrarEnvioMouseClicked
         cambioVisualizacion();
@@ -336,7 +328,7 @@ public class PantallaOperador extends javax.swing.JFrame {
     }//GEN-LAST:event_lCerrarSesionMouseClicked
 
     private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
-        new SesionBloqueada( idUsuario ).setVisible(true);
+        new SesionBloqueada(idUsuario).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlBloquearMouseClicked
 
@@ -348,6 +340,5 @@ public class PantallaOperador extends javax.swing.JFrame {
     public javax.swing.JPanel contenedor;
     public javax.swing.JLabel jlRegistrarEnvio;
     public javax.swing.JLabel label2;
-    public javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables
 }
