@@ -304,29 +304,29 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(labelCedula)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(metodoPagoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(86, 86, 86))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(193, 193, 193))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel21)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel24))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(valorEnvioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel23)
                                     .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
                                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(valorSeguroResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jLabel21)
+                                            .addComponent(jLabel22)
+                                            .addComponent(jLabel24))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(valorEnvioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(valorSeguroResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,12 +364,12 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
                             .addComponent(valorPaqueteResumen))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel23)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(valorImpuestoResumen)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
@@ -377,9 +377,9 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel24)
-                            .addComponent(valorSeguroResumen))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valorSeguroResumen)
+                            .addComponent(jLabel24))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel25)
@@ -672,7 +672,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                     } catch (DocumentException | FileNotFoundException ex2) {
                         try {
                             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf"));
-                            rutaCompleta = ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf";
+                            rutaCompleta = ruta + id_envio+"_Prueba.pdf";
                         } catch (DocumentException | FileNotFoundException ex3) {
                         }
                     }
@@ -796,17 +796,17 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private javax.swing.JLabel labelDireccion;
     private javax.swing.JLabel labelNombre;
     javax.swing.JComboBox<String> metodoDePago;
-    private javax.swing.JLabel metodoPagoResumen;
-    private javax.swing.JLabel numeroPaquetesResumen;
+    javax.swing.JLabel metodoPagoResumen;
+    javax.swing.JLabel numeroPaquetesResumen;
     private javax.swing.JPanel panelTarjeta;
-    private javax.swing.JLabel totalResumen;
+    javax.swing.JLabel totalResumen;
     javax.swing.JTextField valorEnvio;
-    private javax.swing.JLabel valorEnvioResumen;
+    javax.swing.JLabel valorEnvioResumen;
     javax.swing.JTextField valorImpuesto;
-    private javax.swing.JLabel valorImpuestoResumen;
+    javax.swing.JLabel valorImpuestoResumen;
     javax.swing.JTextField valorPaquete;
-    private javax.swing.JLabel valorPaqueteResumen;
+    javax.swing.JLabel valorPaqueteResumen;
     javax.swing.JTextField valorSeguro;
-    private javax.swing.JLabel valorSeguroResumen;
+    javax.swing.JLabel valorSeguroResumen;
     // End of variables declaration//GEN-END:variables
 }

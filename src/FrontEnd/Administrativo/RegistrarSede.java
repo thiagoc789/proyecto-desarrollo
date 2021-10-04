@@ -35,46 +35,29 @@ public class RegistrarSede extends javax.swing.JPanel {
         
         //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
 
-//        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-//            respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
-//            jtfCedula.setText("");
+        if( jtfIdSede.getText().length()<1 || !(jtfIdSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Id ingresada, deben ser solo números";
+            jtfIdSede.setText("");
+            validacion = false;
+        }
+        if( jtfNombreSede.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar un nombre para la sede";
+            validacion = false;
+        }
+        if( jtfDireccionSede.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar un dirección para la sede";
+            validacion = false;
+        }
+//        if( jtfComunaSede.getText().length()<1 || !(jtfComunaSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+//            respuesta = respuesta + "\n   - Comuna ingresada, deben ser solo números";
+//            jtfComunaSede.setText("");
 //            validacion = false;
 //        }
-//        if( jtfNombre.getText().length()<1 ){
-//            respuesta = respuesta + "\n   - Debe ingresar un nombre";
-//            validacion = false;
-//        }
-//        if( jtfTelefono.getText().length()<1 && !(jtfTelefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-//            respuesta = respuesta + "\n   - Debe ingresar un teléfono, deben ser solo números";
-//            jtfTelefono.setText("");
-//            validacion = false;
-//        }
-//        if( jtfCorreo.getText().length()<1 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
-//            respuesta = respuesta + "\n   - Ingrese un correo válido";
-//            validacion = false;
-//        }
-//        if ( jcbSede.getItemAt(jcbSede.getSelectedIndex()).compareTo("Seleccionar") == 0 ){
-//            respuesta = respuesta + "\n   - Debe cargar las sedes y seleccionar una";
-//            validacion = false;
-//        }
-//        if ( jcbCargo.getItemAt(jcbCargo.getSelectedIndex()).compareTo("Seleccionar") == 0 ){
-//            respuesta = respuesta + "\n   - Debe seleccionar un cargo";
-//            validacion = false;
-//        }
-//        if( pass1.getText().length()<1 || pass1.getText().compareTo( pass2.getText() ) != 0 ){
-//            if( pass1.getText().length()<1 )
-//                respuesta = respuesta + "\n   - Ingrese una contraseña";
-//            else{
-//                respuesta = respuesta + "\n   - Contaseña y su confirmación no coinciden";
-//                pass1.setText("");
-//                pass2.setText("");
-//            }
-//            validacion = false;
-//        }
-//        if( jcbEstado.getSelectedIndex() < 1 ){
-//            respuesta = respuesta + "\n   - Debe seleccionar estado 'Activo' o 'Inactivo'";
-//            validacion = false;
-//        }
+        if( jtfTelefonoSede.getText().length()<1 && !(jtfTelefonoSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Debe ingresar un teléfono, deben ser solo números";
+            jtfTelefonoSede.setText("");
+            validacion = false;
+        }
         
         if( !validacion )
             JOptionPane.showMessageDialog(null, respuesta);
@@ -96,12 +79,13 @@ public class RegistrarSede extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        Nombre = new javax.swing.JTextField();
-        Dirección = new javax.swing.JTextField();
-        Id = new javax.swing.JTextField();
-        Telefono = new javax.swing.JTextField();
+        jtfNombreSede = new javax.swing.JTextField();
+        jtfDireccionSede = new javax.swing.JTextField();
+        jtfIdSede = new javax.swing.JTextField();
+        jtfTelefonoSede = new javax.swing.JTextField();
         lRegistrar = new javax.swing.JLabel();
-        lCancelar = new javax.swing.JLabel();
+        jtfComunaSede = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -140,56 +124,48 @@ public class RegistrarSede extends javax.swing.JPanel {
             }
         });
 
-        lCancelar.setBackground(new java.awt.Color(0, 153, 102));
-        lCancelar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        lCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        lCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lCancelar.setText("Cancelar");
-        lCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        lCancelar.setOpaque(true);
-        lCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lCancelarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lCancelarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lCancelarMouseExited(evt);
-            }
-        });
+        jtfComunaSede.setEnabled(false);
+
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel16.setText("Comuna");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(72, 72, 72)
+                        .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
+                                .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Dirección, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jtfTelefonoSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jtfIdSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfDireccionSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(51, 51, 51)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtfNombreSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(115, Short.MAX_VALUE))
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfComunaSede, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,19 +174,23 @@ public class RegistrarSede extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfNombreSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfIdSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfComunaSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfDireccionSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Dirección, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(278, Short.MAX_VALUE))
+                    .addComponent(jtfTelefonoSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -239,16 +219,17 @@ public class RegistrarSede extends javax.swing.JPanel {
         // TODO add your handling code here:
         Sedes sede = new Sedes();
         try {
-            if( !( sede.idExiste(Id.getText()) ) ){
-                sede.registrarSedeNueva(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
-                JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
-                Id.setText("");
-                Nombre.setText("");
-                Dirección.setText("");
-                Telefono.setText("");
-            }else
-                JOptionPane.showMessageDialog(null, "El Id ya existe");
-
+            if( validador() ){
+                if( !( sede.idExiste(jtfIdSede.getText()) ) ){
+                    sede.registrarSedeNueva(jtfIdSede.getText(), jtfNombreSede.getText(), jtfDireccionSede.getText(), jtfTelefonoSede.getText());
+                    JOptionPane.showMessageDialog(null, "Sede " + jtfIdSede.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                    jtfIdSede.setText("");
+                    jtfNombreSede.setText("");
+                    jtfDireccionSede.setText("");
+                    jtfTelefonoSede.setText("");
+                }else
+                    JOptionPane.showMessageDialog(null, "El Id ya existe");
+            }
         } catch (SQLException ex) {
             //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -264,34 +245,19 @@ public class RegistrarSede extends javax.swing.JPanel {
         lRegistrar.setForeground(Color.WHITE);
     }//GEN-LAST:event_lRegistrarMouseExited
 
-    private void lCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseClicked
-        // TODO add your handling code here:
-        new PantallaGerente("Gerente").setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_lCancelarMouseClicked
-
-    private void lCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseEntered
-        // TODO add your handling code here:
-        lCancelar.setForeground(Color.red);
-    }//GEN-LAST:event_lCancelarMouseEntered
-
-    private void lCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseExited
-        // TODO add your handling code here:
-        lCancelar.setForeground(Color.white);
-    }//GEN-LAST:event_lCancelarMouseExited
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JTextField Dirección;
-    javax.swing.JTextField Id;
-    javax.swing.JTextField Nombre;
-    javax.swing.JTextField Telefono;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel4;
-    javax.swing.JLabel lCancelar;
+    javax.swing.JTextField jtfComunaSede;
+    javax.swing.JTextField jtfDireccionSede;
+    javax.swing.JTextField jtfIdSede;
+    javax.swing.JTextField jtfNombreSede;
+    javax.swing.JTextField jtfTelefonoSede;
     javax.swing.JLabel lRegistrar;
     // End of variables declaration//GEN-END:variables
 }
