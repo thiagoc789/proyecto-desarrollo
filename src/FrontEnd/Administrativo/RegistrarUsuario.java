@@ -388,7 +388,7 @@ public class RegistrarUsuario extends javax.swing.JPanel {
                     jtfNombre.setText("");
                     jtfCorreo.setText("");
                 }else
-                JOptionPane.showMessageDialog(null, "La cédula ya existe");
+                    JOptionPane.showMessageDialog(null, "La cédula ya existe");
             }
         } catch (SQLException ex) {
             //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);

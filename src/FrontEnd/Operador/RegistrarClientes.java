@@ -38,35 +38,40 @@ public class RegistrarClientes extends javax.swing.JPanel {
         initComponents();
     }
     
-    public boolean validador(){
+public boolean validador(){
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
         
-        //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
-
-        if( campoNombre.getText().length()<1 || !(campoNombre.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-            respuesta = respuesta + "\n   - Verificar el valor del envío";
-            campoNombre.setText("");
+        if( campoNombre.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar un nombre";
             validacion = false;
         }
         if( campoCedula.getText().length()<1 || !(campoCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-            respuesta = respuesta + "\n   - Verificar el valor del paquete";
+            respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
             campoCedula.setText("");
             validacion = false;
         }
-        if( campoDireccion.getText().length()<1 || !(campoDireccion.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-            respuesta = respuesta + "\n   - Verificar el valor del impuesto";
-            campoDireccion.setText("");
+        if( campoDireccion.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar una dirección";
             validacion = false;
         }
         if( campoComuna.getText().length()<1 || !(campoComuna.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-            respuesta = respuesta + "\n   - Verificar el valor del seguro";
+            respuesta = respuesta + "\n   - Comuna ingresado, deben ser solo números";
             campoComuna.setText("");
             validacion = false;
         }
+//        if( Contrasena.getText().length()<1 ){
+//            respuesta = respuesta + "\n   - Debe ingresar una contraseña";
+//            validacion = false;
+//        }
+//        if( Correo.getText().length()<1 || !Correo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
+//            respuesta = respuesta + "\n   - Ingrese un correo válido";
+//            validacion = false;
+//        }
         
         if( !validacion )
             JOptionPane.showMessageDialog(null, respuesta);
+        
         return validacion;
     }
 
@@ -267,14 +272,19 @@ public class RegistrarClientes extends javax.swing.JPanel {
     private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
         // TODO add your handling code here:
         // AQUI SE REGISTRA EL USUARIO
-        Clientes cliente = new Clientes();
-        int cedula = Integer.parseInt(campoCedula.getText());
-        int comuna = Integer.parseInt(campoComuna.getText());
-        
+        Clientes cliente = new Clientes();        
         
         try {
-            cliente.registrarClienteNuevo(cedula, campoNombre.getText(), campoDireccion.getText(), comuna);
-            JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+            if ( validador() ){
+                if( !( cliente.cedulaExiste( campoCedula.getText() ) ) ){
+                    int cedula = Integer.parseInt(campoCedula.getText());
+                    int comuna = Integer.parseInt(campoComuna.getText());
+                    cliente.registrarClienteNuevo(cedula, campoNombre.getText(), campoDireccion.getText(), comuna);
+                    JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "La cédula ya existe");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
