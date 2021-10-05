@@ -22,12 +22,12 @@ public class IngresoUsuario extends javax.swing.JFrame {
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
 
-        if( Cedula.getText().length()<1 || !(Cedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
-            Cedula.setText("");
+            jtfCedula.setText("");
             validacion = false;
         }
-        if( Contrasena.getText().length()<1 ){
+        if( jtfClave.getText().length()<1 ){
             respuesta = respuesta + "\n   - Debe ingresar una contraseña";
             validacion = false;
         }
@@ -49,10 +49,11 @@ public class IngresoUsuario extends javax.swing.JFrame {
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         lCancelar = new javax.swing.JLabel();
         lEntrar = new javax.swing.JLabel();
-        Cedula = new javax.swing.JFormattedTextField();
-        Contrasena = new javax.swing.JPasswordField();
-        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        jtfCedula = new javax.swing.JFormattedTextField();
+        jtfClave = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -186,67 +187,52 @@ public class IngresoUsuario extends javax.swing.JFrame {
             }
         });
 
-        Cedula.setForeground(new java.awt.Color(153, 153, 153));
-        Cedula.setText("Cedula");
-        Cedula.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                CedulaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                CedulaFocusLost(evt);
-            }
-        });
-        Cedula.addActionListener(new java.awt.event.ActionListener() {
+        jtfCedula.setForeground(new java.awt.Color(153, 153, 153));
+        jtfCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CedulaActionPerformed(evt);
+                jtfCedulaActionPerformed(evt);
             }
         });
 
-        Contrasena.setForeground(new java.awt.Color(153, 153, 153));
-        Contrasena.setText("Contraseña");
-        Contrasena.setHighlighter(null);
-        Contrasena.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ContrasenaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ContrasenaFocusLost(evt);
-            }
-        });
+        jtfClave.setForeground(new java.awt.Color(153, 153, 153));
+        jtfClave.setHighlighter(null);
 
-        jLabel1.setText("PROBANDO VALIDACIONES PRIMER INGRESO");
-
-        jButton3.setText("Pasar a primer ingreso SOLO PRUEBA, LUEGO SE BORRA");
+        jButton3.setText("<html>\n<center>\nProbar<br>PRIMER<br>INGRESO\n</center>\n</html>");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
             }
         });
 
+        jLabel1.setText("Cédula");
+
+        jLabel3.setText("Clave");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Contrasena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
+                                .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(177, 177, 177))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel1)))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(211, 211, 211)
@@ -259,15 +245,17 @@ public class IngresoUsuario extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(108, 108, 108)
-                .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(224, 224, 224)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(118, 118, 118))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -304,9 +292,9 @@ public class IngresoUsuario extends javax.swing.JFrame {
         setLocation(ubicacion.x - x, ubicacion.y - y);//3
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaActionPerformed
+    private void jtfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CedulaActionPerformed
+    }//GEN-LAST:event_jtfCedulaActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         // TODO add your handling code here:
@@ -320,22 +308,22 @@ public class IngresoUsuario extends javax.swing.JFrame {
         String usuariValido = "";
         try {
             if( validador() )
-                usuariValido = usuario.validarIngreso(Cedula.getText(), Contrasena.getText());
+                usuariValido = usuario.validarIngreso(jtfCedula.getText(), jtfClave.getText());
         } catch (SQLException ex) {
             Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         if( usuariValido.compareTo("Gerente") == 0 ){
             //new PantallaGerente().setVisible(true);
-            new PantallaGerente( Cedula.getText() ).setVisible(true);
+            new PantallaGerente( jtfCedula.getText() ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Operador") == 0 ){
-            new PantallaOperador( Cedula.getText() ).setVisible(true);
+            new PantallaOperador( jtfCedula.getText() ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Secretaria") == 0 ){
-            new PantallaSecretaria( Cedula.getText() ).setVisible(true);
+            new PantallaSecretaria( jtfCedula.getText() ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Auxiliar") == 0 ){
-            new PantallaAuxiliar( Cedula.getText() ).setVisible(true);
+            new PantallaAuxiliar( jtfCedula.getText() ).setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_lEntrarMouseClicked
@@ -351,38 +339,6 @@ public class IngresoUsuario extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_lEntrarMouseEntered
-
-    private void CedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusGained
-        // TODO add your handling code here:
-        if (Cedula.getText().equals("Cedula")) {
-            Cedula.setText("");
-            Cedula.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_CedulaFocusGained
-
-    private void CedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusLost
-        // TODO add your handling code here:
-        if (Cedula.getText().equals("")) {
-            Cedula.setText("Cedula");
-            Cedula.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_CedulaFocusLost
-
-    private void ContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusGained
-        // TODO add your handling code here:
-        if (Contrasena.getText().equals("Contraseña")) {
-            Contrasena.setText("");
-            Contrasena.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_ContrasenaFocusGained
-
-    private void ContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusLost
-        // TODO add your handling code here:
-        if (Contrasena.getText().equals("")) {
-            Contrasena.setText("Contraseña");
-            Contrasena.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_ContrasenaFocusLost
 
     private void lEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseExited
         // TODO add your handling code here:
@@ -409,9 +365,9 @@ public class IngresoUsuario extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JFormattedTextField Cedula;
-    javax.swing.JPasswordField Contrasena;
     public javax.swing.JButton jButton3;
+    javax.swing.JFormattedTextField jtfCedula;
+    javax.swing.JPasswordField jtfClave;
     javax.swing.JLabel lCancelar;
     javax.swing.JLabel lEntrar;
     // End of variables declaration//GEN-END:variables
