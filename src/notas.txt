@@ -12,11 +12,12 @@ git add . && git commit -m "Actualizado: $(date)" && git push
 Revisadas:
 - IngresoUsuario.java
 - Main.java
+- PantallaAuxiliar.java     (solo ventana)
+- PantallaGerente.java      (solo ventana)
+- PantallaOperador.java     (solo ventana)
+- PantallaSecretaria.java   (solo ventana)
 - PrimerIngreso.java
 - SesionBloqueada.java
-- PantallaAuxiliar.java (solo ventana)
-- PantallaGerente.java  (solo ventana)
-- PantallaOperador.java (solo ventana)
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 

@@ -57,7 +57,7 @@ public class ModificarUsuario extends javax.swing.JPanel {
             jtfTelefono.setText("");
             validacion = false;
         }
-        if( jtfCorreo.getText().length()>0 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
+        if( jtfCorreo.getText().length()>0 && !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
             respuesta = respuesta + "\n   - Verifique el correo ingresado";
             validacion = false;
         }
@@ -331,9 +331,10 @@ public class ModificarUsuario extends javax.swing.JPanel {
                                                 stringCargo,
                                                 stringSede
                     );
-                    //areaSedes.setText(usuario.listarSedes() );
-                }else
+                }else{
+                    jtfCedula.setText("");
                     JOptionPane.showMessageDialog(null, "No existe usuario con esa cédula");
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ModificarUsuario.class.getName()).log(Level.SEVERE, null, ex);
