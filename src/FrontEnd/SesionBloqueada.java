@@ -22,7 +22,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
     
     public SesionBloqueada(String idUsuario) {
         initComponents();
-        Cedula.setText(idUsuario);
+        jtfCedula.setText(idUsuario);
         this.idUsuario = idUsuario;
     }
     
@@ -30,10 +30,16 @@ public class SesionBloqueada extends javax.swing.JFrame {
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
 
-        if( Contrasena.getText().length()<1 ){
+        if( jtfClave.getText().length()<1 ){
             respuesta = respuesta + "\n   - Debe ingresar una contraseña";
             validacion = false;
         }
+        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
+            jtfCedula.setText("");
+            validacion = false;
+        }
+        
         if( !validacion )
             JOptionPane.showMessageDialog(null, respuesta);
         
@@ -52,9 +58,11 @@ public class SesionBloqueada extends javax.swing.JFrame {
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         lCancelar = new javax.swing.JLabel();
         lEntrar = new javax.swing.JLabel();
-        Cedula = new javax.swing.JFormattedTextField();
-        Contrasena = new javax.swing.JPasswordField();
+        jtfCedula = new javax.swing.JFormattedTextField();
+        jtfClave = new javax.swing.JPasswordField();
         javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -188,32 +196,23 @@ public class SesionBloqueada extends javax.swing.JFrame {
             }
         });
 
-        Cedula.setForeground(new java.awt.Color(153, 153, 153));
-        Cedula.setText("Cedula");
-        Cedula.setEnabled(false);
-        Cedula.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                CedulaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                CedulaFocusLost(evt);
-            }
-        });
-        Cedula.addActionListener(new java.awt.event.ActionListener() {
+        jtfCedula.setForeground(new java.awt.Color(153, 153, 153));
+        jtfCedula.setEnabled(false);
+        jtfCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CedulaActionPerformed(evt);
+                jtfCedulaActionPerformed(evt);
             }
         });
 
-        Contrasena.setForeground(new java.awt.Color(153, 153, 153));
-        Contrasena.setText("Contraseña");
-        Contrasena.setHighlighter(null);
-        Contrasena.addFocusListener(new java.awt.event.FocusAdapter() {
+        jtfClave.setForeground(new java.awt.Color(153, 153, 153));
+        jtfClave.setText("Contraseña");
+        jtfClave.setHighlighter(null);
+        jtfClave.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                ContrasenaFocusGained(evt);
+                jtfClaveFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                ContrasenaFocusLost(evt);
+                jtfClaveFocusLost(evt);
             }
         });
 
@@ -221,18 +220,28 @@ public class SesionBloqueada extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("para desbloquear la sesión");
 
+        jLabel1.setText("Cédula");
+
+        jLabel4.setText("Clave");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(207, Short.MAX_VALUE)
+                .addContainerGap(236, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Contrasena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -254,9 +263,13 @@ public class SesionBloqueada extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(224, 224, 224)
                 .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(118, 118, 118))
@@ -295,9 +308,9 @@ public class SesionBloqueada extends javax.swing.JFrame {
         setLocation(ubicacion.x - x, ubicacion.y - y);//3
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaActionPerformed
+    private void jtfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CedulaActionPerformed
+    }//GEN-LAST:event_jtfCedulaActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         // TODO add your handling code here:
@@ -311,7 +324,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
         String usuariValido = "";
         try {
             if( validador() )
-                usuariValido = validar.validarIngreso(idUsuario, Contrasena.getText());
+                usuariValido = validar.validarIngreso(idUsuario, jtfClave.getText());
         } catch (SQLException ex) {
             Logger.getLogger(SesionBloqueada.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -342,37 +355,21 @@ public class SesionBloqueada extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lEntrarMouseEntered
 
-    private void CedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusGained
+    private void jtfClaveFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfClaveFocusGained
         // TODO add your handling code here:
-        if (Cedula.getText().equals("Cedula")) {
-            Cedula.setText("");
-            Cedula.setForeground(new Color(0, 0, 0));
+        if (jtfClave.getText().equals("Contraseña")) {
+            jtfClave.setText("");
+            jtfClave.setForeground(new Color(0, 0, 0));
         }
-    }//GEN-LAST:event_CedulaFocusGained
+    }//GEN-LAST:event_jtfClaveFocusGained
 
-    private void CedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusLost
+    private void jtfClaveFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfClaveFocusLost
         // TODO add your handling code here:
-        if (Cedula.getText().equals("")) {
-            Cedula.setText("Cedula");
-            Cedula.setForeground(new Color(153, 153, 153));
+        if (jtfClave.getText().equals("")) {
+            jtfClave.setText("Contraseña");
+            jtfClave.setForeground(new Color(153, 153, 153));
         }
-    }//GEN-LAST:event_CedulaFocusLost
-
-    private void ContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusGained
-        // TODO add your handling code here:
-        if (Contrasena.getText().equals("Contraseña")) {
-            Contrasena.setText("");
-            Contrasena.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_ContrasenaFocusGained
-
-    private void ContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusLost
-        // TODO add your handling code here:
-        if (Contrasena.getText().equals("")) {
-            Contrasena.setText("Contraseña");
-            Contrasena.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_ContrasenaFocusLost
+    }//GEN-LAST:event_jtfClaveFocusLost
 
     private void lEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseExited
         // TODO add your handling code here:
@@ -394,8 +391,8 @@ public class SesionBloqueada extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JFormattedTextField Cedula;
-    javax.swing.JPasswordField Contrasena;
+    javax.swing.JFormattedTextField jtfCedula;
+    javax.swing.JPasswordField jtfClave;
     javax.swing.JLabel lCancelar;
     javax.swing.JLabel lEntrar;
     // End of variables declaration//GEN-END:variables
