@@ -288,7 +288,6 @@
                       <Component id="lRegistrarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                       <Component id="lModificarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                       <Component id="lModificarSede" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Component id="lInactivarUsuario" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                       <Component id="lListarUsuarios" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                       <Component id="lRegistrarSede" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
@@ -308,10 +307,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lModificarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lInactivarUsuario" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="lListarUsuarios" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace pref="269" max="32767" attributes="0"/>
+                  <EmptySpace pref="306" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -386,24 +383,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lModificarSedeMouseClicked"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lInactivarUsuario">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="66" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="-Inactivar Usuario"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lInactivarUsuarioMouseClicked"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>

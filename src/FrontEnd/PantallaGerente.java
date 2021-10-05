@@ -34,7 +34,6 @@ public class PantallaGerente extends javax.swing.JFrame {
     }
     
     public void cambioVisualizacion(){
-        lInactivarUsuario.setEnabled(true);
         lListarUsuarios.setEnabled(true);
         lModificarSede.setEnabled(true);
         lModificarUsuario.setEnabled(true);
@@ -69,10 +68,6 @@ public class PantallaGerente extends javax.swing.JFrame {
             panelModificarUsuario.setVisible(true);
             contenedor.add(panelModificarUsuario);
             lModificarUsuario.setEnabled(false);
-        }else if(panel.compareTo("estadoUsuario") == 0){
-            panelEstadoUsuario.setVisible(true);
-            contenedor.add(panelEstadoUsuario);
-            lInactivarUsuario.setEnabled(false);
         }else if(panel.compareTo("listarUsuarios") == 0){
             panelListaUsuariosTabulados.setVisible(true);
             contenedor.add( panelListaUsuariosTabulados );
@@ -100,7 +95,6 @@ public class PantallaGerente extends javax.swing.JFrame {
         lRegistrarSede = new javax.swing.JLabel();
         lModificarUsuario = new javax.swing.JLabel();
         lModificarSede = new javax.swing.JLabel();
-        lInactivarUsuario = new javax.swing.JLabel();
         lListarUsuarios = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
@@ -294,15 +288,6 @@ public class PantallaGerente extends javax.swing.JFrame {
             }
         });
 
-        lInactivarUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lInactivarUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        lInactivarUsuario.setText("-Inactivar Usuario");
-        lInactivarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lInactivarUsuarioMouseClicked(evt);
-            }
-        });
-
         lListarUsuarios.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lListarUsuarios.setForeground(new java.awt.Color(102, 102, 102));
         lListarUsuarios.setText("-Listar Usuarios");
@@ -322,7 +307,6 @@ public class PantallaGerente extends javax.swing.JFrame {
                     .addComponent(lRegistrarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lModificarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lModificarSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lInactivarUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lRegistrarSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -339,10 +323,8 @@ public class PantallaGerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lInactivarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 180, 520));
@@ -403,11 +385,6 @@ public class PantallaGerente extends javax.swing.JFrame {
         visualizacionActual("modificarUsuario");
     }//GEN-LAST:event_lModificarUsuarioMouseClicked
 
-    private void lInactivarUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lInactivarUsuarioMouseClicked
-        cambioVisualizacion();
-        visualizacionActual("estadoUsuario");
-    }//GEN-LAST:event_lInactivarUsuarioMouseClicked
-
     private void lCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCerrarSesionMouseClicked
         new IngresoUsuario().setVisible(true);
         this.setVisible(false);
@@ -429,7 +406,6 @@ public class PantallaGerente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel contenedor;
-    public javax.swing.JLabel lInactivarUsuario;
     public javax.swing.JLabel lListarUsuarios;
     public javax.swing.JLabel lModificarSede;
     public javax.swing.JLabel lModificarUsuario;
