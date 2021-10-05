@@ -92,8 +92,8 @@ public class Clientes {
     }
 
     
-    public String validarCliente(String cedula) throws SQLException {
-        String usuarioValido = "empty";
+    public void traerDatosCliente(String cedula) throws SQLException {
+        //String usuarioValido = "empty";
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -134,7 +134,7 @@ public class Clientes {
             JOptionPane.showMessageDialog(null, "Failed to Connected");
         }
         
-        return usuarioValido;
+        //return usuarioValido;
     }
 
     public String getCedula_cliente() {

@@ -52,6 +52,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private String comuna_cliente;
     private String descripcion_paquete = "";
     private String sedeAsignadaCliente = "";
+    
+    Clientes cliente = new Clientes();
 
     public RegistrarEnvio() {
         initComponents();
@@ -59,44 +61,49 @@ public class RegistrarEnvio extends javax.swing.JPanel {
 
     }
 
-    public boolean validador() {
+    public boolean validador(String opcionValidacion) {
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
 
         //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
-        if (jtfCedula.getText().length() < 1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar la cédula";
-            jtfCedula.setText("");
-            validacion = false;
+        
+        if( opcionValidacion.compareTo("paquete") == 0 ){
+            if (jtfCedula.getText().length() < 1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar la cédula";
+                jtfCedula.setText("");
+                validacion = false;
+            }
+            if (jtfValorEnvio.getText().length() < 1 || !(jtfValorEnvio.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del envío";
+                jtfValorEnvio.setText("");
+                validacion = false;
+            }
+            if (jtfValorPaquete.getText().length() < 1 || !(jtfValorPaquete.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del paquete";
+                jtfValorPaquete.setText("");
+                validacion = false;
+            }
+            if (jtfValorImpuesto.getText().length() < 1 || !(jtfValorImpuesto.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del impuesto";
+                jtfValorImpuesto.setText("");
+                validacion = false;
+            }
+            if (!(jtfValorSeguro.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del seguro";
+                jtfValorSeguro.setText("");
+                validacion = false;
+            }
+            if ( jtfDescripcion.getText().length()<1 ) {
+                respuesta = respuesta + "\n   - Debe ingresar una breve descripción";
+                validacion = false;
+            }
         }
-        if (panelTarjeta.isVisible() && ( jtfTarjeta.getText().length() < 1 || !(jtfTarjeta.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ) {
-            respuesta = respuesta + "\n   - Verificar el número de tarjeta";
-            jtfTarjeta.setText("");
-            validacion = false;
-        }
-        if (jtfValorEnvio.getText().length() < 1 || !(jtfValorEnvio.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del envío";
-            jtfValorEnvio.setText("");
-            validacion = false;
-        }
-        if (jtfValorPaquete.getText().length() < 1 || !(jtfValorPaquete.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del paquete";
-            jtfValorPaquete.setText("");
-            validacion = false;
-        }
-        if (jtfValorImpuesto.getText().length() < 1 || !(jtfValorImpuesto.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del impuesto";
-            jtfValorImpuesto.setText("");
-            validacion = false;
-        }
-        if (!(jtfValorSeguro.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del seguro";
-            jtfValorSeguro.setText("");
-            validacion = false;
-        }
-        if ( jtfDescripcion.getText().length()<1 ) {
-            respuesta = respuesta + "\n   - Debe ingresar una breve descripción";
-            validacion = false;
+        if( opcionValidacion.compareTo("registro") == 0 ){
+            if (panelTarjeta.isVisible() && ( jtfTarjeta.getText().length() < 1 || !(jtfTarjeta.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ) {
+                respuesta = respuesta + "\n   - Verificar el número de tarjeta";
+                jtfTarjeta.setText("");
+                validacion = false;
+            }
         }
 
         if (!validacion) {
@@ -104,7 +111,147 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         }
         return validacion;
     }
+    
+    public void cargarDatosCliente(){
+        //Clientes cliente = new Clientes();
+        try {
+            if (true){
+                cliente.traerDatosCliente(jtfCedula.getText());
 
+                cedula_cliente = cliente.getCedula_cliente();
+                nombre_cliente = cliente.getNombre_cliente();
+                direccion_cliente = cliente.getDireccion_cliente();
+                comuna_cliente = cliente.getComuna_cliente();
+                sedeAsignadaCliente = cliente.getSede_asignada();
+
+                labelCedula.setText(cedula_cliente);
+                labelNombre.setText(nombre_cliente);
+                labelDireccion.setText(direccion_cliente);
+                labelSedeAsignada.setText("Sede asignada: " + sedeAsignadaCliente);
+                labelComuna.setText("Comuna " + comuna_cliente);
+
+                jtfCedula.setEnabled(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void agregarUnPaquete(){
+        //Metodo De Pago
+            conteoPaquetes++;
+            numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
+            int auxiliar = metodoDePago.getSelectedIndex();
+            String auxiliar2 = metodoDePago.getItemAt(auxiliar);
+            metodoPagoResumen.setText(auxiliar2);
+
+            //Valor Del Envio
+            int valorInicialEnvio = Integer.parseInt(jtfValorEnvio.getText());
+            valorSuma = valorSuma + valorInicialEnvio;
+            valorEnvioResumen.setText(Integer.toString(valorSuma));
+
+            //Valor Paquete
+            int auxiliarPaquete = Integer.parseInt(jtfValorPaquete.getText());
+            valorPaqueteSuma = valorPaqueteSuma + auxiliarPaquete;
+            valorPaqueteResumen.setText(Integer.toString(valorPaqueteSuma));
+
+            //Valor Impuesto
+            int auxiliarImpuesto = Integer.parseInt(jtfValorImpuesto.getText());
+            valorImpuestoSuma = valorImpuestoSuma + auxiliarImpuesto;
+            valorImpuestoResumen.setText(Integer.toString(valorImpuestoSuma));
+
+            //Valor Seguro
+            int auxiliarSeguro = Integer.parseInt(jtfValorSeguro.getText());
+            valorSeguroSuma = valorSeguroSuma + auxiliarSeguro;
+            valorSeguroResumen.setText(Integer.toString(valorSeguroSuma));
+
+            //Total
+            int auxiliarTotal = valorSuma + valorPaqueteSuma + valorImpuestoSuma + valorSeguroSuma;
+            totalResumen.setText(Integer.toString(auxiliarTotal));
+        
+            descripcion_paquete = descripcion_paquete + "\n" + jtfDescripcion.getText();
+            
+            jtfValorEnvio.setText("");
+            jtfValorPaquete.setText("");
+            jtfValorImpuesto.setText("");
+            jtfValorSeguro.setText("");
+            jtfDescripcion.setText("");
+    }
+
+    public void generarRecibo(){
+        //GENERAR RECIBO
+        int auxiliar = campoRecibo.getSelectedIndex();
+        String recibo = campoRecibo.getItemAt(auxiliar);
+
+        if (recibo.equals("Si")) {
+
+            Document documento = new Document();
+
+            String rutaCompleta = "";
+
+            try {
+                String ruta = System.getProperty("user.home");
+                //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
+                try {
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Recibo_"+id_envio+".pdf"));
+                    rutaCompleta = ruta + "/Desktop/Recibo"+id_envio+"_Prueba.pdf";
+                } catch (DocumentException | FileNotFoundException ex1) {
+                    try {
+                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Recibo_"+id_envio+".pdf"));
+                        rutaCompleta = ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf";
+                    } catch (DocumentException | FileNotFoundException ex2) {
+                        try {
+                            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Recibo_"+id_envio+".pdf"));
+                            rutaCompleta = ruta + "/Recibo_" + id_envio+".pdf";
+                        } catch (DocumentException | FileNotFoundException ex3) {
+                        }
+                    }
+                }
+
+                //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
+                documento.open();
+
+                Paragraph titulo = new Paragraph("Recibo Envio # " + id_envio + "\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.RED));
+                Paragraph total = new Paragraph("Total A Pagar:" + totalResumen.getText() + "\n\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.GREEN));
+                Paragraph titulo2 = new Paragraph("Datos Del Cliente\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
+
+                String texto = "Cedula: " + cedula_cliente + "\n"
+                        + "Nombre: " + nombre_cliente + "\n"
+                        + "Direccion: " + cedula_cliente + "\n"
+                        + "Comuna: " + comuna_cliente + "\n";
+                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
+
+                Paragraph titulo3 = new Paragraph("Datos Del Envio\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
+
+                String texto2 = "Metodo De Pago: " + metodoPagoResumen.getText() + "\n"
+                        + "Valor Envios " + valorEnvioResumen.getText() + "\n"
+                        + "Valor Paquetes: " + valorPaqueteResumen.getText() + "\n"
+                        + "Valor Impuestos: " + valorImpuestoResumen.getText() + "\n"
+                        + "Valor Seguros: " + valorSeguroResumen.getText() + "\n"
+                        + "Numero De Paquetes: " + numeroPaquetesResumen.getText() + "\n";
+                Paragraph parrafo2 = new Paragraph(texto2, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
+                Paragraph parrafo3 = new Paragraph("Empresa De Servicios Flash", FontFactory.getFont("Segoe Script", 12, Font.BOLD, BaseColor.LIGHT_GRAY));
+
+                documento.add(titulo);
+                documento.add(titulo2);
+                documento.add(parrafo);
+                documento.add(titulo3);
+                documento.add(parrafo2);
+                documento.add(total);
+                documento.add(parrafo3);
+
+                documento.close();
+                JOptionPane.showMessageDialog(null, "Recibo # " + id_envio + " Creado. Se guardó en " + rutaCompleta);
+            } catch (HeadlessException ex) {
+                //JOptionPane.showMessageDialog(null, "Aquí 2");
+            } catch (DocumentException ex) {
+                Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,6 +321,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         Registrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Registrar.setText("Registrar");
         Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Registrar.setEnabled(false);
         Registrar.setOpaque(true);
         Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -612,39 +760,18 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfValorEnvioActionPerformed
 
     private void botonAgregarPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarPaqueteMouseClicked
-        if( validador() ){
-            //Metodo De Pago
-            conteoPaquetes++;
-            numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
-            int auxiliar = metodoDePago.getSelectedIndex();
-            String auxiliar2 = metodoDePago.getItemAt(auxiliar);
-            metodoPagoResumen.setText(auxiliar2);
 
-            //Valor Del Envio
-            int valorInicialEnvio = Integer.parseInt(jtfValorEnvio.getText());
-            valorSuma = valorSuma + valorInicialEnvio;
-            valorEnvioResumen.setText(Integer.toString(valorSuma));
-
-            //Valor Paquete
-            int auxiliarPaquete = Integer.parseInt(jtfValorPaquete.getText());
-            valorPaqueteSuma = valorPaqueteSuma + auxiliarPaquete;
-            valorPaqueteResumen.setText(Integer.toString(valorPaqueteSuma));
-
-            //Valor Impuesto
-            int auxiliarImpuesto = Integer.parseInt(jtfValorImpuesto.getText());
-            valorImpuestoSuma = valorImpuestoSuma + auxiliarImpuesto;
-            valorImpuestoResumen.setText(Integer.toString(valorImpuestoSuma));
-
-            //Valor Seguro
-            int auxiliarSeguro = Integer.parseInt(jtfValorSeguro.getText());
-            valorSeguroSuma = valorSeguroSuma + auxiliarSeguro;
-            valorSeguroResumen.setText(Integer.toString(valorSeguroSuma));
-
-            //Total
-            int auxiliarTotal = valorSuma + valorPaqueteSuma + valorImpuestoSuma + valorSeguroSuma;
-            totalResumen.setText(Integer.toString(auxiliarTotal));
-        
-            descripcion_paquete = descripcion_paquete + "\n" + jtfDescripcion.getText();
+        if( validador("paquete") ){
+            if( cliente.cedulaExiste( jtfCedula.getText() ) ){
+                if( cedula_cliente.length() == 0 )
+                    cargarDatosCliente();
+            
+                agregarUnPaquete();
+                
+                Registrar.setEnabled(true);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Cédula no existe en la base de clientes");
         }
     }//GEN-LAST:event_botonAgregarPaqueteMouseClicked
 
@@ -665,98 +792,30 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
         // TODO add your handling code here:
         // AQUI SE REGISTRA EL ENVIO
-        String finalNumber = "";
-        id_envio = (int) (10000 * Math.random());
-        finalNumber = "" + id_envio;
-        for (int i = finalNumber.length(); i < 4; i++) {
-
-            finalNumber = "0" + finalNumber;
-
-        }
         
-        id_envio = Integer.parseInt(finalNumber);
-        Envios envio = new Envios();
         try {
-            if (validador()) {
+            if (validador("registro") && conteoPaquetes>0 ) {
+                String finalNumber = "";
+                id_envio = (int) (10000 * Math.random());
+                finalNumber = "" + id_envio;
+                for (int i = finalNumber.length(); i < 4; i++) {
+                    finalNumber = "0" + finalNumber;
+                }
+        
+                id_envio = Integer.parseInt(finalNumber);
+                Envios envio = new Envios();
+                
+                
                 envio.registrarEnvio(id_envio, Integer.parseInt(cedula_cliente), metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
                 JOptionPane.showMessageDialog(null, "Envio #  " +id_envio+ " registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                
+                jtfCedula.setEnabled(true);
             }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //GENERAR RECIBO
-        int auxiliar = campoRecibo.getSelectedIndex();
-        String recibo = campoRecibo.getItemAt(auxiliar);
-
-        if (recibo.equals("Si")) {
-
-            Document documento = new Document();
-
-            String rutaCompleta = "";
-
-            try {
-                String ruta = System.getProperty("user.home");
-                //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
-                try {
-                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Recibo_"+id_envio+".pdf"));
-                    rutaCompleta = ruta + "/Desktop/Recibo"+id_envio+"_Prueba.pdf";
-                } catch (DocumentException | FileNotFoundException ex1) {
-                    try {
-                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Recibo_"+id_envio+".pdf"));
-                        rutaCompleta = ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf";
-                    } catch (DocumentException | FileNotFoundException ex2) {
-                        try {
-                            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Recibo_"+id_envio+".pdf"));
-                            rutaCompleta = ruta + "/Recibo_" + id_envio+".pdf";
-                        } catch (DocumentException | FileNotFoundException ex3) {
-                        }
-                    }
-                }
-
-                //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
-                documento.open();
-
-                Paragraph titulo = new Paragraph("Recibo Envio # " + id_envio + "\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.RED));
-                Paragraph total = new Paragraph("Total A Pagar:" + totalResumen.getText() + "\n\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.GREEN));
-                Paragraph titulo2 = new Paragraph("Datos Del Cliente\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
-
-                String texto = "Cedula: " + cedula_cliente + "\n"
-                        + "Nombre: " + nombre_cliente + "\n"
-                        + "Direccion: " + cedula_cliente + "\n"
-                        + "Comuna: " + comuna_cliente + "\n";
-                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
-
-                Paragraph titulo3 = new Paragraph("Datos Del Envio\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
-
-                String texto2 = "Metodo De Pago: " + metodoPagoResumen.getText() + "\n"
-                        + "Valor Envios " + valorEnvioResumen.getText() + "\n"
-                        + "Valor Paquetes: " + valorPaqueteResumen.getText() + "\n"
-                        + "Valor Impuestos: " + valorImpuestoResumen.getText() + "\n"
-                        + "Valor Seguros: " + valorSeguroResumen.getText() + "\n"
-                        + "Numero De Paquetes: " + numeroPaquetesResumen.getText() + "\n";
-                Paragraph parrafo2 = new Paragraph(texto2, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
-                Paragraph parrafo3 = new Paragraph("Empresa De Servicios Flash", FontFactory.getFont("Segoe Script", 12, Font.BOLD, BaseColor.LIGHT_GRAY));
-
-                documento.add(titulo);
-                documento.add(titulo2);
-                documento.add(parrafo);
-                documento.add(titulo3);
-                documento.add(parrafo2);
-                documento.add(total);
-                documento.add(parrafo3);
-
-                documento.close();
-                JOptionPane.showMessageDialog(null, "Recibo # " + id_envio + " Creado. Se guardó en " + rutaCompleta);
-            } catch (HeadlessException ex) {
-                //JOptionPane.showMessageDialog(null, "Aquí 2");
-            } catch (DocumentException ex) {
-                Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-
-        }
+        generarRecibo();
 
     }//GEN-LAST:event_RegistrarMouseClicked
 
@@ -783,7 +842,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private void jtfCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCedulaFocusLost
         Clientes cliente = new Clientes();
         try {
-            cliente.validarCliente(jtfCedula.getText());
+            cliente.traerDatosCliente(jtfCedula.getText());
 
             cedula_cliente = cliente.getCedula_cliente();
             nombre_cliente = cliente.getNombre_cliente();
