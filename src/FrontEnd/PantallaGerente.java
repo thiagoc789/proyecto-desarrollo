@@ -1,7 +1,6 @@
 package FrontEnd;
 
 //import FrontEnd.Administrativo.*;
-import FrontEnd.Administrativo.EstadoUsuario;
 import FrontEnd.Administrativo.ListarUsuariosTabulados;
 import FrontEnd.Administrativo.ModificarSede;
 import FrontEnd.Administrativo.ModificarUsuario;
@@ -22,7 +21,6 @@ public class PantallaGerente extends javax.swing.JFrame {
     ModificarSede panelActualizarSede = new ModificarSede();
     RegistrarUsuario panelNuevoUsuario = new RegistrarUsuario();
     ModificarUsuario panelModificarUsuario = new ModificarUsuario("Gerente");
-    EstadoUsuario panelEstadoUsuario = new EstadoUsuario();
     ListarUsuariosTabulados panelListaUsuariosTabulados = new ListarUsuariosTabulados();
     
     public PantallaGerente(String idUsuario) {
@@ -41,7 +39,6 @@ public class PantallaGerente extends javax.swing.JFrame {
         lRegistrarUsuario.setEnabled(true);
 
         panelActualizarSede.setVisible(false);
-        panelEstadoUsuario.setVisible(false);
         panelModificarUsuario.setVisible(false);
         panelNuevoUsuario.setVisible(false);
         panelNuevaSede.setVisible(false);
