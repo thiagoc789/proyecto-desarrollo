@@ -22,14 +22,16 @@ import javax.swing.JOptionPane;
  */
 public class ListarEnvios extends javax.swing.JPanel {
 
-    String id_usuario;
+    //String id_usuario;
+    String id_usuarioAux;
 
     /**
      * Creates new form ListarEnvios
      */
     public ListarEnvios(String id_usuario) {
         initComponents();
-        this.id_usuario = id_usuario;
+        //this.id_usuario = id_usuario;
+        id_usuarioAux = id_usuario;
     }
 
     /**
@@ -102,10 +104,10 @@ public class ListarEnvios extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnFinalizarBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,19 +118,19 @@ public class ListarEnvios extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFinalizarBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(133, 133, 133))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(587, Short.MAX_VALUE)))
+                    .addContainerGap(450, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -183,7 +185,7 @@ public class ListarEnvios extends javax.swing.JPanel {
         String[] nmClm = {"id_auxiliar", "id_envio", "direccion", "cedula_cliente", "estado_envio"};
 
         sql = "SELECT id_auxiliar, id_envio, direccion, cedula_cliente, estado_envio "
-                + "FROM envios, clientes where '%" + id_usuario + "%' = id_auxiliar and estado_envio = 'Sin Entregar'";
+                + "FROM envios, clientes where '%" + id_usuarioAux + "%' = id_auxiliar and estado_envio = 'Sin Entregar'";
 
         modelo = (DefaultTableModel) jTbl_enviosT.getModel();
 
@@ -209,7 +211,7 @@ public class ListarEnvios extends javax.swing.JPanel {
 
             }
 
-            JOptionPane.showMessageDialog(null,id_usuario);
+            JOptionPane.showMessageDialog(null,id_usuarioAux);
             jTbl_enviosT.setVisible(true);
             //     stmt.executeUpdate(sql2);
             conexion.close();
