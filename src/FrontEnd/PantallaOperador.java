@@ -24,14 +24,14 @@ public class PantallaOperador extends javax.swing.JFrame {
     }
 
     public void cambioVisualizacion() {
-        label2.setEnabled(true);
+        lRegistrarClientes.setEnabled(true);
         jlRegistrarEnvio.setEnabled(true);
 
     }
 
     public void cambioVisualizacion2() {
         jlRegistrarEnvio.setEnabled(true);
-        label2.setEnabled(true);
+        lRegistrarClientes.setEnabled(true);
 
     }
 
@@ -47,7 +47,7 @@ public class PantallaOperador extends javax.swing.JFrame {
             panelRegistrarClientes.setVisible(true);
             panelRegistrarEnvio.setVisible(false);
             contenedor.add(panelRegistrarClientes);
-            label2.setEnabled(false);
+            lRegistrarClientes.setEnabled(false);
         } else if (panel.compareTo("nuevoUsuario") == 0) {
 //            nuevoUsuario.setVisible(true);
 //            contenedor.add(nuevoUsuario);
@@ -72,7 +72,7 @@ public class PantallaOperador extends javax.swing.JFrame {
         javax.swing.JLabel jlBloquear = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
-        label2 = new javax.swing.JLabel();
+        lRegistrarClientes = new javax.swing.JLabel();
         jlRegistrarEnvio = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
@@ -229,12 +229,12 @@ public class PantallaOperador extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
-        label2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        label2.setForeground(new java.awt.Color(102, 102, 102));
-        label2.setText("-Registrar Clientes");
-        label2.addMouseListener(new java.awt.event.MouseAdapter() {
+        lRegistrarClientes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lRegistrarClientes.setForeground(new java.awt.Color(102, 102, 102));
+        lRegistrarClientes.setText("-Registrar Clientes");
+        lRegistrarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label2MouseClicked(evt);
+                lRegistrarClientesMouseClicked(evt);
             }
         });
 
@@ -254,7 +254,7 @@ public class PantallaOperador extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lRegistrarClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlRegistrarEnvio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -262,7 +262,7 @@ public class PantallaOperador extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lRegistrarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlRegistrarEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(439, Short.MAX_VALUE))
@@ -277,12 +277,10 @@ public class PantallaOperador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -306,10 +304,10 @@ public class PantallaOperador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
+    private void lRegistrarClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarClientesMouseClicked
         cambioVisualizacion();
         visualizacionActual("registrarClientes");
-    }//GEN-LAST:event_label2MouseClicked
+    }//GEN-LAST:event_lRegistrarClientesMouseClicked
 
     private void jlRegistrarEnvioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlRegistrarEnvioMouseClicked
         cambioVisualizacion();
@@ -333,6 +331,6 @@ public class PantallaOperador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel contenedor;
     public javax.swing.JLabel jlRegistrarEnvio;
-    public javax.swing.JLabel label2;
+    public javax.swing.JLabel lRegistrarClientes;
     // End of variables declaration//GEN-END:variables
 }

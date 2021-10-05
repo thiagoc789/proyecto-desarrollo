@@ -285,7 +285,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="label2" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="lRegistrarClientes" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                       <Component id="jlRegistrarEnvio" alignment="1" min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -296,7 +296,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="label2" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lRegistrarClientes" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jlRegistrarEnvio" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace pref="439" max="32767" attributes="0"/>
@@ -305,7 +305,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="label2">
+        <Component class="javax.swing.JLabel" name="lRegistrarClientes">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="12" style="1"/>
@@ -316,7 +316,7 @@
             <Property name="text" type="java.lang.String" value="-Registrar Clientes"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="label2MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lRegistrarClientesMouseClicked"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
