@@ -14,6 +14,7 @@ Revisadas:
 - Main.java
 - PrimerIngreso.java
 - SesionBloqueada.java
+- PantallaAuxiliar.java (solo ventana)
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 
