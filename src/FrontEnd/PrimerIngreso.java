@@ -409,7 +409,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
         Usuarios registrar = new Usuarios();
         try {
             if( validador() ){
-                registrar.registrarUsuarioNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfTelefono.getText(), jtfPass1.getText(), "Gerente", "Sin Sede", "Activo");
+                registrar.registrarUsuarioNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfTelefono.getText(), jtfPass1.getText(), "Gerente", "Sin Sede", "Activo", jtfCorreo.getText());
                 new PantallaGerente( jtfCedula.getText() ).setVisible(true);
                 this.setVisible(false);
             }

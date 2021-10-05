@@ -380,7 +380,7 @@ public class RegistrarUsuario extends javax.swing.JPanel {
             if ( validador() ){
                 if( !( usuario.cedulaExiste( jtfCedula.getText() ) ) ){
                     //usuario.registrarUsuarioNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfTelefono.getText(), jtfClave.getText(), jtfCargo.getText(), borrar.getText(), jtfEstado.getText());
-                    usuario.registrarUsuarioNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfTelefono.getText(), pass1.getText(), jcbCargo.getItemAt(jcbCargo.getSelectedIndex()), jcbSede.getItemAt(jcbSede.getSelectedIndex()), jcbCargo.getItemAt(jcbCargo.getSelectedIndex()));
+                    usuario.registrarUsuarioNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfTelefono.getText(), pass1.getText(), jcbCargo.getItemAt(jcbCargo.getSelectedIndex()), jcbSede.getItemAt(jcbSede.getSelectedIndex()), jcbCargo.getItemAt(jcbCargo.getSelectedIndex()), jtfCorreo.getText());
 
     //                sede.registrarSedeNueva(jtfCedula.getText(), jtfNombre.getText(), jtfCargo.getText(), jtfCorreo.getText());
                     JOptionPane.showMessageDialog(null, "Nombre " + jtfNombre.getText() + " Registrado Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);

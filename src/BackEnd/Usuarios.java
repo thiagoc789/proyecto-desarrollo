@@ -55,7 +55,7 @@ public class Usuarios {
         return cedulaExiste;
     }
 
-    public void registrarUsuarioNuevo(String cedula, String nombre, String telefono, String contraseña, String cargo, String sede, String estado) throws SQLException {
+    public void registrarUsuarioNuevo(String cedula, String nombre, String telefono, String contraseña, String cargo, String sede, String estado, String correo) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -66,14 +66,15 @@ public class Usuarios {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
             stmt = conexion.createStatement();
 
-            sql = "INSERT INTO usuarios(cedula, nombre, telefono, contraseña, cargo, sede, estado) VALUES("
+            sql = "INSERT INTO usuarios(cedula, nombre, telefono, contraseña, cargo, sede, estado, correo) VALUES("
                     + "\'" + cedula + "\',"
                     + "\'" + nombre + "\',"
                     + "\'" + telefono + "\',"
                     + "\'" + contraseña + "\',"
                     + "\'" + cargo + "\',"
                     + "\'" + sede + "\',"
-                    + "\'" + estado + "\'"
+                    + "\'" + estado + "\',"
+                    + "\'" + correo + "\'"
                     + ");";
             stmt.executeUpdate(sql);
 
@@ -160,7 +161,7 @@ public class Usuarios {
         return usuarios;
     }
     
-    public void modificarUsuario(String cedula, String nombre, String telefono, String correo, String cargo, String sede) throws SQLException {
+    public void modificarUsuario(String cedula, String nombre, String telefono, String correo, String cargo, String sede, String estado) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -185,12 +186,12 @@ public class Usuarios {
                     + "WHERE cedula = \'" + cedula + "\'";
                 stmt.executeUpdate(sql);
             }
-//            if( !(correo.compareTo("")== 0) ){
-//                sql = "UPDATE usuarios "
-//                    + "SET correo = \'" + correo + "\' "
-//                    + "WHERE cedula = \'" + cedula + "\'";
-//                stmt.executeUpdate(sql);
-//            }
+            if( !(correo.compareTo("")== 0) ){
+                sql = "UPDATE usuarios "
+                    + "SET correo = \'" + correo + "\' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }
             if( !(cargo.compareTo("")== 0) ){
                 sql = "UPDATE usuarios "
                     + "SET cargo = \'" + cargo + "\' "

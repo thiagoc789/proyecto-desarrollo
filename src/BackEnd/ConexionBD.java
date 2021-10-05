@@ -49,7 +49,7 @@ public class ConexionBD {
             //JOptionPane.showMessageDialog(null, "Se ha conectado a la base de datos", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
             stmt = conexion.createStatement();
 
-            sql = "CREATE TABLE IF NOT EXISTS usuarios (cedula VARCHAR(50), nombre VARCHAR(50), telefono VARCHAR(50), contraseña VARCHAR(50), cargo VARCHAR(50), sede VARCHAR(50), estado VARCHAR(20));";
+            sql = "CREATE TABLE IF NOT EXISTS usuarios (cedula VARCHAR(50), nombre VARCHAR(50), telefono VARCHAR(50), contraseña VARCHAR(50), cargo VARCHAR(50), sede VARCHAR(50), estado VARCHAR(20), correo VARCHAR(50));";
             stmt.executeUpdate(sql);
 
         } catch (SQLException ex) {
