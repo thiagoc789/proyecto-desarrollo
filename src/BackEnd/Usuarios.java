@@ -204,6 +204,12 @@ public class Usuarios {
                     + "WHERE cedula = \'" + cedula + "\'";
                 stmt.executeUpdate(sql);
             }
+            if( !(estado.compareTo("")== 0) ){
+                sql = "UPDATE usuarios "
+                    + "SET estado = \'" + estado + "\' "
+                    + "WHERE cedula = \'" + cedula + "\'";
+                stmt.executeUpdate(sql);
+            }
             conexion.close();
 
         } catch (SQLException ex) {

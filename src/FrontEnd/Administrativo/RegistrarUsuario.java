@@ -358,9 +358,9 @@ public class RegistrarUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_CancelarMouseEntered
 
     private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
-        // TODO add your handling code here:
-        new PantallaGerente("Gerente").setVisible(true);
-        this.setVisible(false);
+//        new PantallaGerente("Gerente").setVisible(true);
+//        this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_CancelarMouseClicked
 
     private void RegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseExited
