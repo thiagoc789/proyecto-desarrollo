@@ -7,7 +7,7 @@ if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\
             validacion = false;
         }
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-git add . && git commit -m "Añadiendo cosas" && git push
+git add . && git commit -m "Actualizado a Lunes 8:15 pm" && git push
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
