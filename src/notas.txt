@@ -24,7 +24,8 @@ Revisadas:
 - PrimerIngreso.java
 - SesionBloqueada.java
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-
+Tamaño contenedor
+770 x 520
 
 
 
