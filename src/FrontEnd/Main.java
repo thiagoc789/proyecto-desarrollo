@@ -41,12 +41,6 @@ public class Main {
         conexion.dbConecction();
         
         gerente = conexion.getCantidadUsuarios();
-        
-//        if(gerente){
-//            JOptionPane.showMessageDialog(null, "Gerente existe", "", JOptionPane.INFORMATION_MESSAGE);
-//        };
-        
-        //JOptionPane.showMessageDialog(null, "No se pudo conectar a la base de datos", "Sistematizacion De Procesos - Flash", JOptionPane.ERROR_MESSAGE);
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -63,6 +63,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
         javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
+        lEntrar1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -205,16 +206,7 @@ public class SesionBloqueada extends javax.swing.JFrame {
         });
 
         jtfClave.setForeground(new java.awt.Color(153, 153, 153));
-        jtfClave.setText("Contraseña");
         jtfClave.setHighlighter(null);
-        jtfClave.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jtfClaveFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfClaveFocusLost(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -223,6 +215,25 @@ public class SesionBloqueada extends javax.swing.JFrame {
         jLabel1.setText("Cédula");
 
         jLabel4.setText("Clave");
+
+        lEntrar1.setBackground(new java.awt.Color(0, 153, 102));
+        lEntrar1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        lEntrar1.setForeground(new java.awt.Color(255, 255, 255));
+        lEntrar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lEntrar1.setText("CERRAR SESIÓN");
+        lEntrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lEntrar1.setOpaque(true);
+        lEntrar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lEntrar1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lEntrar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lEntrar1MouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -233,27 +244,29 @@ public class SesionBloqueada extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(229, 229, 229))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(266, 266, 266))))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(211, 211, 211)
-                    .addComponent(lEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(451, Short.MAX_VALUE)))
+                        .addGap(266, 266, 266))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(339, 339, 339)
+                .addComponent(lEntrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,14 +283,13 @@ public class SesionBloqueada extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(224, 224, 224)
-                .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                .addGap(118, 118, 118))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(408, 408, 408)
-                    .addComponent(lEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                    .addGap(120, 120, 120)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(lEntrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(150, 150, 150))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 44, 820, 660));
@@ -320,16 +332,16 @@ public class SesionBloqueada extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void lEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseClicked
-        Usuarios validar = new Usuarios();
+        Usuarios unUsuario = new Usuarios();
         String usuariValido = "";
         try {
             if( validador() )
-                usuariValido = validar.validarIngreso(idUsuario, jtfClave.getText());
+                usuariValido = unUsuario.validarIngreso(idUsuario, jtfClave.getText());
         } catch (SQLException ex) {
             Logger.getLogger(SesionBloqueada.class.getName()).log(Level.SEVERE, null, ex);
         }
         if( usuariValido.compareTo("Gerente") == 0 ){
-            new PantallaGerente("Gerente").setVisible(true);
+            new PantallaGerente( idUsuario ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Operador") == 0 ){
             new PantallaOperador().setVisible(true);
@@ -355,22 +367,6 @@ public class SesionBloqueada extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lEntrarMouseEntered
 
-    private void jtfClaveFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfClaveFocusGained
-        // TODO add your handling code here:
-        if (jtfClave.getText().equals("Contraseña")) {
-            jtfClave.setText("");
-            jtfClave.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_jtfClaveFocusGained
-
-    private void jtfClaveFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfClaveFocusLost
-        // TODO add your handling code here:
-        if (jtfClave.getText().equals("")) {
-            jtfClave.setText("Contraseña");
-            jtfClave.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_jtfClaveFocusLost
-
     private void lEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseExited
         // TODO add your handling code here:
         lEntrar.setForeground(Color.white);
@@ -386,6 +382,19 @@ public class SesionBloqueada extends javax.swing.JFrame {
         lCancelar.setForeground(Color.white);
     }//GEN-LAST:event_lCancelarMouseExited
 
+    private void lEntrar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrar1MouseClicked
+        new IngresoUsuario().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_lEntrar1MouseClicked
+
+    private void lEntrar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrar1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lEntrar1MouseEntered
+
+    private void lEntrar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrar1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lEntrar1MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -395,5 +404,6 @@ public class SesionBloqueada extends javax.swing.JFrame {
     javax.swing.JPasswordField jtfClave;
     javax.swing.JLabel lCancelar;
     javax.swing.JLabel lEntrar;
+    javax.swing.JLabel lEntrar1;
     // End of variables declaration//GEN-END:variables
 }

@@ -48,6 +48,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
         }
         if( jtfCorreo.getText().length()<1 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
             respuesta = respuesta + "\n   - Ingrese un correo válido";
+            jtfCorreo.setText("");
             validacion = false;
         }
         
@@ -409,7 +410,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
         try {
             if( validador() ){
                 registrar.registrarUsuarioNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfTelefono.getText(), jtfPass1.getText(), "Gerente", "Sin Sede", "Activo");
-                new PantallaGerente("Gerente").setVisible(true);
+                new PantallaGerente( jtfCedula.getText() ).setVisible(true);
                 this.setVisible(false);
             }
         } catch (SQLException ex) {
@@ -426,8 +427,6 @@ public class PrimerIngreso extends javax.swing.JFrame {
     private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
         // TODO add your handling code here:
         jLabel4.setForeground(Color.red);
-
-
     }//GEN-LAST:event_jLabel4MouseEntered
 
     private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
