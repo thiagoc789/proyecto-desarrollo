@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import BackEnd.Clientes;
 
-
 /**
  *
  * @author alejandro
@@ -42,38 +41,50 @@ public boolean validador(){
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
         
-        if( campoNombre.getText().length()<1 ){
+        if( jtfNombre.getText().length()<1 ){
             respuesta = respuesta + "\n   - Debe ingresar un nombre";
             validacion = false;
         }
-        if( campoCedula.getText().length()<1 || !(campoCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
-            campoCedula.setText("");
+            jtfCedula.setText("");
             validacion = false;
         }
-        if( campoDireccion.getText().length()<1 ){
+        if( jtfDireccion.getText().length()<1 ){
             respuesta = respuesta + "\n   - Debe ingresar una dirección";
             validacion = false;
         }
-        if( campoComuna.getText().length()<1 || !(campoComuna.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-            respuesta = respuesta + "\n   - Comuna ingresado, deben ser solo números";
-            campoComuna.setText("");
+        if( jtfComuna.getText().length()<1 || !(jtfComuna.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Comuna ingresado, deben ser solo números positivos";
+            jtfComuna.setText("");
             validacion = false;
         }
-//        if( Contrasena.getText().length()<1 ){
-//            respuesta = respuesta + "\n   - Debe ingresar una contraseña";
-//            validacion = false;
-//        }
-//        if( Correo.getText().length()<1 || !Correo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
-//            respuesta = respuesta + "\n   - Ingrese un correo válido";
-//            validacion = false;
-//        }
         
         if( !validacion )
             JOptionPane.showMessageDialog(null, respuesta);
         
         return validacion;
     }
+
+public String hallarSedeCercana(int comunaCliente){
+    Sedes sede = new Sedes();
+    String sedeCercana = "";
+    
+    String[] listaDeSedes = sede.getIdYComunaSedes().split(":");
+    int distanciaSedeACliente = 10000000;
+    
+    for(int i=0; i< listaDeSedes.length ;i++){
+        if(i%2 == 0){
+            if( Math.abs(Integer.parseInt( listaDeSedes[i]) - comunaCliente) <  distanciaSedeACliente){
+                distanciaSedeACliente = Math.abs(Integer.parseInt( listaDeSedes[i]) - comunaCliente);
+                sedeCercana = listaDeSedes[i+1];
+            }
+        }
+        //jcbSede.addItem(listaDeSedes[i] );
+    }
+
+    return sedeCercana;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,55 +96,58 @@ public boolean validador(){
     private void initComponents() {
 
         jpEnvio = new javax.swing.JPanel();
-        Registrar = new javax.swing.JLabel();
-        Cancelar = new javax.swing.JLabel();
+        lRegistrarCliente = new javax.swing.JLabel();
+        lCancelar = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        campoNombre = new javax.swing.JTextField();
-        campoDireccion = new javax.swing.JTextField();
-        campoCedula = new javax.swing.JTextField();
-        campoComuna = new javax.swing.JTextField();
+        jtfNombre = new javax.swing.JTextField();
+        jtfDireccion = new javax.swing.JTextField();
+        jtfCedula = new javax.swing.JTextField();
+        jtfComuna = new javax.swing.JTextField();
+        lSedeAsignada = new javax.swing.JLabel();
+        lAsignarSede = new javax.swing.JLabel();
 
         jpEnvio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
-        Registrar.setBackground(new java.awt.Color(0, 153, 102));
-        Registrar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Registrar.setForeground(new java.awt.Color(255, 255, 255));
-        Registrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Registrar.setText("Registrar");
-        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Registrar.setOpaque(true);
-        Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        lRegistrarCliente.setBackground(new java.awt.Color(0, 153, 102));
+        lRegistrarCliente.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        lRegistrarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        lRegistrarCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lRegistrarCliente.setText("Registrar");
+        lRegistrarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lRegistrarCliente.setEnabled(false);
+        lRegistrarCliente.setOpaque(true);
+        lRegistrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RegistrarMouseClicked(evt);
+                lRegistrarClienteMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                RegistrarMouseEntered(evt);
+                lRegistrarClienteMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                RegistrarMouseExited(evt);
+                lRegistrarClienteMouseExited(evt);
             }
         });
 
-        Cancelar.setBackground(new java.awt.Color(0, 153, 102));
-        Cancelar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Cancelar.setForeground(new java.awt.Color(255, 255, 255));
-        Cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Cancelar.setText("Cancelar");
-        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Cancelar.setOpaque(true);
-        Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+        lCancelar.setBackground(new java.awt.Color(0, 153, 102));
+        lCancelar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        lCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        lCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lCancelar.setText("Cancelar");
+        lCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lCancelar.setOpaque(true);
+        lCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CancelarMouseClicked(evt);
+                lCancelarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                CancelarMouseEntered(evt);
+                lCancelarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                CancelarMouseExited(evt);
+                lCancelarMouseExited(evt);
             }
         });
 
@@ -145,9 +159,9 @@ public boolean validador(){
 
         jLabel18.setText("Comuna");
 
-        campoNombre.addActionListener(new java.awt.event.ActionListener() {
+        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombreActionPerformed(evt);
+                jtfNombreActionPerformed(evt);
             }
         });
 
@@ -156,27 +170,32 @@ public boolean validador(){
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
+                        .addContainerGap()
+                        .addComponent(lSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfDireccion)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoDireccion)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoComuna))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfComuna)))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,42 +204,72 @@ public boolean validador(){
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel16)
-                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(campoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
-                    .addComponent(campoComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(jtfComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(lSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
+
+        lAsignarSede.setBackground(new java.awt.Color(0, 153, 102));
+        lAsignarSede.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        lAsignarSede.setForeground(new java.awt.Color(255, 255, 255));
+        lAsignarSede.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lAsignarSede.setText("Asignar sede");
+        lAsignarSede.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lAsignarSede.setOpaque(true);
+        lAsignarSede.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lAsignarSedeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lAsignarSedeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lAsignarSedeMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpEnvioLayout = new javax.swing.GroupLayout(jpEnvio);
         jpEnvio.setLayout(jpEnvioLayout);
         jpEnvioLayout.setHorizontalGroup(
             jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEnvioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpEnvioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpEnvioLayout.createSequentialGroup()
+                        .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpEnvioLayout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpEnvioLayout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(lRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96)
+                                .addComponent(lAsignarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
         );
         jpEnvioLayout.setVerticalGroup(
             jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEnvioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(24, 24, 24)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(lRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lAsignarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -229,80 +278,114 @@ public boolean validador(){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 198, Short.MAX_VALUE))
+                .addGap(0, 135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 414, Short.MAX_VALUE))
+                .addGap(0, 291, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
+    private void lCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseClicked
         // TODO add your handling code here:
         //new PantallaGeneralGerente().setVisible(true);
         //this.setVisible(false);
-    }//GEN-LAST:event_CancelarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lCancelarMouseClicked
 
-    private void CancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseEntered
+    private void lCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseEntered
         // TODO add your handling code here:
-        Cancelar.setForeground(Color.red);
-    }//GEN-LAST:event_CancelarMouseEntered
+        lCancelar.setForeground(Color.red);
+    }//GEN-LAST:event_lCancelarMouseEntered
 
-    private void CancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseExited
+    private void lCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseExited
         // TODO add your handling code here:
-        Cancelar.setForeground(Color.white);
-    }//GEN-LAST:event_CancelarMouseExited
+        lCancelar.setForeground(Color.white);
+    }//GEN-LAST:event_lCancelarMouseExited
 
-    private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreActionPerformed
+    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoNombreActionPerformed
+    }//GEN-LAST:event_jtfNombreActionPerformed
 
-    private void RegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseExited
+    private void lRegistrarClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarClienteMouseExited
         // TODO add your handling code here:
-        Registrar.setForeground(Color.WHITE);
-    }//GEN-LAST:event_RegistrarMouseExited
+        lRegistrarCliente.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lRegistrarClienteMouseExited
 
-    private void RegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseEntered
+    private void lRegistrarClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarClienteMouseEntered
         // TODO add your handling code here:
-        Registrar.setForeground(Color.red);
-    }//GEN-LAST:event_RegistrarMouseEntered
+        lRegistrarCliente.setForeground(Color.red);
+    }//GEN-LAST:event_lRegistrarClienteMouseEntered
 
-    private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
+    private void lRegistrarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarClienteMouseClicked
         // TODO add your handling code here:
         // AQUI SE REGISTRA EL USUARIO
         Clientes cliente = new Clientes();        
         
-        try {
+//        try {
             if ( validador() ){
-                if( !( cliente.cedulaExiste( campoCedula.getText() ) ) ){
-                    int cedula = Integer.parseInt(campoCedula.getText());
-                    int comuna = Integer.parseInt(campoComuna.getText());
-                    cliente.registrarClienteNuevo(cedula, campoNombre.getText(), campoDireccion.getText(), comuna);
+                if( !( cliente.cedulaExiste( jtfCedula.getText() ) ) ){
+                    int cedula = Integer.parseInt(jtfCedula.getText());
+                    int comuna = Integer.parseInt(jtfComuna.getText());
+                    //cliente.registrarClienteNuevo(cedula, jtfNombre.getText(), jtfDireccion.getText(), comuna);
+                    jtfCedula.setText("");
+                    jtfNombre.setText("");
+                    jtfDireccion.setText("");
+                    jtfComuna.setText("");
                     JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                     JOptionPane.showMessageDialog(null, "La cédula ya existe");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_lRegistrarClienteMouseClicked
+
+    private void lAsignarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lAsignarSedeMouseClicked
+        
+        if( (jtfComuna.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+            Sedes unaSede = new Sedes();
+            
+            int comunaCliente = Integer.parseInt(jtfComuna.getText());
+            hallarSedeCercana(comunaCliente);
+            
+            
+            jtfComuna.setEnabled(false);
+            lRegistrarCliente.setEnabled(true);
+        }else{
+            
         }
-    }//GEN-LAST:event_RegistrarMouseClicked
+        
+        jtfComuna.setEnabled(false);
+        lRegistrarCliente.setEnabled(true);
+    }//GEN-LAST:event_lAsignarSedeMouseClicked
+
+    private void lAsignarSedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lAsignarSedeMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lAsignarSedeMouseEntered
+
+    private void lAsignarSedeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lAsignarSedeMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lAsignarSedeMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JLabel Cancelar;
-    javax.swing.JLabel Registrar;
-    javax.swing.JTextField campoCedula;
-    javax.swing.JTextField campoComuna;
-    javax.swing.JTextField campoDireccion;
-    javax.swing.JTextField campoNombre;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jpEnvio;
+    javax.swing.JTextField jtfCedula;
+    javax.swing.JTextField jtfComuna;
+    javax.swing.JTextField jtfDireccion;
+    javax.swing.JTextField jtfNombre;
+    javax.swing.JLabel lAsignarSede;
+    javax.swing.JLabel lCancelar;
+    javax.swing.JLabel lRegistrarCliente;
+    private javax.swing.JLabel lSedeAsignada;
     // End of variables declaration//GEN-END:variables
 }

@@ -368,8 +368,8 @@ public class ModificarUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_ActualizarMouseExited
 
     private void jcbCargoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbCargoMousePressed
-        jcbCargo.addItem("Gerente");
-        jcbCargo.addItem("Secretaria");
+//        jcbCargo.addItem("Gerente");
+//        jcbCargo.addItem("Secretaria");
     }//GEN-LAST:event_jcbCargoMousePressed
 
     private void bCargarSedesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bCargarSedesMouseClicked

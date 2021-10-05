@@ -57,7 +57,7 @@ public class Sedes {
         return existeId;
     }
 
-    public void registrarSedeNueva(String id, String nombre, String direccion, String telefono) throws SQLException {
+    public void registrarSedeNueva(String id, String nombre, String direccion, String telefono, String comuna) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -67,14 +67,15 @@ public class Sedes {
         try {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
             stmt = conexion.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50));";
+            sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50), comuna VARCHAR(10));";
             stmt.executeUpdate(sql);
 
-            sql = "INSERT INTO sedes(id, nombre, direccion, telefono) VALUES("
+            sql = "INSERT INTO sedes(id, nombre, direccion, telefono, comuna) VALUES("
                     + "\'" + id + "\',"
                     + "\'" + nombre + "\',"
                     + "\'" + direccion + "\',"
-                    + "\'" + telefono + "\'"
+                    + "\'" + telefono + "\',"
+                    + "\'" + comuna + "\'"
                     + ");";
             stmt.executeUpdate(sql);
 
@@ -85,7 +86,7 @@ public class Sedes {
         }
     }
     
-    public void modificarSede(String id, String nombre, String direccion, String telefono) throws SQLException {
+    public void modificarSede(String id, String nombre, String direccion, String telefono, String comuna) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -95,7 +96,7 @@ public class Sedes {
         try {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
             stmt = conexion.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50));";
+            sql = "CREATE TABLE IF NOT EXISTS sedes (id VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(50), telefono VARCHAR(50), comuna VARCHAR(10));";
             stmt.executeUpdate(sql);
             
             if( !(nombre.compareTo("")== 0) ){
@@ -113,6 +114,12 @@ public class Sedes {
             if( !(telefono.compareTo("")== 0) ){
                 sql = "UPDATE sedes "
                     + "SET telefono = \'" + telefono + "\' "
+                    + "WHERE id = \'" + id + "\'";
+                stmt.executeUpdate(sql);
+            }
+            if( !(comuna.compareTo("")== 0) ){
+                sql = "UPDATE sedes "
+                    + "SET comuna = \'" + comuna + "\' "
                     + "WHERE id = \'" + id + "\'";
                 stmt.executeUpdate(sql);
             }
@@ -202,5 +209,32 @@ public class Sedes {
             JOptionPane.showMessageDialog(null, "Error de conexión con base de datos");
         }
         return idSedes;
+    }
+    
+    public String getIdYComunaSedes(){
+        String idYComunaSedes = "";
+        try{
+            Class.forName("org.postgresql.Driver");
+        }catch(ClassNotFoundException e){
+            e.getMessage();
+        }
+        
+        try {
+            conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
+            stmt = conexion.createStatement();
+
+            sql = "SELECT * FROM sedes";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while(rs.next()){
+                idYComunaSedes = idYComunaSedes + rs.getString("comuna") + ":";
+                idYComunaSedes = idYComunaSedes + rs.getString("id") + ":";
+            } 
+            conexion.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexión con base de datos");
+        }
+        return idYComunaSedes;
     }
 }

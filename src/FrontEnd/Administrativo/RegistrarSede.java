@@ -48,12 +48,12 @@ public class RegistrarSede extends javax.swing.JPanel {
             respuesta = respuesta + "\n   - Debe ingresar un dirección para la sede";
             validacion = false;
         }
-//        if( jtfComunaSede.getText().length()<1 || !(jtfComunaSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
-//            respuesta = respuesta + "\n   - Comuna ingresada, deben ser solo números";
-//            jtfComunaSede.setText("");
-//            validacion = false;
-//        }
-        if( jtfTelefonoSede.getText().length()<1 && !(jtfTelefonoSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfComunaSede.getText().length()<1 || !(jtfComunaSede.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Comuna ingresada, debe ser un número";
+            jtfComunaSede.setText("");
+            validacion = false;
+        }
+        if( jtfTelefonoSede.getText().length()<1 && !(jtfTelefonoSede.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
             respuesta = respuesta + "\n   - Debe ingresar un teléfono, deben ser solo números";
             jtfTelefonoSede.setText("");
             validacion = false;
@@ -87,7 +87,6 @@ public class RegistrarSede extends javax.swing.JPanel {
         jtfComunaSede = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         Cancelar1 = new javax.swing.JLabel();
-        Cancelar = new javax.swing.JLabel();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -125,8 +124,6 @@ public class RegistrarSede extends javax.swing.JPanel {
                 lRegistrarMouseExited(evt);
             }
         });
-
-        jtfComunaSede.setEnabled(false);
 
         jLabel16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(102, 102, 102));
@@ -218,54 +215,21 @@ public class RegistrarSede extends javax.swing.JPanel {
                 .addContainerGap(239, Short.MAX_VALUE))
         );
 
-        Cancelar.setBackground(new java.awt.Color(0, 153, 102));
-        Cancelar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Cancelar.setForeground(new java.awt.Color(255, 255, 255));
-        Cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Cancelar.setText("Cancelar");
-        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Cancelar.setOpaque(true);
-        Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CancelarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                CancelarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                CancelarMouseExited(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(260, 260, 260)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(260, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(245, 245, 245)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(245, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -275,12 +239,13 @@ public class RegistrarSede extends javax.swing.JPanel {
         try {
             if( validador() ){
                 if( !( sede.idExiste(jtfIdSede.getText()) ) ){
-                    sede.registrarSedeNueva(jtfIdSede.getText(), jtfNombreSede.getText(), jtfDireccionSede.getText(), jtfTelefonoSede.getText());
+                    sede.registrarSedeNueva(jtfIdSede.getText(), jtfNombreSede.getText(), jtfDireccionSede.getText(), jtfTelefonoSede.getText(), jtfComunaSede.getText());
                     JOptionPane.showMessageDialog(null, "Sede " + jtfIdSede.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
                     jtfIdSede.setText("");
                     jtfNombreSede.setText("");
                     jtfDireccionSede.setText("");
                     jtfTelefonoSede.setText("");
+                    jtfComunaSede.setText("");
                 }else
                     JOptionPane.showMessageDialog(null, "El Id ya existe");
             }
@@ -299,22 +264,6 @@ public class RegistrarSede extends javax.swing.JPanel {
         lRegistrar.setForeground(Color.WHITE);
     }//GEN-LAST:event_lRegistrarMouseExited
 
-    private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
-        // TODO add your handling code here:
-        new PantallaGerente("Gerente").setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_CancelarMouseClicked
-
-    private void CancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseEntered
-        // TODO add your handling code here:
-        Cancelar.setForeground(Color.red);
-    }//GEN-LAST:event_CancelarMouseEntered
-
-    private void CancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseExited
-        // TODO add your handling code here:
-        Cancelar.setForeground(Color.white);
-    }//GEN-LAST:event_CancelarMouseExited
-
     private void Cancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Cancelar1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_Cancelar1MouseClicked
@@ -329,7 +278,6 @@ public class RegistrarSede extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JLabel Cancelar;
     javax.swing.JLabel Cancelar1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

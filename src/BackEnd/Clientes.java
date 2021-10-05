@@ -60,7 +60,7 @@ public class Clientes {
         return cedulaExiste;
     }
 
-    public void registrarClienteNuevo(int cedula, String nombre, String direccion, int id_comuna) throws SQLException {
+    public void registrarClienteNuevo(int cedula, String nombre, String direccion, int id_comuna, String sede_asignada) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -72,14 +72,15 @@ public class Clientes {
             //JOptionPane.showMessageDialog(null, "Connected to Database");
             //conexion.close();
             stmt = conexion.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS clientes (cedula INT, nombre VARCHAR(50), direccion VARCHAR(100), id_comuna INT);";
+            sql = "CREATE TABLE IF NOT EXISTS clientes (cedula INT, nombre VARCHAR(50), direccion VARCHAR(100), id_comuna INT, sede_asignada VARCHAR(50));";
             stmt.executeUpdate(sql);
 
-            sql = "INSERT INTO clientes(cedula, nombre, direccion, id_comuna) VALUES("
+            sql = "INSERT INTO clientes(cedula, nombre, direccion, id_comuna, sede_asignada) VALUES("
                     + "\'" + cedula + "\',"
                     + "\'" + nombre + "\',"
                     + "\'" + direccion + "\',"
-                    + "\'" + id_comuna + "\'"
+                    + "\'" + id_comuna + "\',"
+                    + "\'" + sede_asignada + "\'"
                     + ");";
             stmt.executeUpdate(sql);
 
