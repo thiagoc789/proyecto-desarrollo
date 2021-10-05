@@ -36,8 +36,14 @@ public class PrimerIngreso extends javax.swing.JFrame {
             jtfTelefono.setText("");
             validacion = false;
         }
-        if( jtfPass1.getText().length()<1 ){
-            respuesta = respuesta + "\n   - Debe ingresar una contraseña";
+        if( jtfPass1.getText().length()<1 || jtfPass1.getText().compareTo( jtfPass2.getText() ) != 0 ){
+            if( jtfPass1.getText().length()<1 )
+                respuesta = respuesta + "\n   - Ingrese una contraseña";
+            else{
+                respuesta = respuesta + "\n   - Contaseña y su confirmación no coinciden";
+                jtfPass1.setText("");
+                jtfPass2.setText("");
+            }
             validacion = false;
         }
         if( jtfCorreo.getText().length()<1 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){

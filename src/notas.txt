@@ -7,15 +7,7 @@ if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\
             validacion = false;
         }
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-git add . && git commit -m "Actualizado a Lunes 8:15 pm" && git push
-git add . && git commit -m date && git push     NO
-git add . && git commit -m $date && git push    NO
-git add . && git commit -m ""+date && git push  NO
-git add . && git commit -m $date$ && git push   NO
-git add . && git commit -m &date && git push    NO
-git add . && git commit -m $(date) && git push  NO
 git add . && git commit -m "Actualizado: $(date)" && git push
-
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
