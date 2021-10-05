@@ -26,7 +26,7 @@ public class Clientes {
     private String nombre_cliente;
     private String direccion_cliente;
     private String comuna_cliente;
-    
+    private String sede_asignada;
     
     public boolean cedulaExiste(String cedula){
         boolean cedulaExiste = false;
@@ -112,12 +112,14 @@ public class Clientes {
             nombre_cliente = "";
             direccion_cliente = "";
             comuna_cliente = "";
+            sede_asignada = "";
             
             while(rs.next()){
                 cedula_cliente = rs.getString("cedula");
                 nombre_cliente = rs.getString("nombre");
                 direccion_cliente = rs.getString("direccion");
                 comuna_cliente = rs.getString("id_comuna");
+                sede_asignada = rs.getString("sede_asignada");
             }
             
             if( !(cedula.compareTo(cedula_cliente) == 0) ){
@@ -153,6 +155,10 @@ public class Clientes {
 
     public String getDireccion_cliente() {
         return direccion_cliente;
+    }
+    
+    public String getSede_asignada() {
+        return sede_asignada;
     }
 
     public void setDireccion_cliente(String direccion_cliente) {

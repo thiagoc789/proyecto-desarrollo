@@ -50,6 +50,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private String nombre_cliente;
     private String direccion_cliente;
     private String comuna_cliente;
+    private String descripcion_paquete = "";
+    private String sedeAsignadaCliente = "";
 
     public RegistrarEnvio() {
         initComponents();
@@ -92,6 +94,10 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             jtfValorSeguro.setText("");
             validacion = false;
         }
+        if ( jtfDescripcion.getText().length()<1 ) {
+            respuesta = respuesta + "\n   - Debe ingresar una breve descripción";
+            validacion = false;
+        }
 
         if (!validacion) {
             JOptionPane.showMessageDialog(null, respuesta);
@@ -122,7 +128,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         jtfValorPaquete = new javax.swing.JTextField();
         jtfValorSeguro = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        jtfValorImpuesto1 = new javax.swing.JTextField();
+        jtfDescripcion = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -249,8 +255,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfValorImpuesto1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +276,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jtfValorImpuesto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -342,33 +348,33 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                             .addComponent(labelDireccion)
                             .addComponent(labelSedeAsignada))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                            .addComponent(jLabel20)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(metodoPagoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(86, 86, 86))
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel23)
-                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel21)
-                                        .addComponent(jLabel22)
-                                        .addComponent(jLabel24))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(valorEnvioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel6Layout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(valorSeguroResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addContainerGap(215, Short.MAX_VALUE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(metodoPagoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel23)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel21)
+                                            .addComponent(jLabel22)
+                                            .addComponent(jLabel24))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(valorEnvioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(valorSeguroResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -377,13 +383,23 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                                 .addComponent(jLabel25)
                                 .addGap(18, 18, 18)
                                 .addComponent(numeroPaquetesResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(57, 57, 57))))
+                        .addGap(174, 174, 174))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
@@ -399,16 +415,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(valorImpuestoResumen)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(labelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(valorImpuestoResumen))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valorSeguroResumen)
                             .addComponent(jLabel24))
@@ -419,12 +427,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(totalResumen)
-                            .addComponent(jLabel26)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(labelComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 11, Short.MAX_VALUE))
+                            .addComponent(jLabel26))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botonAgregarPaquete.setBackground(new java.awt.Color(102, 102, 102));
@@ -502,9 +506,9 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         jpEnvioLayout.setHorizontalGroup(
             jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEnvioLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEnvioLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpEnvioLayout.createSequentialGroup()
                                 .addComponent(jLabel17)
@@ -523,22 +527,23 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                                 .addComponent(panelTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpEnvioLayout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(botonAgregarPaquete))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jpEnvioLayout.createSequentialGroup()
-                                    .addGap(164, 164, 164)
-                                    .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(54, 54, 54)
-                                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jpEnvioLayout.createSequentialGroup()
-                                    .addComponent(jLabel19)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
+                                        .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(54, 54, 54)
+                                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
+                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(botonAgregarPaquete)))))))
                 .addContainerGap())
         );
         jpEnvioLayout.setVerticalGroup(
@@ -579,7 +584,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpEnvio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,37 +613,40 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfValorEnvioActionPerformed
 
     private void botonAgregarPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarPaqueteMouseClicked
-        // TODO add your handling code here:
-        //Metodo De Pago
-        conteoPaquetes++;
-        numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
-        int auxiliar = metodoDePago.getSelectedIndex();
-        String auxiliar2 = metodoDePago.getItemAt(auxiliar);
-        metodoPagoResumen.setText(auxiliar2);
+        if( validador() ){
+            //Metodo De Pago
+            conteoPaquetes++;
+            numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
+            int auxiliar = metodoDePago.getSelectedIndex();
+            String auxiliar2 = metodoDePago.getItemAt(auxiliar);
+            metodoPagoResumen.setText(auxiliar2);
 
-        //Valor Del Envio
-        int valorInicialEnvio = Integer.parseInt(jtfValorEnvio.getText());
-        valorSuma = valorSuma + valorInicialEnvio;
-        valorEnvioResumen.setText(Integer.toString(valorSuma));
+            //Valor Del Envio
+            int valorInicialEnvio = Integer.parseInt(jtfValorEnvio.getText());
+            valorSuma = valorSuma + valorInicialEnvio;
+            valorEnvioResumen.setText(Integer.toString(valorSuma));
 
-        //Valor Paquete
-        int auxiliarPaquete = Integer.parseInt(jtfValorPaquete.getText());
-        valorPaqueteSuma = valorPaqueteSuma + auxiliarPaquete;
-        valorPaqueteResumen.setText(Integer.toString(valorPaqueteSuma));
+            //Valor Paquete
+            int auxiliarPaquete = Integer.parseInt(jtfValorPaquete.getText());
+            valorPaqueteSuma = valorPaqueteSuma + auxiliarPaquete;
+            valorPaqueteResumen.setText(Integer.toString(valorPaqueteSuma));
 
-        //Valor Impuesto
-        int auxiliarImpuesto = Integer.parseInt(jtfValorImpuesto.getText());
-        valorImpuestoSuma = valorImpuestoSuma + auxiliarImpuesto;
-        valorImpuestoResumen.setText(Integer.toString(valorImpuestoSuma));
+            //Valor Impuesto
+            int auxiliarImpuesto = Integer.parseInt(jtfValorImpuesto.getText());
+            valorImpuestoSuma = valorImpuestoSuma + auxiliarImpuesto;
+            valorImpuestoResumen.setText(Integer.toString(valorImpuestoSuma));
 
-        //Valor Seguro
-        int auxiliarSeguro = Integer.parseInt(jtfValorSeguro.getText());
-        valorSeguroSuma = valorSeguroSuma + auxiliarSeguro;
-        valorSeguroResumen.setText(Integer.toString(valorSeguroSuma));
+            //Valor Seguro
+            int auxiliarSeguro = Integer.parseInt(jtfValorSeguro.getText());
+            valorSeguroSuma = valorSeguroSuma + auxiliarSeguro;
+            valorSeguroResumen.setText(Integer.toString(valorSeguroSuma));
 
-        //Total
-        int auxiliarTotal = valorSuma + valorPaqueteSuma + valorImpuestoSuma + valorSeguroSuma;
-        totalResumen.setText(Integer.toString(auxiliarTotal));
+            //Total
+            int auxiliarTotal = valorSuma + valorPaqueteSuma + valorImpuestoSuma + valorSeguroSuma;
+            totalResumen.setText(Integer.toString(auxiliarTotal));
+        
+            descripcion_paquete = descripcion_paquete + "\n" + jtfDescripcion.getText();
+        }
     }//GEN-LAST:event_botonAgregarPaqueteMouseClicked
 
     private void botonAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarPaqueteActionPerformed
@@ -782,13 +790,13 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             nombre_cliente = cliente.getNombre_cliente();
             direccion_cliente = cliente.getDireccion_cliente();
             comuna_cliente = cliente.getComuna_cliente();
+            sedeAsignadaCliente = cliente.getSede_asignada();
             
             labelCedula.setText(cedula_cliente);
             labelNombre.setText(nombre_cliente);
             labelDireccion.setText(direccion_cliente);
+            labelSedeAsignada.setText("Sede asignada: " + sedeAsignadaCliente);
             labelComuna.setText("Comuna " + comuna_cliente);
-        
-            //labelSedeAsignada
 
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
@@ -822,10 +830,10 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jpEnvio;
     javax.swing.JTextField jtfCedula;
+    javax.swing.JTextField jtfDescripcion;
     javax.swing.JTextField jtfTarjeta;
     javax.swing.JTextField jtfValorEnvio;
     javax.swing.JTextField jtfValorImpuesto;
-    javax.swing.JTextField jtfValorImpuesto1;
     javax.swing.JTextField jtfValorPaquete;
     javax.swing.JTextField jtfValorSeguro;
     private javax.swing.JLabel labelCedula;
