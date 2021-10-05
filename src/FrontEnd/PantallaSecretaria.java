@@ -12,19 +12,14 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    String idUsuario;
+    String idUsuarioSecre;
     
     ListarUsuariosTabulados panelListarUsuarios = new ListarUsuariosTabulados();
-
-    public PantallaSecretaria() {
-        initComponents();
-        contenedor.setVisible(false);
-    }
     
      public PantallaSecretaria(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
-        this.idUsuario = idUsuario;
+        this.idUsuarioSecre = idUsuario;
     }
     
     public void cambioVisualizacion(){
@@ -337,7 +332,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     }//GEN-LAST:event_lCerrarSesionMouseClicked
 
     private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
-        new SesionBloqueada( idUsuario ).setVisible(true);
+        new SesionBloqueada( idUsuarioSecre ).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlBloquearMouseClicked
 

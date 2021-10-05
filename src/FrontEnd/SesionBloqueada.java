@@ -14,16 +14,13 @@ public class SesionBloqueada extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    String idUsuario;
+    String idUsuarioBloq;
 
-//    public SesionBloqueada() {
-//        initComponents();
-//    }
     
     public SesionBloqueada(String idUsuario) {
         initComponents();
         jtfCedula.setText(idUsuario);
-        this.idUsuario = idUsuario;
+        this.idUsuarioBloq = idUsuario;
     }
     
     public boolean validador(){
@@ -336,21 +333,21 @@ public class SesionBloqueada extends javax.swing.JFrame {
         String usuariValido = "";
         try {
             if( validador() )
-                usuariValido = unUsuario.validarIngreso(idUsuario, jtfClave.getText());
+                usuariValido = unUsuario.validarIngreso(idUsuarioBloq, jtfClave.getText());
         } catch (SQLException ex) {
             Logger.getLogger(SesionBloqueada.class.getName()).log(Level.SEVERE, null, ex);
         }
         if( usuariValido.compareTo("Gerente") == 0 ){
-            new PantallaGerente( idUsuario ).setVisible(true);
+            new PantallaGerente( idUsuarioBloq ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Operador") == 0 ){
-            new PantallaOperador().setVisible(true);
+            new PantallaOperador( idUsuarioBloq ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Secretaria") == 0 ){
-            new PantallaSecretaria().setVisible(true);
+            new PantallaSecretaria( idUsuarioBloq ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Auxiliar") == 0 ){
-            new PantallaAuxiliar().setVisible(true);
+            new PantallaAuxiliar( idUsuarioBloq ).setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_lEntrarMouseClicked

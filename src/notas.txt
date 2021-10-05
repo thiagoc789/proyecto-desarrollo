@@ -10,6 +10,7 @@ if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\
 git add . && git commit -m "Actualizado: $(date)" && git push
 ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 Revisadas:
+- IngresoUsuario.java
 - Main.java
 - PrimerIngreso.java
 - SesionBloqueada.java

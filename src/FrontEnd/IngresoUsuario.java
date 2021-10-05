@@ -313,7 +313,6 @@ public class IngresoUsuario extends javax.swing.JFrame {
             Logger.getLogger(IngresoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         if( usuariValido.compareTo("Gerente") == 0 ){
-            //new PantallaGerente().setVisible(true);
             new PantallaGerente( jtfCedula.getText() ).setVisible(true);
             this.setVisible(false);
         }else if( usuariValido.compareTo("Operador") == 0 ){
@@ -329,29 +328,22 @@ public class IngresoUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_lEntrarMouseClicked
 
     private void lCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseClicked
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_lCancelarMouseClicked
 
     private void lEntrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseEntered
-        // TODO add your handling code here:
         lEntrar.setForeground(Color.red);
-
-
     }//GEN-LAST:event_lEntrarMouseEntered
 
     private void lEntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lEntrarMouseExited
-        // TODO add your handling code here:
         lEntrar.setForeground(Color.white);
     }//GEN-LAST:event_lEntrarMouseExited
 
     private void lCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseEntered
-        // TODO add your handling code here:
         lCancelar.setForeground(Color.red);
     }//GEN-LAST:event_lCancelarMouseEntered
 
     private void lCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCancelarMouseExited
-        // TODO add your handling code here:
         lCancelar.setForeground(Color.white);
     }//GEN-LAST:event_lCancelarMouseExited
 

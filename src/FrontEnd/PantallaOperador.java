@@ -12,21 +12,15 @@ public class PantallaOperador extends javax.swing.JFrame {
     private int x;
     private int y;
 
-    String idUsuario;
+    String idUsuarioOper;
 
     RegistrarEnvio panelRegistrarEnvio = new RegistrarEnvio();
     RegistrarClientes panelRegistrarClientes = new RegistrarClientes();
 
-    public PantallaOperador() {
-
-        initComponents();
-        contenedor.setVisible(false);
-    }
-
     public PantallaOperador(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
-        this.idUsuario = idUsuario;
+        this.idUsuarioOper = idUsuario;
     }
 
     public void cambioVisualizacion() {
@@ -328,7 +322,7 @@ public class PantallaOperador extends javax.swing.JFrame {
     }//GEN-LAST:event_lCerrarSesionMouseClicked
 
     private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
-        new SesionBloqueada(idUsuario).setVisible(true);
+        new SesionBloqueada(idUsuarioOper).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlBloquearMouseClicked
 

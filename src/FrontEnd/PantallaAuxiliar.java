@@ -13,19 +13,14 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    String idUsuario;
+    String idUsuarioAux;
     
     ListarEnvios panelListarEnviosDia = new ListarEnvios();
-
-    public PantallaAuxiliar() {
-        initComponents();
-        contenedor.setVisible(false);
-    }
     
     public PantallaAuxiliar(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
-        this.idUsuario = idUsuario;
+        this.idUsuarioAux = idUsuario;
     }
     
     public void cambioVisualizacion(){
@@ -340,7 +335,7 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
     }//GEN-LAST:event_lCerrarSesionMouseClicked
 
     private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
-        new SesionBloqueada( idUsuario ).setVisible(true);
+        new SesionBloqueada( idUsuarioAux ).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlBloquearMouseClicked
 
