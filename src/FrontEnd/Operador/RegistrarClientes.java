@@ -32,9 +32,11 @@ public class RegistrarClientes extends javax.swing.JPanel {
     int valorImpuestoSuma = 0;
     int valorSeguroSuma = 0;
     int conteoPaquetes = 0;
+    String sedeAsignadaAlCliente = "";
     
     public RegistrarClientes() {
         initComponents();
+        lRegistrarCliente.setEnabled(false);
     }
     
 public boolean validador(){
@@ -80,7 +82,6 @@ public String hallarSedeCercana(int comunaCliente){
                 sedeCercana = listaDeSedes[i+1];
             }
         }
-        //jcbSede.addItem(listaDeSedes[i] );
     }
 
     return sedeCercana;
@@ -109,6 +110,7 @@ public String hallarSedeCercana(int comunaCliente){
         jtfComuna = new javax.swing.JTextField();
         lSedeAsignada = new javax.swing.JLabel();
         lAsignarSede = new javax.swing.JLabel();
+        bRegistrar = new javax.swing.JButton();
 
         jpEnvio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -170,32 +172,31 @@ public String hallarSedeCercana(int comunaCliente){
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfDireccion)))
+                        .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfComuna)))))
+                        .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfDireccion)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfComuna)))
                 .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,9 +213,9 @@ public String hallarSedeCercana(int comunaCliente){
                     .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(jtfComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(lSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(26, 26, 26))
         );
 
         lAsignarSede.setBackground(new java.awt.Color(0, 153, 102));
@@ -236,6 +237,14 @@ public String hallarSedeCercana(int comunaCliente){
             }
         });
 
+        bRegistrar.setText("Registrar");
+        bRegistrar.setEnabled(false);
+        bRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRegistrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpEnvioLayout = new javax.swing.GroupLayout(jpEnvio);
         jpEnvio.setLayout(jpEnvioLayout);
         jpEnvioLayout.setHorizontalGroup(
@@ -248,12 +257,14 @@ public String hallarSedeCercana(int comunaCliente){
                     .addGroup(jpEnvioLayout.createSequentialGroup()
                         .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpEnvioLayout.createSequentialGroup()
-                                .addGap(183, 183, 183)
+                                .addContainerGap()
+                                .addComponent(lRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
                                 .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpEnvioLayout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(lRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(96, 96, 96)
+                                .addGap(99, 99, 99)
+                                .addComponent(bRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76)
                                 .addComponent(lAsignarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -265,10 +276,12 @@ public String hallarSedeCercana(int comunaCliente){
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lAsignarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lRegistrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -284,7 +297,7 @@ public String hallarSedeCercana(int comunaCliente){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 291, Short.MAX_VALUE))
+                .addGap(0, 288, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -320,47 +333,50 @@ public String hallarSedeCercana(int comunaCliente){
     }//GEN-LAST:event_lRegistrarClienteMouseEntered
 
     private void lRegistrarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarClienteMouseClicked
-        // TODO add your handling code here:
         // AQUI SE REGISTRA EL USUARIO
         Clientes cliente = new Clientes();        
         
-//        try {
+        try {
             if ( validador() ){
                 if( !( cliente.cedulaExiste( jtfCedula.getText() ) ) ){
                     int cedula = Integer.parseInt(jtfCedula.getText());
                     int comuna = Integer.parseInt(jtfComuna.getText());
-                    //cliente.registrarClienteNuevo(cedula, jtfNombre.getText(), jtfDireccion.getText(), comuna);
+                    cliente.registrarClienteNuevo(cedula, jtfNombre.getText(), jtfDireccion.getText(), comuna, sedeAsignadaAlCliente);
                     jtfCedula.setText("");
                     jtfNombre.setText("");
                     jtfDireccion.setText("");
                     jtfComuna.setText("");
+                    lSedeAsignada.setText("");
                     JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                     JOptionPane.showMessageDialog(null, "La cédula ya existe");
             }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_lRegistrarClienteMouseClicked
 
     private void lAsignarSedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lAsignarSedeMouseClicked
-        
-        if( (jtfComuna.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+        if( ( jtfComuna.getText().length()>0 && jtfComuna.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
             Sedes unaSede = new Sedes();
-            
-            int comunaCliente = Integer.parseInt(jtfComuna.getText());
-            hallarSedeCercana(comunaCliente);
-            
-            
+            try{
+                int comunaCliente = Integer.parseInt(jtfComuna.getText());
+                sedeAsignadaAlCliente = hallarSedeCercana(comunaCliente);
+
+                lSedeAsignada.setText("Al cliente se le asigno la sede " + sedeAsignadaAlCliente);
+                jtfComuna.setEnabled(false);
+                lRegistrarCliente.setEnabled(true);
+                bRegistrar.setEnabled(true);
+            } catch (NumberFormatException exc) {
+                Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, exc);
+                JOptionPane.showMessageDialog(null, "Exc: " + exc);
+            }            
             jtfComuna.setEnabled(false);
             lRegistrarCliente.setEnabled(true);
         }else{
-            
+            JOptionPane.showMessageDialog(null, "La comuna ingresada no es válida");
         }
-        
-        jtfComuna.setEnabled(false);
-        lRegistrarCliente.setEnabled(true);
     }//GEN-LAST:event_lAsignarSedeMouseClicked
 
     private void lAsignarSedeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lAsignarSedeMouseEntered
@@ -371,8 +387,34 @@ public String hallarSedeCercana(int comunaCliente){
         // TODO add your handling code here:
     }//GEN-LAST:event_lAsignarSedeMouseExited
 
+    private void bRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRegistrarActionPerformed
+        // AQUI SE REGISTRA EL USUARIO
+        Clientes cliente = new Clientes();        
+        
+        try {
+            if ( validador() ){
+                if( !( cliente.cedulaExiste( jtfCedula.getText() ) ) ){
+                    int cedula = Integer.parseInt(jtfCedula.getText());
+                    int comuna = Integer.parseInt(jtfComuna.getText());
+                    cliente.registrarClienteNuevo(cedula, jtfNombre.getText(), jtfDireccion.getText(), comuna, sedeAsignadaAlCliente);
+                    jtfCedula.setText("");
+                    jtfNombre.setText("");
+                    jtfDireccion.setText("");
+                    jtfComuna.setText("");
+                    lSedeAsignada.setText("");
+                    JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "La cédula ya existe");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bRegistrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bRegistrar;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
@@ -385,7 +427,7 @@ public String hallarSedeCercana(int comunaCliente){
     javax.swing.JTextField jtfNombre;
     javax.swing.JLabel lAsignarSede;
     javax.swing.JLabel lCancelar;
-    javax.swing.JLabel lRegistrarCliente;
+    public javax.swing.JLabel lRegistrarCliente;
     private javax.swing.JLabel lSedeAsignada;
     // End of variables declaration//GEN-END:variables
 }
