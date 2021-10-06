@@ -48,12 +48,8 @@ public class ListarClientes extends javax.swing.JPanel {
 
         jPanel4 = new javax.swing.JPanel();
         listarClientesTotales = new javax.swing.JLabel();
-        listarPorSedeClientes = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTbl_clientes = new javax.swing.JTable();
-        jcbSedes = new javax.swing.JComboBox<>();
-        bCargarSedes = new javax.swing.JButton();
-        btn_pdf_cln = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -73,26 +69,6 @@ public class ListarClientes extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 listarClientesTotalesMouseExited(evt);
-            }
-        });
-
-        listarPorSedeClientes.setBackground(new java.awt.Color(0, 153, 102));
-        listarPorSedeClientes.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        listarPorSedeClientes.setForeground(new java.awt.Color(255, 255, 255));
-        listarPorSedeClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        listarPorSedeClientes.setText("Clientes por sede");
-        listarPorSedeClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listarPorSedeClientes.setEnabled(false);
-        listarPorSedeClientes.setOpaque(true);
-        listarPorSedeClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listarPorSedeClientesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                listarPorSedeClientesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                listarPorSedeClientesMouseExited(evt);
             }
         });
 
@@ -121,54 +97,17 @@ public class ListarClientes extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTbl_clientes);
 
-        bCargarSedes.setText("Cargar sedes");
-        bCargarSedes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bCargarSedesMouseClicked(evt);
-            }
-        });
-
-        btn_pdf_cln.setBackground(new java.awt.Color(255, 255, 255));
-        btn_pdf_cln.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btn_pdf_cln.setForeground(new java.awt.Color(0, 153, 102));
-        btn_pdf_cln.setText("Generar  reporte PDF");
-        btn_pdf_cln.setToolTipText("");
-        btn_pdf_cln.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_pdf_clnMouseClicked(evt);
-            }
-        });
-        btn_pdf_cln.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_pdf_clnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(listarClientesTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(listarPorSedeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bCargarSedes)))
-                .addGap(89, 89, 89))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(299, 299, 299)
-                .addComponent(btn_pdf_cln)
+                .addGap(280, 280, 280)
+                .addComponent(listarClientesTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -176,18 +115,9 @@ public class ListarClientes extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(listarClientesTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(listarPorSedeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bCargarSedes))))
-                .addGap(42, 42, 42)
-                .addComponent(btn_pdf_cln)
-                .addGap(31, 31, 31))
+                .addGap(45, 45, 45)
+                .addComponent(listarClientesTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -269,173 +199,11 @@ public class ListarClientes extends javax.swing.JPanel {
         listarClientesTotales.setForeground(Color.WHITE);
     }//GEN-LAST:event_listarClientesTotalesMouseExited
 
-    private void listarPorSedeClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarPorSedeClientesMouseClicked
-       
-       /* jTbl_clientes.setModel(new DefaultTableModel());
-
-        DefaultTableModel modelo;
-        ConexionBD con = new ConexionBD();
-        String sql = "";
-        java.sql.Connection conexion = con.getConexion();
-        java.sql.Statement stmt = con.getStm();
-        //String nombreSede = Jtxt_nmSede.getText();
-        String nombreSede = jcbSedes.getItemAt(jcbSedes.getSelectedIndex());
-
-        String[] nmClm = {"id", "nombre", "telefono", "contraseña", "cargo", "sede", "estado"};
-
-        try {
-            conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
-        } catch (SQLException ex) {
-            Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        sql = "select * from clientes, sedes where sede_asignada like\'" + nombreSede + "\'";
-
-        modelo = (DefaultTableModel) jTbl_clientes.getModel();
-
-        modelo.setColumnIdentifiers(nmClm);
-
-        jTbl_clientes.setModel(modelo);
-
-        String[] registro = new String[7];
-
-        try {
-            stmt = conexion.createStatement();
-
-            ResultSet rstm = stmt.executeQuery(sql);
-
-            while (rstm.next()) {
-                registro[0] = rstm.getString(1);
-                registro[1] = rstm.getString(2);
-                registro[2] = rstm.getString(3);
-                registro[3] = rstm.getString(4);
-                registro[4] = rstm.getString(5);
-                registro[5] = rstm.getString(6);
-                registro[6] = rstm.getString(7);
-                modelo.addRow(registro);
-            }
-            jTbl_clientes.setVisible(true);
-
-            conexion.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-*/
-        
-    }//GEN-LAST:event_listarPorSedeClientesMouseClicked
-
-    private void listarPorSedeClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarPorSedeClientesMouseEntered
-        // TODO add your handling code here:
-        //listarPorSede.setForeground(Color.red);
-    }//GEN-LAST:event_listarPorSedeClientesMouseEntered
-
-    private void listarPorSedeClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarPorSedeClientesMouseExited
-        // TODO add your handling code here:
-        //listarPorSede.setForeground(Color.white);
-    }//GEN-LAST:event_listarPorSedeClientesMouseExited
-
-    private void bCargarSedesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bCargarSedesMouseClicked
-        Sedes sede = new Sedes();
-        String listaDeNombres[] = sede.getNombreSedes().split(":");
-
-        jcbSedes.removeAllItems();
-        for (int i = 0; i < listaDeNombres.length; i++) {
-            jcbSedes.addItem(listaDeNombres[i]);
-        }
-        listarPorSedeClientes.setEnabled(true);
-        listarPorSedeClientes.setBackground(new Color(0, 153, 102));
-
-        //(0, 153, 102)
-    }//GEN-LAST:event_bCargarSedesMouseClicked
-
-    private void btn_pdf_clnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pdf_clnMouseClicked
-        Document documento = new Document();
-
-        String rutaCompleta = "";
-
-        try {
-            String ruta = System.getProperty("user.home");
-            //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
-            try {
-                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Prueba.pdf"));
-                rutaCompleta = ruta + "/Desktop/Reporte_Prueba.pdf";
-            } catch (DocumentException | FileNotFoundException ex1) {
-                try {
-                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
-                    rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
-                } catch (DocumentException | FileNotFoundException ex2) {
-                    try {
-                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
-                        rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
-                    } catch (DocumentException | FileNotFoundException ex3) {
-                    }
-                }
-            }
-
-            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
-            documento.open();
-
-            PdfPTable tabla = new PdfPTable(4);
-            tabla.addCell("Cedula");
-            tabla.addCell("Nombre");
-            tabla.addCell("Dirección");
-            tabla.addCell("Comuna");
-            tabla.addCell("Id Sede");
-
-            try {
-                ConexionBD con = new ConexionBD();
-                java.sql.Connection conexion = con.getConexion();
-                java.sql.Statement stmt = con.getStm();
-                conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
-
-                stmt = conexion.createStatement();
-
-                String sql = "SELECT * FROM sedes";
-
-                ResultSet rstm = stmt.executeQuery(sql);
-
-                while (rstm.next()) {
-                    tabla.addCell(rstm.getString("id"));
-                    tabla.addCell(rstm.getString("nombre"));
-                    tabla.addCell(rstm.getString("direccion"));
-                    tabla.addCell(rstm.getString("telefono"));
-                }
-                Paragraph titulo = new Paragraph("Tabla sedes\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLACK));
-
-                String texto = "Señores: Cliente\n"
-                        + "Les presentamos la lista de las sedes\n\n";
-                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.BLACK));
-
-                documento.add(titulo);
-
-                documento.add(parrafo);
-
-                documento.add(tabla);
-
-                conexion.close();
-
-            } catch (DocumentException | SQLException e) {
-            }
-            documento.close();
-            JOptionPane.showMessageDialog(null, "PDF Creado. Se guardó en " + rutaCompleta);
-        } catch (HeadlessException ex) {
-        }
-    }//GEN-LAST:event_btn_pdf_clnMouseClicked
-
-    private void btn_pdf_clnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pdf_clnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_pdf_clnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton bCargarSedes;
-    private javax.swing.JButton btn_pdf_cln;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTbl_clientes;
-    public javax.swing.JComboBox<String> jcbSedes;
     javax.swing.JLabel listarClientesTotales;
-    javax.swing.JLabel listarPorSedeClientes;
     // End of variables declaration//GEN-END:variables
 }
