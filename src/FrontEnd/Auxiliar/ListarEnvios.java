@@ -47,6 +47,8 @@ public class ListarEnvios extends javax.swing.JPanel {
         jTbl_enviosT = new javax.swing.JTable();
         btnFinalizarBusqueda = new javax.swing.JLabel();
         listarTotales = new javax.swing.JLabel();
+        btn_rpts_aux = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(770, 520));
 
@@ -109,6 +111,19 @@ public class ListarEnvios extends javax.swing.JPanel {
             }
         });
 
+        btn_rpts_aux.setBackground(new java.awt.Color(255, 255, 255));
+        btn_rpts_aux.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_rpts_aux.setForeground(new java.awt.Color(0, 153, 102));
+        btn_rpts_aux.setText("Generar PDF ");
+        btn_rpts_aux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_rpts_auxActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Reporte de los envios pendientes:");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -118,21 +133,36 @@ public class ListarEnvios extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(listarTotales, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                     .addComponent(btnFinalizarBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(jLabel1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(btn_rpts_aux)
+                                .addGap(233, 233, 233))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 401, Short.MAX_VALUE)
                 .addComponent(btnFinalizarBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_rpts_aux)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -149,7 +179,7 @@ public class ListarEnvios extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,11 +194,12 @@ public class ListarEnvios extends javax.swing.JPanel {
 
             stmt = conexion.createStatement();
             sql = "UPDATE envios e SET estado = 'entregado' "
-                    + "WHEREe e.id_auxiliare like \'" + id_usuarioAux + "\'";
+                    + "WHERE e.id_auxiliare like \'" + id_usuarioAux + "\'";
 
             stmt.executeUpdate(sql);
+           
         } catch (SQLException ex) {
-            Logger.getLogger(ListarEnvios.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null, "Ya ha realizado sus entregas");
         }
 
         jTbl_enviosT.setModel(new DefaultTableModel());
@@ -248,9 +279,15 @@ public class ListarEnvios extends javax.swing.JPanel {
         listarTotales.setForeground(Color.white);
     }//GEN-LAST:event_listarTotalesMouseExited
 
+    private void btn_rpts_auxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rpts_auxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_rpts_auxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel btnFinalizarBusqueda;
+    private javax.swing.JButton btn_rpts_aux;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTbl_enviosT;

@@ -151,9 +151,9 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
             }
         });
 
-        jbPrueba.setBackground(new java.awt.Color(0, 204, 102));
+        jbPrueba.setBackground(new java.awt.Color(255, 255, 255));
         jbPrueba.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jbPrueba.setForeground(new java.awt.Color(255, 255, 255));
+        jbPrueba.setForeground(new java.awt.Color(0, 153, 102));
         jbPrueba.setText("Generar  reporte PDF");
         jbPrueba.setToolTipText("");
         jbPrueba.addMouseListener(new java.awt.event.MouseAdapter() {
