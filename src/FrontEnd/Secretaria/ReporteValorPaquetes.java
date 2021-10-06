@@ -246,7 +246,6 @@ public class ReporteValorPaquetes extends javax.swing.JPanel {
     private void btnPagosEfectivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPagosEfectivoMouseClicked
         Usuarios listaUsuarios = new Usuarios();
         try {
-
             DefaultTableModel modelo;
             ConexionBD con = new ConexionBD();
             String sql = "";
