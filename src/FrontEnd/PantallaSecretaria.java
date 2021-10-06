@@ -2,7 +2,7 @@ package FrontEnd;
 
 import FrontEnd.Administrativo.*;
 import FrontEnd.Operador.RegistrarEnvio;
-import FrontEnd.Secretaria.Funcion1Secretaria;
+import FrontEnd.Secretaria.ReporteValorPaquetes;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -16,7 +16,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
 
     ListarUsuariosTabulados panelListarUsuarios = new ListarUsuariosTabulados();
     ListarClientes panelListarClientes = new ListarClientes();
-
+    ReporteValorPaquetes reporteValor = new ReporteValorPaquetes();
     public PantallaSecretaria(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
@@ -26,10 +26,12 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     public void cambioVisualizacion() {
         ListarClientes.setEnabled(true);
         lListarUsuarios.setEnabled(true);
+        ReporteValorE.setEnabled(true);
         //label3.setEnabled(true);
 
         panelListarClientes.setVisible(false);
         panelListarUsuarios.setVisible(false);
+        reporteValor.setVisible(false);
     }
 
     public void visualizacionActual(String panel) {
@@ -42,10 +44,10 @@ public class PantallaSecretaria extends javax.swing.JFrame {
             panelListarClientes.setVisible(true);
             contenedor.add(panelListarClientes);
             ListarClientes.setEnabled(false);
-        } else if (panel.compareTo("nuevoUsuario") == 0) {
-//            nuevoUsuario.setVisible(true);
-//            contenedor.add(nuevoUsuario);
-//            label3.setEnabled(false);
+        } else if (panel.compareTo("ReporteValorE") == 0) {
+            reporteValor.setVisible(true);
+            contenedor.add(reporteValor);
+            ReporteValorE.setEnabled(false);
         }
 
         contenedor.validate();
@@ -65,7 +67,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         javax.swing.JLabel jlBloquear = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
-        label3 = new javax.swing.JLabel();
+        ReporteValorE = new javax.swing.JLabel();
         ListarClientes = new javax.swing.JLabel();
         lListarUsuarios = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
@@ -223,18 +225,18 @@ public class PantallaSecretaria extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
-        label3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        label3.setForeground(new java.awt.Color(102, 102, 102));
-        label3.setText("-Funcion 3");
-        label3.addMouseListener(new java.awt.event.MouseAdapter() {
+        ReporteValorE.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        ReporteValorE.setForeground(new java.awt.Color(102, 102, 102));
+        ReporteValorE.setText("-Reporte valor de envios");
+        ReporteValorE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label3MouseClicked(evt);
+                ReporteValorEMouseClicked(evt);
             }
         });
 
         ListarClientes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         ListarClientes.setForeground(new java.awt.Color(102, 102, 102));
-        ListarClientes.setText("-Listar Clientes ");
+        ListarClientes.setText("-Reporte clientes registrados");
         ListarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ListarClientesMouseClicked(evt);
@@ -255,12 +257,18 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ListarClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ListarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ReporteValorE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +278,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ReporteValorE, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(380, Short.MAX_VALUE))
         );
 
@@ -316,10 +324,10 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         visualizacionActual("ListarClientes");
     }//GEN-LAST:event_ListarClientesMouseClicked
 
-    private void label3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label3MouseClicked
+    private void ReporteValorEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReporteValorEMouseClicked
         cambioVisualizacion();
-        visualizacionActual("otraFuncion2");
-    }//GEN-LAST:event_label3MouseClicked
+        visualizacionActual("ReporteValorE");
+    }//GEN-LAST:event_ReporteValorEMouseClicked
 
     private void lListarUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lListarUsuariosMouseClicked
         cambioVisualizacion();
@@ -342,8 +350,8 @@ public class PantallaSecretaria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel ListarClientes;
+    public javax.swing.JLabel ReporteValorE;
     public javax.swing.JPanel contenedor;
     public javax.swing.JLabel lListarUsuarios;
-    public javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables
 }

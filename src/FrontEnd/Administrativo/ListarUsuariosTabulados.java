@@ -151,6 +151,7 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
         jbPrueba.setForeground(new java.awt.Color(0, 153, 102));
         jbPrueba.setText("Generar  reporte PDF");
         jbPrueba.setToolTipText("");
+        jbPrueba.setActionCommand("Generar  reporte totales");
         jbPrueba.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jbPruebaMouseClicked(evt);
@@ -185,7 +186,7 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(278, 278, 278)
+                .addGap(281, 281, 281)
                 .addComponent(jbPrueba)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -203,9 +204,9 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bCargarSedes))))
-                .addGap(8, 8, 8)
+                .addGap(13, 13, 13)
                 .addComponent(jbPrueba)
-                .addGap(65, 65, 65))
+                .addGap(60, 60, 60))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -380,16 +381,16 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
             String ruta = System.getProperty("user.home");
             //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
             try{
-                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Prueba.pdf"));
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Usuarios.pdf"));
                 rutaCompleta = ruta + "/Desktop/Reporte_Prueba.pdf";
             } catch( DocumentException | FileNotFoundException ex1 ){
                 try{
-                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Usuarios.pdf"));
                 rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
                 } catch( DocumentException | FileNotFoundException ex2 ){
                     try{
-                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
-                        rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
+                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Usuarios.pdf"));
+                        rutaCompleta = ruta + "/Reporte_Usuarios.pdf";
                     } catch( DocumentException | FileNotFoundException ex3 ){}
                 }
             }
