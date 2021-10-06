@@ -332,6 +332,9 @@ public class ModificarSede extends javax.swing.JPanel {
         for(int i=0; i< listaDeIds.length ;i++){
             jcbSedes.addItem(listaDeIds[i] );
         }
+        
+        areaSedes.setText( "Id\tNombre\tDirección\t\tTeléfono\n\n" );
+        areaSedes.append(sede.listarSedes() );
     }//GEN-LAST:event_bCargarSedesMouseClicked
 
     private void jtfComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfComunaActionPerformed

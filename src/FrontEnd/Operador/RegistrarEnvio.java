@@ -790,6 +790,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         // TODO add your handling code here:
         //new PantallaGeneralGerente().setVisible(true);
         //this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_CancelarMouseClicked
 
     private void CancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseEntered
