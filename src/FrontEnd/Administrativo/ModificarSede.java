@@ -28,8 +28,9 @@ public class ModificarSede extends javax.swing.JPanel {
      */
     public ModificarSede() {
         initComponents();
-
-        areaSedes.setText( sede.listarSedes() );
+        
+        areaSedes.setText( "Id\tNombre\tDirección\t\tTeléfono\n\n" );
+        areaSedes.append(sede.listarSedes() );
     }
     
     public boolean validador(){
