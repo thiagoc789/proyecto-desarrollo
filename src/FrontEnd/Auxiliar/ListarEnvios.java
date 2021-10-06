@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,12 +23,13 @@ import javax.swing.JOptionPane;
 public class ListarEnvios extends javax.swing.JPanel {
 
     String id_usuarioAux;
+
     /**
      * Creates new form ListarEnvios
      */
     public ListarEnvios(String id_usuario) {
         initComponents();
-         id_usuarioAux = id_usuario;
+        id_usuarioAux = id_usuario;
 
     }
 
@@ -50,15 +52,23 @@ public class ListarEnvios extends javax.swing.JPanel {
 
         jTbl_enviosT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id_auxiliare", "id_envio", "direccion", "cedula_cliente", "estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTbl_enviosT);
 
         btnFinalizarBusqueda.setBackground(new java.awt.Color(0, 153, 102));
@@ -144,8 +154,26 @@ public class ListarEnvios extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarBusquedaMouseClicked
-        // TODO add your handling code here:
-        //Usuarios listaUsuarios = new Usuarios();
+        ConexionBD con = new ConexionBD();
+        String sql = "";
+        java.sql.Connection conexion = con.getConexion();
+        Statement stmt;
+
+        try {
+            conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
+
+            stmt = conexion.createStatement();
+            sql = "UPDATE envios e SET estado = 'entregado' "
+                    + "WHEREe e.id_auxiliare like \'" + id_usuarioAux + "\'";
+
+            stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarEnvios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        jTbl_enviosT.setModel(new DefaultTableModel());
+        JOptionPane.showMessageDialog(null, "Inventario Actualizado");
+
 
     }//GEN-LAST:event_btnFinalizarBusquedaMouseClicked
 
@@ -200,7 +228,7 @@ public class ListarEnvios extends javax.swing.JPanel {
                 modelo.addRow(registro);
 
             }
-            JOptionPane.showMessageDialog(null, id_usuarioAux );
+
             jTbl_enviosT.setModel(modelo);
 
             jTbl_enviosT.setVisible(true);
@@ -217,7 +245,7 @@ public class ListarEnvios extends javax.swing.JPanel {
     }//GEN-LAST:event_listarTotalesMouseEntered
 
     private void listarTotalesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarTotalesMouseExited
-       listarTotales.setForeground(Color.white);
+        listarTotales.setForeground(Color.white);
     }//GEN-LAST:event_listarTotalesMouseExited
 
 
