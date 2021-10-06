@@ -6,8 +6,16 @@
 package FrontEnd.Administrativo;
 
 import BackEnd.ConexionBD;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+
+import BackEnd.ConexionBD;
 import BackEnd.Sedes;
+import com.itextpdf.text.Document;
 import java.awt.Color;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import javax.swing.table.DefaultTableModel;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -45,6 +53,7 @@ public class ListarClientes extends javax.swing.JPanel {
         jTbl_clientes = new javax.swing.JTable();
         jcbSedes = new javax.swing.JComboBox<>();
         bCargarSedes = new javax.swing.JButton();
+        btn_pdf_cln = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -119,6 +128,22 @@ public class ListarClientes extends javax.swing.JPanel {
             }
         });
 
+        btn_pdf_cln.setBackground(new java.awt.Color(255, 255, 255));
+        btn_pdf_cln.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_pdf_cln.setForeground(new java.awt.Color(0, 153, 102));
+        btn_pdf_cln.setText("Generar  reporte PDF");
+        btn_pdf_cln.setToolTipText("");
+        btn_pdf_cln.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_pdf_clnMouseClicked(evt);
+            }
+        });
+        btn_pdf_cln.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pdf_clnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -141,6 +166,10 @@ public class ListarClientes extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(btn_pdf_cln)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +185,9 @@ public class ListarClientes extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(bCargarSedes))))
-                .addGap(93, 93, 93))
+                .addGap(42, 42, 42)
+                .addComponent(btn_pdf_cln)
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -216,7 +247,7 @@ public class ListarClientes extends javax.swing.JPanel {
                 registro[2] = rstm.getString(3);
                 registro[3] = rstm.getString(4);
                 registro[4] = rstm.getString(5);
-           
+
                 modelo.addRow(registro);
             }
             jTbl_clientes.setVisible(true);
@@ -239,8 +270,8 @@ public class ListarClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_listarClientesTotalesMouseExited
 
     private void listarPorSedeClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarPorSedeClientesMouseClicked
-/*
-        jTbl_clientes.setModel(new DefaultTableModel());
+       
+       /* jTbl_clientes.setModel(new DefaultTableModel());
 
         DefaultTableModel modelo;
         ConexionBD con = new ConexionBD();
@@ -258,7 +289,7 @@ public class ListarClientes extends javax.swing.JPanel {
             Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        sql = "select * from clientes where sede_asignada like\'" + nombreSede + "\'";
+        sql = "select * from clientes, sedes where sede_asignada like\'" + nombreSede + "\'";
 
         modelo = (DefaultTableModel) jTbl_clientes.getModel();
 
@@ -291,6 +322,7 @@ public class ListarClientes extends javax.swing.JPanel {
             Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
         }
 */
+        
     }//GEN-LAST:event_listarPorSedeClientesMouseClicked
 
     private void listarPorSedeClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarPorSedeClientesMouseEntered
@@ -308,8 +340,8 @@ public class ListarClientes extends javax.swing.JPanel {
         String listaDeNombres[] = sede.getNombreSedes().split(":");
 
         jcbSedes.removeAllItems();
-        for(int i=0; i< listaDeNombres.length ;i++){
-            jcbSedes.addItem( listaDeNombres[i] );
+        for (int i = 0; i < listaDeNombres.length; i++) {
+            jcbSedes.addItem(listaDeNombres[i]);
         }
         listarPorSedeClientes.setEnabled(true);
         listarPorSedeClientes.setBackground(new Color(0, 153, 102));
@@ -317,9 +349,88 @@ public class ListarClientes extends javax.swing.JPanel {
         //(0, 153, 102)
     }//GEN-LAST:event_bCargarSedesMouseClicked
 
+    private void btn_pdf_clnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pdf_clnMouseClicked
+        Document documento = new Document();
+
+        String rutaCompleta = "";
+
+        try {
+            String ruta = System.getProperty("user.home");
+            //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
+            try {
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Prueba.pdf"));
+                rutaCompleta = ruta + "/Desktop/Reporte_Prueba.pdf";
+            } catch (DocumentException | FileNotFoundException ex1) {
+                try {
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
+                    rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
+                } catch (DocumentException | FileNotFoundException ex2) {
+                    try {
+                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_Prueba.pdf"));
+                        rutaCompleta = ruta + "/Escritorio/Reporte_Prueba.pdf";
+                    } catch (DocumentException | FileNotFoundException ex3) {
+                    }
+                }
+            }
+
+            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
+            documento.open();
+
+            PdfPTable tabla = new PdfPTable(4);
+            tabla.addCell("Cedula");
+            tabla.addCell("Nombre");
+            tabla.addCell("Dirección");
+            tabla.addCell("Comuna");
+            tabla.addCell("Id Sede");
+
+            try {
+                ConexionBD con = new ConexionBD();
+                java.sql.Connection conexion = con.getConexion();
+                java.sql.Statement stmt = con.getStm();
+                conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
+
+                stmt = conexion.createStatement();
+
+                String sql = "SELECT * FROM sedes";
+
+                ResultSet rstm = stmt.executeQuery(sql);
+
+                while (rstm.next()) {
+                    tabla.addCell(rstm.getString("id"));
+                    tabla.addCell(rstm.getString("nombre"));
+                    tabla.addCell(rstm.getString("direccion"));
+                    tabla.addCell(rstm.getString("telefono"));
+                }
+                Paragraph titulo = new Paragraph("Tabla sedes\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLACK));
+
+                String texto = "Señores: Cliente\n"
+                        + "Les presentamos la lista de las sedes\n\n";
+                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.BLACK));
+
+                documento.add(titulo);
+
+                documento.add(parrafo);
+
+                documento.add(tabla);
+
+                conexion.close();
+
+            } catch (DocumentException | SQLException e) {
+            }
+            documento.close();
+            JOptionPane.showMessageDialog(null, "PDF Creado. Se guardó en " + rutaCompleta);
+        } catch (HeadlessException ex) {
+        }
+    }//GEN-LAST:event_btn_pdf_clnMouseClicked
+
+    private void btn_pdf_clnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pdf_clnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_pdf_clnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bCargarSedes;
+    private javax.swing.JButton btn_pdf_cln;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTbl_clientes;

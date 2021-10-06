@@ -8,9 +8,7 @@ package FrontEnd.Auxiliar;
 import BackEnd.ConexionBD;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import java.awt.HeadlessException;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
