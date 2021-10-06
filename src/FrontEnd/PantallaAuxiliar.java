@@ -27,8 +27,6 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
 
     public void cambioVisualizacion() {
         jlListarEnviosDia.setEnabled(true);
-        //label2.setEnabled(true);
-        //label3.setEnabled(true);
 
         panelListarEnviosDia.setVisible(false);
     }
