@@ -38,7 +38,7 @@ public class Envios {
             sql = "CREATE TABLE IF NOT EXISTS envios (id_envio SERIAL, cedula_cliente INT, metodo_Pago VARCHAR(50), valor_Envios INT, valor_Paquetes INT, valor_Impuestos INT, valor_Seguros INT, numero_Envios int, estado VARCHAR(15));";
             stmt.executeUpdate(sql);
 
-            sql = "INSERT INTO envios(cedula_cliente, metodo_Pago, valor_Envios, valor_Paquetes, valor_Impuestos, valor_Seguros, numero_Envios, estado) VALUES("
+            sql = "INSERT INTO envios(cedula_cliente, metodo_Pago, valor_Envios, valor_Paquetes, valor_Impuestos, valor_Seguros, numero_Envios, estado, id_auxiliare) VALUES("
                     + "\'" + cedula_cliente + "\',"
                     + "\'" + metodoPago + "\',"
                     + "\'" + valorEnvios + "\',"
@@ -46,7 +46,8 @@ public class Envios {
                     + "\'" + valorImpuestos + "\',"
                     + "\'" + valorSeguros + "\',"
                     + "\'" + numeroEnvios + "\',"
-                    + "\'pendiente\'"
+                    + "\'pendiente\',"
+                    + "\'7766\'"
                     + ");";
             stmt.executeUpdate(sql);
 
