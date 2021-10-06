@@ -328,15 +328,17 @@ public String hallarSedeCercana(int comunaCliente){
             if ( seAsignoSede ){
                 if ( validador() ){
                     if( !( cliente.cedulaExiste( jtfCedula.getText() ) ) ){
-                        int cedula = Integer.parseInt(jtfCedula.getText());
                         int comuna = Integer.parseInt(jtfComuna.getText());
-                        cliente.registrarClienteNuevo(cedula, jtfNombre.getText(), jtfDireccion.getText(), comuna, sedeAsignadaAlCliente);
+                        cliente.registrarClienteNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfDireccion.getText(), comuna, sedeAsignadaAlCliente);
                         jtfCedula.setText("");
                         jtfNombre.setText("");
                         jtfDireccion.setText("");
                         jtfComuna.setText("");
                         lSedeAsignada.setText("");
                         JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                        jtfComuna.setEnabled(true);
+                        seAsignoSede = false;
+                        lRegistrarCliente.setEnabled(false);
                     }
                     else
                         JOptionPane.showMessageDialog(null, "La cédula ya existe");

@@ -10,6 +10,7 @@ import BackEnd.ConexionBD;
 import BackEnd.Envios;
 import FrontEnd.PantallaGerente;
 import BackEnd.Sedes;
+import BackEnd.Tarjetas;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -46,10 +47,13 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     int valorSeguroSuma = 0;
     int conteoPaquetes = 0;
     int id_envio = 0;
-    private String cedula_cliente;
-    private String nombre_cliente;
-    private String direccion_cliente;
-    private String comuna_cliente;
+    
+    int costoTotal = 0;
+    
+    private String cedula_cliente = "";
+    private String nombre_cliente = "";
+    private String direccion_cliente = "";
+    private String comuna_cliente = "";
     private String descripcion_paquete = "";
     private String sedeAsignadaCliente = "";
     
@@ -88,7 +92,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 jtfValorImpuesto.setText("");
                 validacion = false;
             }
-            if (!(jtfValorSeguro.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+            if (jtfValorSeguro.getText().length()>0 && !(jtfValorSeguro.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
                 respuesta = respuesta + "\n   - Verificar el valor del seguro";
                 jtfValorSeguro.setText("");
                 validacion = false;
@@ -103,6 +107,20 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 respuesta = respuesta + "\n   - Verificar el número de tarjeta";
                 jtfTarjeta.setText("");
                 validacion = false;
+            } else{
+                // VALIDAR LAS TARJETAS
+                Tarjetas unaTarjeta = new Tarjetas();
+
+                if( unaTarjeta.tarjetaExiste( jtfTarjeta.getText() ) ){
+                    //descontarDeTarjeta
+                    if( !unaTarjeta.descontarDeTarjeta(jtfTarjeta.getText(), costoTotal) ){
+                        validacion = false;
+                    }
+                }
+                else{
+                    respuesta = respuesta + "\n   - La tarjeta no existe";
+                    validacion = false;
+                }
             }
         }
 
@@ -112,10 +130,13 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         return validacion;
     }
     
+    
+    
     public void cargarDatosCliente(){
+        JOptionPane.showMessageDialog(null, "método agregarUnPaquete()");
         //Clientes cliente = new Clientes();
         try {
-            if (true){
+            JOptionPane.showMessageDialog(null, "método agregarUnPaquete() dentro del try");
                 cliente.traerDatosCliente(jtfCedula.getText());
 
                 cedula_cliente = cliente.getCedula_cliente();
@@ -131,13 +152,48 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 labelComuna.setText("Comuna " + comuna_cliente);
 
                 jtfCedula.setEnabled(false);
-            }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    public void reiniciarVariables(){
+        jtfCedula.setEnabled(true);
+        jtfCedula.setText("");
+        
+        valorSuma = 0;
+        valorPaqueteSuma = 0;
+        valorImpuestoSuma = 0;
+        valorSeguroSuma = 0;
+        conteoPaquetes = 0;
+        id_envio = 0;
+        cedula_cliente = "";
+        nombre_cliente = "";
+        direccion_cliente = "";
+        comuna_cliente = "";
+        descripcion_paquete = "";
+        sedeAsignadaCliente = "";
+        
+        labelCedula.setText("Cédula");
+        labelNombre.setText("Nombre");
+        labelDireccion.setText("Dirección");
+        labelSedeAsignada.setText("Sede asignada");
+        labelComuna.setText("Comuna");
+
+        totalResumen.setText("0");
+        numeroPaquetesResumen.setText("0");
+        valorSeguroResumen.setText("0");
+        valorImpuestoResumen.setText("0");
+        valorPaqueteResumen.setText("0");
+        valorEnvioResumen.setText("0");
+        
+        metodoDePago.setSelectedIndex(0);
+        
+        costoTotal = 0;
+    }
+    
     public void agregarUnPaquete(){
+        JOptionPane.showMessageDialog(null, "metodo agregarUnPaquete()");
         //Metodo De Pago
             conteoPaquetes++;
             numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
@@ -161,13 +217,16 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             valorImpuestoResumen.setText(Integer.toString(valorImpuestoSuma));
 
             //Valor Seguro
-            int auxiliarSeguro = Integer.parseInt(jtfValorSeguro.getText());
+            int auxiliarSeguro = 0;
+            if(jtfValorSeguro.getText().length() >0)
+                auxiliarSeguro = Integer.parseInt(jtfValorSeguro.getText());
             valorSeguroSuma = valorSeguroSuma + auxiliarSeguro;
             valorSeguroResumen.setText(Integer.toString(valorSeguroSuma));
 
             //Total
             int auxiliarTotal = valorSuma + valorPaqueteSuma + valorImpuestoSuma + valorSeguroSuma;
             totalResumen.setText(Integer.toString(auxiliarTotal));
+            costoTotal = auxiliarTotal;
         
             descripcion_paquete = descripcion_paquete + "\n" + jtfDescripcion.getText();
             
@@ -465,7 +524,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         totalResumen.setText("0");
 
         labelCedula.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        labelCedula.setText("Cedula");
+        labelCedula.setText("Cédula");
 
         labelNombre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         labelNombre.setText("Nombre");
@@ -474,7 +533,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         labelComuna.setText("Comuna");
 
         labelDireccion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        labelDireccion.setText("Direccion");
+        labelDireccion.setText("Dirección");
 
         labelSedeAsignada.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         labelSedeAsignada.setText("Sede asignada");
@@ -486,52 +545,41 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(labelComuna)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCedula)
-                            .addComponent(labelNombre)
-                            .addComponent(labelDireccion)
-                            .addComponent(labelSedeAsignada))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                    .addComponent(labelComuna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelSedeAsignada, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                    .addComponent(labelDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(metodoPagoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel23)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel21)
-                                            .addComponent(jLabel22)
-                                            .addComponent(jLabel24))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(valorEnvioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(valorSeguroResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel24))
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(valorSeguroResumen, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                                    .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(valorEnvioResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totalResumen))
+                                .addComponent(totalResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel25)
                                 .addGap(18, 18, 18)
-                                .addComponent(numeroPaquetesResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(174, 174, 174))))
+                                .addComponent(numeroPaquetesResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(metodoPagoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,11 +654,6 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Cedula Del Cliente");
 
-        jtfCedula.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfCedulaFocusLost(evt);
-            }
-        });
         jtfCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfCedulaActionPerformed(evt);
@@ -762,7 +805,9 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private void botonAgregarPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarPaqueteMouseClicked
 
         if( validador("paquete") ){
+            JOptionPane.showMessageDialog(null, "Validó paquete");
             if( cliente.cedulaExiste( jtfCedula.getText() ) ){
+                JOptionPane.showMessageDialog(null, "Cliente si existe");
                 if( cedula_cliente.length() == 0 )
                     cargarDatosCliente();
             
@@ -795,21 +840,22 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         
         try {
             if (validador("registro") && conteoPaquetes>0 ) {
-                String finalNumber = "";
-                id_envio = (int) (10000 * Math.random());
-                finalNumber = "" + id_envio;
-                for (int i = finalNumber.length(); i < 4; i++) {
-                    finalNumber = "0" + finalNumber;
-                }
-        
-                id_envio = Integer.parseInt(finalNumber);
+//                String finalNumber = "";
+//                id_envio = (int) (10000 * Math.random());
+//                finalNumber = "" + id_envio;
+//                for (int i = finalNumber.length(); i < 4; i++) {
+//                    finalNumber = "0" + finalNumber;
+//                }
+//        
+//                id_envio = Integer.parseInt(finalNumber);
                 Envios envio = new Envios();
                 
                 
-                envio.registrarEnvio(id_envio, Integer.parseInt(cedula_cliente), metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
+                envio.registrarEnvio(Integer.parseInt(cedula_cliente), metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
+                id_envio = Integer.parseInt( envio.envioRecienteRegistrado() );
                 JOptionPane.showMessageDialog(null, "Envio #  " +id_envio+ " registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
                 
-                jtfCedula.setEnabled(true);
+                reiniciarVariables();
             }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
@@ -829,6 +875,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         String auxiliar2 = metodoDePago.getItemAt(auxiliar);
         if (auxiliar2.equals("Efectivo")) {
             panelTarjeta.setVisible(false);
+            jtfTarjeta.setText("");
         } else {
             panelTarjeta.setVisible(true);
         }
@@ -838,28 +885,6 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private void jtfTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTarjetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfTarjetaActionPerformed
-
-    private void jtfCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfCedulaFocusLost
-        Clientes cliente = new Clientes();
-        try {
-            cliente.traerDatosCliente(jtfCedula.getText());
-
-            cedula_cliente = cliente.getCedula_cliente();
-            nombre_cliente = cliente.getNombre_cliente();
-            direccion_cliente = cliente.getDireccion_cliente();
-            comuna_cliente = cliente.getComuna_cliente();
-            sedeAsignadaCliente = cliente.getSede_asignada();
-            
-            labelCedula.setText(cedula_cliente);
-            labelNombre.setText(nombre_cliente);
-            labelDireccion.setText(direccion_cliente);
-            labelSedeAsignada.setText("Sede asignada: " + sedeAsignadaCliente);
-            labelComuna.setText("Comuna " + comuna_cliente);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jtfCedulaFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
