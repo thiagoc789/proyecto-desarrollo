@@ -179,6 +179,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         labelDireccion.setText("Dirección");
         labelSedeAsignada.setText("Sede asignada");
         labelComuna.setText("Comuna");
+        metodoPagoResumen.setText("Efectivo");
 
         totalResumen.setText("0");
         numeroPaquetesResumen.setText("0");
@@ -228,7 +229,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             totalResumen.setText(Integer.toString(auxiliarTotal));
             costoTotal = auxiliarTotal;
         
-            descripcion_paquete = descripcion_paquete + "\n" + jtfDescripcion.getText();
+            descripcion_paquete = descripcion_paquete + "\n- " + jtfDescripcion.getText();
             
             jtfValorEnvio.setText("");
             jtfValorPaquete.setText("");
@@ -253,11 +254,11 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
                 try {
                     PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Recibo_"+id_envio+".pdf"));
-                    rutaCompleta = ruta + "/Desktop/Recibo"+id_envio+"_Prueba.pdf";
+                    rutaCompleta = ruta + "/Desktop/Recibo_"+id_envio+".pdf";
                 } catch (DocumentException | FileNotFoundException ex1) {
                     try {
                         PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Recibo_"+id_envio+".pdf"));
-                        rutaCompleta = ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf";
+                        rutaCompleta = ruta + "/Escritorio/Recibo_"+id_envio+".pdf";
                     } catch (DocumentException | FileNotFoundException ex2) {
                         try {
                             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Recibo_"+id_envio+".pdf"));
@@ -287,7 +288,10 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                         + "Valor Paquetes: " + valorPaqueteResumen.getText() + "\n"
                         + "Valor Impuestos: " + valorImpuestoResumen.getText() + "\n"
                         + "Valor Seguros: " + valorSeguroResumen.getText() + "\n"
-                        + "Numero De Paquetes: " + numeroPaquetesResumen.getText() + "\n";
+                        + "Numero De Paquetes: " + numeroPaquetesResumen.getText() + "\n"
+                        + "Descripción de los paquetes (aportada por el cliente):\n" + descripcion_paquete + "\n";
+                
+                        //descripcion_paquete
                 Paragraph parrafo2 = new Paragraph(texto2, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
                 Paragraph parrafo3 = new Paragraph("Empresa De Servicios Flash", FontFactory.getFont("Segoe Script", 12, Font.BOLD, BaseColor.LIGHT_GRAY));
 
@@ -300,7 +304,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 documento.add(parrafo3);
 
                 documento.close();
-                JOptionPane.showMessageDialog(null, "Recibo # " + id_envio + " Creado. Se guardó en " + rutaCompleta);
+                JOptionPane.showMessageDialog(null, "Recibo #" + id_envio + " creado. Se guardó en:\n" + rutaCompleta);
             } catch (HeadlessException ex) {
                 //JOptionPane.showMessageDialog(null, "Aquí 2");
             } catch (DocumentException ex) {
@@ -812,7 +816,6 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                     cargarDatosCliente();
             
                 agregarUnPaquete();
-                
                 Registrar.setEnabled(true);
             }
             else
@@ -840,29 +843,18 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         
         try {
             if (validador("registro") && conteoPaquetes>0 ) {
-//                String finalNumber = "";
-//                id_envio = (int) (10000 * Math.random());
-//                finalNumber = "" + id_envio;
-//                for (int i = finalNumber.length(); i < 4; i++) {
-//                    finalNumber = "0" + finalNumber;
-//                }
-//        
-//                id_envio = Integer.parseInt(finalNumber);
                 Envios envio = new Envios();
-                
                 
                 envio.registrarEnvio(Integer.parseInt(cedula_cliente), metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
                 id_envio = Integer.parseInt( envio.envioRecienteRegistrado() );
                 JOptionPane.showMessageDialog(null, "Envio #  " +id_envio+ " registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
                 
+                generarRecibo();
                 reiniciarVariables();
             }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        generarRecibo();
-
     }//GEN-LAST:event_RegistrarMouseClicked
 
     private void jtfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCedulaActionPerformed
