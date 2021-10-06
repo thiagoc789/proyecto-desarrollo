@@ -344,9 +344,10 @@ public class ModificarUsuario extends javax.swing.JPanel {
                     jtfTelefono.setText("");
                     jtfCorreo.setText("");
                     jcbSede.removeAllItems();
-                    jcbSede.setSelectedIndex(0);
+                    //jcbSede.setSelectedIndex(0);
                     jcbCargo.setSelectedIndex(0);
                     jcbEstado.setSelectedIndex(0);
+                    jtfCedula.setText("");
                 }else{
                     jtfCedula.setText("");
                     JOptionPane.showMessageDialog(null, "No existe usuario con esa cédula");
