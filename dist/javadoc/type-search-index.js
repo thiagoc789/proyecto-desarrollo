@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"BackEnd","l":"ConexionBD"},{"p":"FrontEnd","l":"Main"},{"p":"FrontEnd","l":"PantallaGeneralGerente"},{"p":"FrontEnd","l":"RegistrarSede"},{"p":"BackEnd","l":"RegistrarSedes"},{"p":"BackEnd","l":"RegistrarUsuario"},{"p":"FrontEnd","l":"UsuarioNuevo"}]
