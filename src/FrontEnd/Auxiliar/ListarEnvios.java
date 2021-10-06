@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -163,6 +164,7 @@ public class ListarEnvios extends javax.swing.JPanel {
 
     private void listarTotalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarTotalesMouseClicked
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, evt);
          jTbl_enviosT.setModel(new DefaultTableModel());
         DefaultTableModel modelo;
         ConexionBD con = new ConexionBD();
