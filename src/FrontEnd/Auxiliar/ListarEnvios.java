@@ -176,7 +176,8 @@ public class ListarEnvios extends javax.swing.JPanel {
             Logger.getLogger(ListarEnvios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String[] nmClm = {"metodo de pago", "valor envios", "valor seguros", "numero envios", "estado", "direccion", "sede", "ID"};
+        //String[] nmClm = {"metodo de pago", "valor envios", "valor seguros", "numero envios", "estado", "direccion", "sede", "ID"};
+        String[] nmClm = {"Id", "Cédula", "valor seguros", "numero envios", "estado", "direccion", "sede", "ID"};
 
         sql = "SELECT * FROM envios";
 
