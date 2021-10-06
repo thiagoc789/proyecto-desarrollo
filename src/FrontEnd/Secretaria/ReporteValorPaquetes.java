@@ -60,7 +60,7 @@ public class ReporteValorPaquetes extends javax.swing.JPanel {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(java.awt.Color.gray);
         jLabel2.setText("REPORTE DEL VALOR DE LOS PAQUETES ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -112,10 +112,10 @@ public class ReporteValorPaquetes extends javax.swing.JPanel {
         });
 
         btnPagosEfectivo.setBackground(new java.awt.Color(0, 153, 102));
-        btnPagosEfectivo.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        btnPagosEfectivo.setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
         btnPagosEfectivo.setForeground(new java.awt.Color(255, 255, 255));
         btnPagosEfectivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnPagosEfectivo.setText("Usuarios por sede");
+        btnPagosEfectivo.setText("PAGOS CON EFECTIVO");
         btnPagosEfectivo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPagosEfectivo.setOpaque(true);
         btnPagosEfectivo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,11 +140,11 @@ public class ReporteValorPaquetes extends javax.swing.JPanel {
                         .addGap(126, 126, 126)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addGap(57, 57, 57)
                                     .addComponent(jtxt_valorTRT, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(33, 33, 33)
                                     .addComponent(btnPtarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel3))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
