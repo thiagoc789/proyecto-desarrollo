@@ -1,0 +1,40 @@
+
+JOptionPane.showMessageDialog(null, jcbEstado.getItemAt(jcbEstado.getSelectedIndex()) )
+----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- 
+Validar si son números
+    (jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?"))
+Validar si son solo números positivos
+    (jtfCedula.getText().matches("[+]?\\d*(\\.\\d+)?"))
+
+if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
+            jtfCedula.setText("");
+            validacion = false;
+        }
+----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+git add . && git commit -m "Actualizado: $(date)" && git push
+----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+Revisadas:
+- IngresoUsuario.java
+- Main.java
+- PantallaAuxiliar.java     (solo ventana)
+- PantallaGerente.java      (solo ventana)
+- PantallaOperador.java     (solo ventana)
+- PantallaSecretaria.java   (solo ventana)
+- PrimerIngreso.java
+- SesionBloqueada.java
+----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+Tamaño contenedor
+770 x 520
+
+
+
+----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+- ¿Qué comuna le asigno a una nueva sede que se va ha crear?
+----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+- Que Gerente no pueda cambiar su cargo
+----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+Cosas por hacer:
+- Pago con tarjetas
+- Comunas para usuarios y la sede
