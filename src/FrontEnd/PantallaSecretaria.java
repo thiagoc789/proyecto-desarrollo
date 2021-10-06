@@ -11,41 +11,43 @@ public class PantallaSecretaria extends javax.swing.JFrame {
 
     private int x;
     private int y;
-    
+
     String idUsuarioSecre;
-    
+
     ListarUsuariosTabulados panelListarUsuarios = new ListarUsuariosTabulados();
-    
-     public PantallaSecretaria(String idUsuario) {
+    ListarClientes panelListarClientes = new ListarClientes();
+
+    public PantallaSecretaria(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
         this.idUsuarioSecre = idUsuario;
     }
-    
-    public void cambioVisualizacion(){
-        label2.setEnabled(true);
-        lListarUsuarios.setEnabled(true);
-        label3.setEnabled(true);
 
+    public void cambioVisualizacion() {
+        ListarClientes.setEnabled(true);
+        lListarUsuarios.setEnabled(true);
+        //label3.setEnabled(true);
+
+        panelListarClientes.setVisible(false);
         panelListarUsuarios.setVisible(false);
     }
-    
-    public void visualizacionActual(String panel){
-        
-        if(panel.compareTo("listarUsuarios") == 0){
+
+    public void visualizacionActual(String panel) {
+
+        if (panel.compareTo("listarUsuarios") == 0) {
             panelListarUsuarios.setVisible(true);
-            contenedor.add( panelListarUsuarios );
+            contenedor.add(panelListarUsuarios);
             lListarUsuarios.setEnabled(false);
-        }else if(panel.compareTo("actualizarSede") == 0){
-//            actualizarSede.setVisible(true);
-//            contenedor.add(actualizarSede);
-//            label2.setEnabled(false);
-        }else if(panel.compareTo("nuevoUsuario") == 0){
+        } else if (panel.compareTo("ListarClientes") == 0) {
+            panelListarClientes.setVisible(true);
+            contenedor.add(panelListarClientes);
+            ListarClientes.setEnabled(false);
+        } else if (panel.compareTo("nuevoUsuario") == 0) {
 //            nuevoUsuario.setVisible(true);
 //            contenedor.add(nuevoUsuario);
 //            label3.setEnabled(false);
         }
-        
+
         contenedor.validate();
         contenedor.setVisible(true);
     }
@@ -64,7 +66,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
         label3 = new javax.swing.JLabel();
-        label2 = new javax.swing.JLabel();
+        ListarClientes = new javax.swing.JLabel();
         lListarUsuarios = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
@@ -230,12 +232,12 @@ public class PantallaSecretaria extends javax.swing.JFrame {
             }
         });
 
-        label2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        label2.setForeground(new java.awt.Color(102, 102, 102));
-        label2.setText("-Función2");
-        label2.addMouseListener(new java.awt.event.MouseAdapter() {
+        ListarClientes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        ListarClientes.setForeground(new java.awt.Color(102, 102, 102));
+        ListarClientes.setText("-Listar Clientes ");
+        ListarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label2MouseClicked(evt);
+                ListarClientesMouseClicked(evt);
             }
         });
 
@@ -256,7 +258,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ListarClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lListarUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -266,7 +268,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(lListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ListarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(380, Short.MAX_VALUE))
@@ -309,10 +311,10 @@ public class PantallaSecretaria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
+    private void ListarClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarClientesMouseClicked
         cambioVisualizacion();
-        visualizacionActual("otraFuncion1");
-    }//GEN-LAST:event_label2MouseClicked
+        visualizacionActual("ListarClientes");
+    }//GEN-LAST:event_ListarClientesMouseClicked
 
     private void label3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label3MouseClicked
         cambioVisualizacion();
@@ -330,7 +332,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     }//GEN-LAST:event_lCerrarSesionMouseClicked
 
     private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
-        new SesionBloqueada( idUsuarioSecre ).setVisible(true);
+        new SesionBloqueada(idUsuarioSecre).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlBloquearMouseClicked
 
@@ -339,9 +341,9 @@ public class PantallaSecretaria extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel ListarClientes;
     public javax.swing.JPanel contenedor;
     public javax.swing.JLabel lListarUsuarios;
-    public javax.swing.JLabel label2;
     public javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,15 @@
 package FrontEnd.Auxiliar;
 
 import BackEnd.ConexionBD;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.awt.Color;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -115,6 +123,11 @@ public class ListarEnvios extends javax.swing.JPanel {
         btn_rpts_aux.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btn_rpts_aux.setForeground(new java.awt.Color(0, 153, 102));
         btn_rpts_aux.setText("Generar PDF ");
+        btn_rpts_aux.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_rpts_auxMouseClicked(evt);
+            }
+        });
         btn_rpts_aux.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_rpts_auxActionPerformed(evt);
@@ -197,9 +210,9 @@ public class ListarEnvios extends javax.swing.JPanel {
                     + "WHERE e.id_auxiliare like \'" + id_usuarioAux + "\'";
 
             stmt.executeUpdate(sql);
-           
+
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Ya ha realizado sus entregas");
+            JOptionPane.showMessageDialog(null, "Ya ha realizado sus entregas");
         }
 
         jTbl_enviosT.setModel(new DefaultTableModel());
@@ -282,6 +295,82 @@ public class ListarEnvios extends javax.swing.JPanel {
     private void btn_rpts_auxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rpts_auxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_rpts_auxActionPerformed
+
+    private void btn_rpts_auxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_rpts_auxMouseClicked
+        Document documento = new Document();
+
+        String rutaCompleta = "";
+
+        try {
+            String ruta = System.getProperty("user.home");
+            //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
+            try {
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_PruebaAux.pdf"));
+                rutaCompleta = ruta + "/Desktop/Reporte_PruebaAux.pdf";
+            } catch (DocumentException | FileNotFoundException ex1) {
+                try {
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_PruebaAux.pdf"));
+                    rutaCompleta = ruta + "/Escritorio/Reporte_PruebaAux.pdf";
+                } catch (DocumentException | FileNotFoundException ex2) {
+                    try {
+                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Reporte_PruebaAux.pdf"));
+                        rutaCompleta = ruta + "/Escritorio/Reporte_PruebaAux.pdf";
+                    } catch (DocumentException | FileNotFoundException ex3) {
+                    }
+                }
+            }
+
+            //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
+            documento.open();
+
+            PdfPTable tabla = new PdfPTable(5);
+            tabla.addCell("Id del Auxiliar");
+            tabla.addCell("Id del envio ");
+            tabla.addCell("Dirección del cliente");
+            tabla.addCell("Cedula del cliente");
+            tabla.addCell("Estado del envio");
+
+            try {
+                ConexionBD con = new ConexionBD();
+                java.sql.Connection conexion = con.getConexion();
+                java.sql.Statement stmt = con.getStm();
+                conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
+
+                stmt = conexion.createStatement();
+
+                String sql = "SELECT id_auxiliare, id_envio, direccion, cedula_cliente, estado FROM envios, clientes WHERE \'" + id_usuarioAux + "\' like id_auxiliare and estado = 'pendiente' and cedula_cliente like cedula;";
+
+                ResultSet rstm = stmt.executeQuery(sql);
+
+                while (rstm.next()) {
+                    tabla.addCell(rstm.getString("id_auxiliare"));
+                    tabla.addCell(rstm.getString("id_envio"));
+                    tabla.addCell(rstm.getString("direccion"));
+                    tabla.addCell(rstm.getString("cedula_cliente"));
+                    tabla.addCell(rstm.getString("estado"));
+                }
+                Paragraph titulo = new Paragraph("Tabla Entregas\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLACK));
+
+                String texto = "Señor(a): Auxiliar\n"
+                        + "Les presentamos la lista de los envíos\n\n";
+                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.BLACK));
+
+                documento.add(titulo);
+
+                documento.add(parrafo);
+
+                documento.add(tabla);
+
+                conexion.close();
+
+            } catch (DocumentException | SQLException e) {
+            }
+            documento.close();
+            JOptionPane.showMessageDialog(null, "PDF Creado. Se guardó en " + rutaCompleta);
+        } catch (HeadlessException ex) {
+
+        }
+    }//GEN-LAST:event_btn_rpts_auxMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

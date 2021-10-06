@@ -216,6 +216,7 @@
             <Property name="text" type="java.lang.String" value="Generar PDF "/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_rpts_auxMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_rpts_auxActionPerformed"/>
           </Events>
         </Component>

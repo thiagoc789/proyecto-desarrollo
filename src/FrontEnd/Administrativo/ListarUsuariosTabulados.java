@@ -6,16 +6,11 @@
 package FrontEnd.Administrativo;
 
 import BackEnd.ConexionBD;
-import FrontEnd.PantallaGerente;
+
 import BackEnd.Sedes;
-import BackEnd.Usuarios;
-import FrontEnd.PantallaSecretaria;
-import com.sun.jdi.connect.spi.Connection;
+
 import java.awt.Color;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.beans.Statement;
-import java.sql.ResultSetMetaData;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -442,62 +437,12 @@ public class ListarUsuariosTabulados extends javax.swing.JPanel {
                 conexion.close();
                 
 
-            } catch(DocumentException | SQLException e){
-                JOptionPane.showMessageDialog(null, "Aquí 1");
+            } catch(DocumentException | SQLException e){               
             }
             documento.close();
             JOptionPane.showMessageDialog(null, "PDF Creado. Se guardó en " + rutaCompleta);
         } catch(HeadlessException ex){
-            JOptionPane.showMessageDialog(null, "Aquí 2");
-        }
-        
-        /*
-        ConexionBD con = new ConexionBD();
-        String sql = "";
-        java.sql.Connection conexion = con.getConexion();
-        java.sql.Statement stmt = con.getStm();
-
-        try {
-            conexion = DriverManager.getConnection(con.getUrl(), con.getUser(), con.getPassword());
-        } catch (SQLException ex) {
-            Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        String[] nmClm = {"id", "nombre", "telefono", "contraseña", "cargo", "sede", "estado"};
-
-        sql = "SELECT * FROM usuarios";
-
-        modelo = (DefaultTableModel) jTbl_usuarios.getModel();
-
-        modelo.setColumnIdentifiers(nmClm);
-
-        jTbl_usuarios.setModel(modelo);
-
-        String[] registro = new String[7];
-
-        try {
-            stmt = conexion.createStatement();
-
-            ResultSet rstm = stmt.executeQuery(sql);
-
-            while (rstm.next()) {
-                registro[0] = rstm.getString(1);
-                registro[1] = rstm.getString(2);
-                registro[2] = rstm.getString(3);
-                registro[3] = rstm.getString(4);
-                registro[4] = rstm.getString(5);
-                registro[5] = rstm.getString(6);
-                registro[6] = rstm.getString(7);
-                modelo.addRow(registro);
-            }
-            jTbl_usuarios.setVisible(true);
-
-            conexion.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ListarUsuariosTabulados.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+        }          
     }//GEN-LAST:event_jbPruebaMouseClicked
 
     private void jbPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPruebaActionPerformed
