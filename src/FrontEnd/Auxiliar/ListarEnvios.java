@@ -176,7 +176,7 @@ public class ListarEnvios extends javax.swing.JPanel {
 
         String[] nmClm = {"id_auxiliare", "id_envio", "direccion", "cedula_cliente", "estado"};
 
-        sql = "SELECT id_auxiliare, id_envio, direccion, cedula_cliente, estado FROM envios, clientes WHERE '%" + id_usuarioAux + "%' like id_auxiliare "
+        sql = "SELECT id_auxiliare, id_envio, direccion, cedula_cliente, estado FROM envios, clientes WHERE \'" + id_usuarioAux + "\' like id_auxiliare "
                 + "and estado = 'pendiente' and cedula_cliente like cedula;";
 
         modelo = (DefaultTableModel) jTbl_enviosT.getModel();
