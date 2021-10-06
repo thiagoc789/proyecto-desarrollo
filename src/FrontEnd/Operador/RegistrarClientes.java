@@ -78,13 +78,12 @@ public String hallarSedeCercana(int comunaCliente){
     
     for(int i=0; i< listaDeSedes.length ;i++){
         if(i%2 == 0){
-            if( Math.abs(Integer.parseInt( listaDeSedes[i]) - comunaCliente) <  distanciaSedeACliente){
+            if( Math.abs( Integer.parseInt(listaDeSedes[i]) - comunaCliente) <  distanciaSedeACliente){
                 distanciaSedeACliente = Math.abs(Integer.parseInt( listaDeSedes[i]) - comunaCliente);
                 sedeCercana = listaDeSedes[i+1];
             }
         }
     }
-
     return sedeCercana;
 }
 

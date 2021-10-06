@@ -103,27 +103,27 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             }
         }
         if( opcionValidacion.compareTo("registro") == 0 ){
-            if (panelTarjeta.isVisible() && ( jtfTarjeta.getText().length() < 1 || !(jtfTarjeta.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ) {
-                respuesta = respuesta + "\n   - Verificar el número de tarjeta";
-                jtfTarjeta.setText("");
-                validacion = false;
-            } else{
-                // VALIDAR LAS TARJETAS
-                Tarjetas unaTarjeta = new Tarjetas();
+            if (metodoDePago.getSelectedIndex()>0 ) {
+                if( jtfTarjeta.getText().length() < 1 || !(jtfTarjeta.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+                    respuesta = respuesta + "\n   - Verificar el número de tarjeta";
+                    jtfTarjeta.setText("");
+                    validacion = false;
+                }else{
+                    Tarjetas unaTarjeta = new Tarjetas();
 
-                if( unaTarjeta.tarjetaExiste( jtfTarjeta.getText() ) ){
-                    //descontarDeTarjeta
-                    if( !unaTarjeta.descontarDeTarjeta(jtfTarjeta.getText(), costoTotal) ){
+                    if( unaTarjeta.tarjetaExiste( jtfTarjeta.getText() ) ){
+                        if( !unaTarjeta.descontarDeTarjeta(jtfTarjeta.getText(), costoTotal) ){
+                            validacion = false;
+                        }
+                    }
+                    else{
+                        respuesta = respuesta + "\n   - La tarjeta no existe";
                         validacion = false;
                     }
                 }
-                else{
-                    respuesta = respuesta + "\n   - La tarjeta no existe";
-                    validacion = false;
-                }
             }
         }
-
+        
         if (!validacion) {
             JOptionPane.showMessageDialog(null, respuesta);
         }
@@ -133,10 +133,10 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     
     
     public void cargarDatosCliente(){
-        JOptionPane.showMessageDialog(null, "método agregarUnPaquete()");
+        //JOptionPane.showMessageDialog(null, "método agregarUnPaquete()");
         //Clientes cliente = new Clientes();
         try {
-            JOptionPane.showMessageDialog(null, "método agregarUnPaquete() dentro del try");
+            //JOptionPane.showMessageDialog(null, "método agregarUnPaquete() dentro del try");
                 cliente.traerDatosCliente(jtfCedula.getText());
 
                 cedula_cliente = cliente.getCedula_cliente();
@@ -194,7 +194,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     }
     
     public void agregarUnPaquete(){
-        JOptionPane.showMessageDialog(null, "metodo agregarUnPaquete()");
+        //JOptionPane.showMessageDialog(null, "metodo agregarUnPaquete()");
         //Metodo De Pago
             conteoPaquetes++;
             numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
@@ -229,7 +229,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             totalResumen.setText(Integer.toString(auxiliarTotal));
             costoTotal = auxiliarTotal;
         
-            descripcion_paquete = descripcion_paquete + "\n- " + jtfDescripcion.getText();
+            descripcion_paquete = descripcion_paquete + "\n  -  " + jtfDescripcion.getText();
             
             jtfValorEnvio.setText("");
             jtfValorPaquete.setText("");
@@ -272,24 +272,24 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 documento.open();
 
                 Paragraph titulo = new Paragraph("Recibo Envio # " + id_envio + "\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.RED));
-                Paragraph total = new Paragraph("Total A Pagar:" + totalResumen.getText() + "\n\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.GREEN));
+                Paragraph total = new Paragraph("Total A Pagar: $" + totalResumen.getText() + "\n\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.GREEN));
                 Paragraph titulo2 = new Paragraph("Datos Del Cliente\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
 
                 String texto = "Cedula: " + cedula_cliente + "\n"
                         + "Nombre: " + nombre_cliente + "\n"
-                        + "Direccion: " + cedula_cliente + "\n"
+                        + "Direccion: " + direccion_cliente + "\n"
                         + "Comuna: " + comuna_cliente + "\n";
                 Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
 
                 Paragraph titulo3 = new Paragraph("Datos Del Envio\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
 
                 String texto2 = "Metodo De Pago: " + metodoPagoResumen.getText() + "\n"
-                        + "Valor Envios " + valorEnvioResumen.getText() + "\n"
-                        + "Valor Paquetes: " + valorPaqueteResumen.getText() + "\n"
-                        + "Valor Impuestos: " + valorImpuestoResumen.getText() + "\n"
-                        + "Valor Seguros: " + valorSeguroResumen.getText() + "\n"
+                        + "Valor Envios: $" + valorEnvioResumen.getText() + "\n"
+                        + "Valor Paquetes: $" + valorPaqueteResumen.getText() + "\n"
+                        + "Valor Impuestos: $" + valorImpuestoResumen.getText() + "\n"
+                        + "Valor Seguros: $" + valorSeguroResumen.getText() + "\n"
                         + "Numero De Paquetes: " + numeroPaquetesResumen.getText() + "\n"
-                        + "Descripción de los paquetes (aportada por el cliente):\n" + descripcion_paquete + "\n";
+                        + "Descripción de los paquetes (aportada por el cliente):" + descripcion_paquete + "\n";
                 
                         //descripcion_paquete
                 Paragraph parrafo2 = new Paragraph(texto2, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
@@ -809,9 +809,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private void botonAgregarPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarPaqueteMouseClicked
 
         if( validador("paquete") ){
-            JOptionPane.showMessageDialog(null, "Validó paquete");
             if( cliente.cedulaExiste( jtfCedula.getText() ) ){
-                JOptionPane.showMessageDialog(null, "Cliente si existe");
+                //JOptionPane.showMessageDialog(null, "Cliente si existe");
                 if( cedula_cliente.length() == 0 )
                     cargarDatosCliente();
             
@@ -866,8 +865,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         int auxiliar = metodoDePago.getSelectedIndex();
         String auxiliar2 = metodoDePago.getItemAt(auxiliar);
         if (auxiliar2.equals("Efectivo")) {
-            panelTarjeta.setVisible(false);
             jtfTarjeta.setText("");
+            panelTarjeta.setVisible(false);
         } else {
             panelTarjeta.setVisible(true);
         }
