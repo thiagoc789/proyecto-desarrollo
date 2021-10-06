@@ -6,7 +6,6 @@
 package FrontEnd.Auxiliar;
 
 import BackEnd.ConexionBD;
-import FrontEnd.PantallaAuxiliar;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,16 +21,14 @@ import javax.swing.JOptionPane;
  */
 public class ListarEnvios extends javax.swing.JPanel {
 
-    //String id_usuario;
     String id_usuarioAux;
-
     /**
      * Creates new form ListarEnvios
      */
     public ListarEnvios(String id_usuario) {
         initComponents();
-        //this.id_usuario = id_usuario;
-        id_usuarioAux = id_usuario;
+         id_usuarioAux = id_usuario;
+
     }
 
     /**
@@ -48,6 +45,8 @@ public class ListarEnvios extends javax.swing.JPanel {
         jTbl_enviosT = new javax.swing.JTable();
         btnFinalizarBusqueda = new javax.swing.JLabel();
         listarTotales = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(770, 520));
 
         jTbl_enviosT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,33 +103,32 @@ public class ListarEnvios extends javax.swing.JPanel {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnFinalizarBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
-                    .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(548, Short.MAX_VALUE)))
+                    .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(561, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnFinalizarBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
+                .addGap(20, 20, 20))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(listarTotales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(450, Short.MAX_VALUE)))
+                    .addContainerGap(462, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -168,7 +166,7 @@ public class ListarEnvios extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFinalizarBusquedaMouseExited
 
     private void listarTotalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarTotalesMouseClicked
-
+        // TODO add your handling code here:
         jTbl_enviosT.setModel(new DefaultTableModel());
         DefaultTableModel modelo;
         ConexionBD con = new ConexionBD();
@@ -182,16 +180,14 @@ public class ListarEnvios extends javax.swing.JPanel {
             Logger.getLogger(ListarEnvios.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String[] nmClm = {"id_auxiliar", "id_envio", "direccion", "cedula_cliente", "estado_envio"};
+        String[] nmClm = {"id_auxiliare", "id_envio", "direccion", "cedula_cliente", "estado"};
 
-        sql = "SELECT id_auxiliar, id_envio, direccion, cedula_cliente, estado_envio "
-                + "FROM envios, clientes where '%" + id_usuarioAux + "%' = id_auxiliar and estado_envio = 'Sin Entregar'";
+        sql = "SELECT id_auxiliare, id_envio, direccion, cedula_cliente, estado FROM envios, clientes WHERE '%" + id_usuarioAux + "%' like id_auxiliare "
+                + "and estado = 'pendiente' and cedula_cliente like cedula;";
 
         modelo = (DefaultTableModel) jTbl_enviosT.getModel();
 
         modelo.setColumnIdentifiers(nmClm);
-
-        jTbl_enviosT.setModel(modelo);
 
         String[] registro = new String[5];
 
@@ -210,10 +206,11 @@ public class ListarEnvios extends javax.swing.JPanel {
                 modelo.addRow(registro);
 
             }
+            JOptionPane.showMessageDialog(null, id_usuarioAux );
+            jTbl_enviosT.setModel(modelo);
 
-            JOptionPane.showMessageDialog(null,id_usuarioAux);
             jTbl_enviosT.setVisible(true);
-            //     stmt.executeUpdate(sql2);
+
             conexion.close();
 
         } catch (SQLException ex) {
@@ -222,11 +219,11 @@ public class ListarEnvios extends javax.swing.JPanel {
     }//GEN-LAST:event_listarTotalesMouseClicked
 
     private void listarTotalesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarTotalesMouseEntered
-        // TODO add your handling code here:
+        listarTotales.setForeground(Color.red);
     }//GEN-LAST:event_listarTotalesMouseEntered
 
     private void listarTotalesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listarTotalesMouseExited
-        // TODO add your handling code here:
+       listarTotales.setForeground(Color.white);
     }//GEN-LAST:event_listarTotalesMouseExited
 
 

@@ -10,6 +10,7 @@ import BackEnd.ConexionBD;
 import BackEnd.Envios;
 import FrontEnd.PantallaGerente;
 import BackEnd.Sedes;
+import BackEnd.Tarjetas;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -46,10 +47,17 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     int valorSeguroSuma = 0;
     int conteoPaquetes = 0;
     int id_envio = 0;
-    private String cedula_cliente;
-    private String nombre_cliente;
-    private String direccion_cliente;
-    private String comuna_cliente;
+    
+    int costoTotal = 0;
+    
+    private String cedula_cliente = "";
+    private String nombre_cliente = "";
+    private String direccion_cliente = "";
+    private String comuna_cliente = "";
+    private String descripcion_paquete = "";
+    private String sedeAsignadaCliente = "";
+    
+    Clientes cliente = new Clientes();
 
     public RegistrarEnvio() {
         initComponents();
@@ -57,38 +65,256 @@ public class RegistrarEnvio extends javax.swing.JPanel {
 
     }
 
-    public boolean validador() {
+    public boolean validador(String opcionValidacion) {
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
 
         //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
-        if (valorEnvio.getText().length() < 1 || !(valorEnvio.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del envío";
-            valorEnvio.setText("");
-            validacion = false;
+        
+        if( opcionValidacion.compareTo("paquete") == 0 ){
+            if (jtfCedula.getText().length() < 1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar la cédula";
+                jtfCedula.setText("");
+                validacion = false;
+            }
+            if (jtfValorEnvio.getText().length() < 1 || !(jtfValorEnvio.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del envío";
+                jtfValorEnvio.setText("");
+                validacion = false;
+            }
+            if (jtfValorPaquete.getText().length() < 1 || !(jtfValorPaquete.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del paquete";
+                jtfValorPaquete.setText("");
+                validacion = false;
+            }
+            if (jtfValorImpuesto.getText().length() < 1 || !(jtfValorImpuesto.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del impuesto";
+                jtfValorImpuesto.setText("");
+                validacion = false;
+            }
+            if (jtfValorSeguro.getText().length()>0 && !(jtfValorSeguro.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
+                respuesta = respuesta + "\n   - Verificar el valor del seguro";
+                jtfValorSeguro.setText("");
+                validacion = false;
+            }
+            if ( jtfDescripcion.getText().length()<1 ) {
+                respuesta = respuesta + "\n   - Debe ingresar una breve descripción";
+                validacion = false;
+            }
         }
-        if (valorPaquete.getText().length() < 1 || !(valorPaquete.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del paquete";
-            valorPaquete.setText("");
-            validacion = false;
-        }
-        if (valorImpuesto.getText().length() < 1 || !(valorImpuesto.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del impuesto";
-            valorImpuesto.setText("");
-            validacion = false;
-        }
-        if (valorSeguro.getText().length() < 1 || !(valorSeguro.getText().matches("[+-]?\\d*(\\.\\d+)?"))) {
-            respuesta = respuesta + "\n   - Verificar el valor del seguro";
-            valorSeguro.setText("");
-            validacion = false;
-        }
+        if( opcionValidacion.compareTo("registro") == 0 ){
+            if (metodoDePago.getSelectedIndex()>0 ) {
+                if( jtfTarjeta.getText().length() < 1 || !(jtfTarjeta.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+                    respuesta = respuesta + "\n   - Verificar el número de tarjeta";
+                    jtfTarjeta.setText("");
+                    validacion = false;
+                }else{
+                    Tarjetas unaTarjeta = new Tarjetas();
 
+                    if( unaTarjeta.tarjetaExiste( jtfTarjeta.getText() ) ){
+                        if( !unaTarjeta.descontarDeTarjeta(jtfTarjeta.getText(), costoTotal) ){
+                            validacion = false;
+                        }
+                    }
+                    else{
+                        respuesta = respuesta + "\n   - La tarjeta no existe";
+                        validacion = false;
+                    }
+                }
+            }
+        }
+        
         if (!validacion) {
             JOptionPane.showMessageDialog(null, respuesta);
         }
         return validacion;
     }
+    
+    
+    
+    public void cargarDatosCliente(){
+        //JOptionPane.showMessageDialog(null, "método agregarUnPaquete()");
+        //Clientes cliente = new Clientes();
+        try {
+            //JOptionPane.showMessageDialog(null, "método agregarUnPaquete() dentro del try");
+                cliente.traerDatosCliente(jtfCedula.getText());
 
+                cedula_cliente = cliente.getCedula_cliente();
+                nombre_cliente = cliente.getNombre_cliente();
+                direccion_cliente = cliente.getDireccion_cliente();
+                comuna_cliente = cliente.getComuna_cliente();
+                sedeAsignadaCliente = cliente.getSede_asignada();
+
+                labelCedula.setText(cedula_cliente);
+                labelNombre.setText(nombre_cliente);
+                labelDireccion.setText(direccion_cliente);
+                labelSedeAsignada.setText("Sede asignada: " + sedeAsignadaCliente);
+                labelComuna.setText("Comuna " + comuna_cliente);
+
+                jtfCedula.setEnabled(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void reiniciarVariables(){
+        jtfCedula.setEnabled(true);
+        jtfCedula.setText("");
+        
+        valorSuma = 0;
+        valorPaqueteSuma = 0;
+        valorImpuestoSuma = 0;
+        valorSeguroSuma = 0;
+        conteoPaquetes = 0;
+        id_envio = 0;
+        cedula_cliente = "";
+        nombre_cliente = "";
+        direccion_cliente = "";
+        comuna_cliente = "";
+        descripcion_paquete = "";
+        sedeAsignadaCliente = "";
+        
+        labelCedula.setText("Cédula");
+        labelNombre.setText("Nombre");
+        labelDireccion.setText("Dirección");
+        labelSedeAsignada.setText("Sede asignada");
+        labelComuna.setText("Comuna");
+        metodoPagoResumen.setText("Efectivo");
+
+        totalResumen.setText("0");
+        numeroPaquetesResumen.setText("0");
+        valorSeguroResumen.setText("0");
+        valorImpuestoResumen.setText("0");
+        valorPaqueteResumen.setText("0");
+        valorEnvioResumen.setText("0");
+        
+        metodoDePago.setSelectedIndex(0);
+        
+        costoTotal = 0;
+    }
+    
+    public void agregarUnPaquete(){
+        //JOptionPane.showMessageDialog(null, "metodo agregarUnPaquete()");
+        //Metodo De Pago
+            conteoPaquetes++;
+            numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
+            int auxiliar = metodoDePago.getSelectedIndex();
+            String auxiliar2 = metodoDePago.getItemAt(auxiliar);
+            metodoPagoResumen.setText(auxiliar2);
+
+            //Valor Del Envio
+            int valorInicialEnvio = Integer.parseInt(jtfValorEnvio.getText());
+            valorSuma = valorSuma + valorInicialEnvio;
+            valorEnvioResumen.setText(Integer.toString(valorSuma));
+
+            //Valor Paquete
+            int auxiliarPaquete = Integer.parseInt(jtfValorPaquete.getText());
+            valorPaqueteSuma = valorPaqueteSuma + auxiliarPaquete;
+            valorPaqueteResumen.setText(Integer.toString(valorPaqueteSuma));
+
+            //Valor Impuesto
+            int auxiliarImpuesto = Integer.parseInt(jtfValorImpuesto.getText());
+            valorImpuestoSuma = valorImpuestoSuma + auxiliarImpuesto;
+            valorImpuestoResumen.setText(Integer.toString(valorImpuestoSuma));
+
+            //Valor Seguro
+            int auxiliarSeguro = 0;
+            if(jtfValorSeguro.getText().length() >0)
+                auxiliarSeguro = Integer.parseInt(jtfValorSeguro.getText());
+            valorSeguroSuma = valorSeguroSuma + auxiliarSeguro;
+            valorSeguroResumen.setText(Integer.toString(valorSeguroSuma));
+
+            //Total
+            int auxiliarTotal = valorSuma + valorPaqueteSuma + valorImpuestoSuma + valorSeguroSuma;
+            totalResumen.setText(Integer.toString(auxiliarTotal));
+            costoTotal = auxiliarTotal;
+        
+            descripcion_paquete = descripcion_paquete + "\n  -  " + jtfDescripcion.getText();
+            
+            jtfValorEnvio.setText("");
+            jtfValorPaquete.setText("");
+            jtfValorImpuesto.setText("");
+            jtfValorSeguro.setText("");
+            jtfDescripcion.setText("");
+    }
+
+    public void generarRecibo(){
+        //GENERAR RECIBO
+        int auxiliar = campoRecibo.getSelectedIndex();
+        String recibo = campoRecibo.getItemAt(auxiliar);
+
+        if (recibo.equals("Si")) {
+
+            Document documento = new Document();
+
+            String rutaCompleta = "";
+
+            try {
+                String ruta = System.getProperty("user.home");
+                //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
+                try {
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Recibo_"+id_envio+".pdf"));
+                    rutaCompleta = ruta + "/Desktop/Recibo_"+id_envio+".pdf";
+                } catch (DocumentException | FileNotFoundException ex1) {
+                    try {
+                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Recibo_"+id_envio+".pdf"));
+                        rutaCompleta = ruta + "/Escritorio/Recibo_"+id_envio+".pdf";
+                    } catch (DocumentException | FileNotFoundException ex2) {
+                        try {
+                            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Recibo_"+id_envio+".pdf"));
+                            rutaCompleta = ruta + "/Recibo_" + id_envio+".pdf";
+                        } catch (DocumentException | FileNotFoundException ex3) {
+                        }
+                    }
+                }
+
+                //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
+                documento.open();
+
+                Paragraph titulo = new Paragraph("Recibo Envio # " + id_envio + "\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.RED));
+                Paragraph total = new Paragraph("Total A Pagar: $" + totalResumen.getText() + "\n\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.GREEN));
+                Paragraph titulo2 = new Paragraph("Datos Del Cliente\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
+
+                String texto = "Cedula: " + cedula_cliente + "\n"
+                        + "Nombre: " + nombre_cliente + "\n"
+                        + "Direccion: " + direccion_cliente + "\n"
+                        + "Comuna: " + comuna_cliente + "\n";
+                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
+
+                Paragraph titulo3 = new Paragraph("Datos Del Envio\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
+
+                String texto2 = "Metodo De Pago: " + metodoPagoResumen.getText() + "\n"
+                        + "Valor Envios: $" + valorEnvioResumen.getText() + "\n"
+                        + "Valor Paquetes: $" + valorPaqueteResumen.getText() + "\n"
+                        + "Valor Impuestos: $" + valorImpuestoResumen.getText() + "\n"
+                        + "Valor Seguros: $" + valorSeguroResumen.getText() + "\n"
+                        + "Numero De Paquetes: " + numeroPaquetesResumen.getText() + "\n"
+                        + "Descripción de los paquetes (aportada por el cliente):" + descripcion_paquete + "\n";
+                
+                        //descripcion_paquete
+                Paragraph parrafo2 = new Paragraph(texto2, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
+                Paragraph parrafo3 = new Paragraph("Empresa De Servicios Flash", FontFactory.getFont("Segoe Script", 12, Font.BOLD, BaseColor.LIGHT_GRAY));
+
+                documento.add(titulo);
+                documento.add(titulo2);
+                documento.add(parrafo);
+                documento.add(titulo3);
+                documento.add(parrafo2);
+                documento.add(total);
+                documento.add(parrafo3);
+
+                documento.close();
+                JOptionPane.showMessageDialog(null, "Recibo #" + id_envio + " creado. Se guardó en:\n" + rutaCompleta);
+            } catch (HeadlessException ex) {
+                //JOptionPane.showMessageDialog(null, "Aquí 2");
+            } catch (DocumentException ex) {
+                Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,10 +333,12 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        valorEnvio = new javax.swing.JTextField();
-        valorImpuesto = new javax.swing.JTextField();
-        valorPaquete = new javax.swing.JTextField();
-        valorSeguro = new javax.swing.JTextField();
+        jtfValorEnvio = new javax.swing.JTextField();
+        jtfValorImpuesto = new javax.swing.JTextField();
+        jtfValorPaquete = new javax.swing.JTextField();
+        jtfValorSeguro = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jtfDescripcion = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -131,15 +359,18 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         labelNombre = new javax.swing.JLabel();
         labelComuna = new javax.swing.JLabel();
         labelDireccion = new javax.swing.JLabel();
+        labelSedeAsignada = new javax.swing.JLabel();
         botonAgregarPaquete = new javax.swing.JButton();
         metodoDePago = new javax.swing.JComboBox<>();
         campoRecibo = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
-        campoCedula = new javax.swing.JTextField();
+        jtfCedula = new javax.swing.JTextField();
         panelTarjeta = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        campoTarjeta = new javax.swing.JTextField();
+        jtfTarjeta = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(770, 520));
 
         jpEnvio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -153,6 +384,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         Registrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Registrar.setText("Registrar");
         Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Registrar.setEnabled(false);
         Registrar.setOpaque(true);
         Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -195,38 +427,47 @@ public class RegistrarEnvio extends javax.swing.JPanel {
 
         jLabel18.setText("Valor Seguro");
 
-        valorEnvio.addActionListener(new java.awt.event.ActionListener() {
+        jtfValorEnvio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valorEnvioActionPerformed(evt);
+                jtfValorEnvioActionPerformed(evt);
             }
         });
+
+        jLabel28.setText("Breve descripción");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtfValorEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfValorImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfValorSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfValorPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                        .addComponent(jLabel28)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(54, 54, 54)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(154, Short.MAX_VALUE))
+                        .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,15 +476,19 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel16)
-                    .addComponent(valorEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valorPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(jtfValorEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfValorPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(valorImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfValorImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
-                    .addComponent(valorSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(jtfValorSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(jtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel19.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -283,7 +528,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         totalResumen.setText("0");
 
         labelCedula.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        labelCedula.setText("Cedula");
+        labelCedula.setText("Cédula");
 
         labelNombre.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         labelNombre.setText("Nombre");
@@ -292,7 +537,10 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         labelComuna.setText("Comuna");
 
         labelDireccion.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        labelDireccion.setText("Direccion");
+        labelDireccion.setText("Dirección");
+
+        labelSedeAsignada.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        labelSedeAsignada.setText("Sede asignada");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -301,51 +549,41 @@ public class RegistrarEnvio extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelComuna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelSedeAsignada, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                    .addComponent(labelDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(labelCedula)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel20)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel23)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel24))
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(valorSeguroResumen, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                                    .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(valorEnvioResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(metodoPagoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(86, 86, 86))
+                                .addComponent(totalResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel21)
-                                            .addComponent(jLabel22)
-                                            .addComponent(jLabel24))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(valorEnvioResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(valorPaqueteResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(valorImpuestoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(valorSeguroResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel25)
+                                .addGap(18, 18, 18)
+                                .addComponent(numeroPaquetesResumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelComuna)
-                                    .addComponent(labelDireccion))
-                                .addGap(0, 272, Short.MAX_VALUE)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jLabel26)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(totalResumen))
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jLabel25)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(numeroPaquetesResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(labelNombre))
-                        .addGap(57, 57, 57))))
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(metodoPagoResumen, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,16 +591,23 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(labelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelSedeAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
                             .addComponent(metodoPagoResumen))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
-                            .addComponent(valorEnvioResumen)))
-                    .addComponent(labelCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(valorEnvioResumen))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
@@ -370,12 +615,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(valorImpuestoResumen)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(valorImpuestoResumen))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valorSeguroResumen)
@@ -387,14 +627,8 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(totalResumen)
-                            .addComponent(jLabel26))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(labelDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                            .addComponent(jLabel26))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botonAgregarPaquete.setBackground(new java.awt.Color(102, 102, 102));
@@ -424,14 +658,9 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Cedula Del Cliente");
 
-        campoCedula.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                campoCedulaFocusLost(evt);
-            }
-        });
-        campoCedula.addActionListener(new java.awt.event.ActionListener() {
+        jtfCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCedulaActionPerformed(evt);
+                jtfCedulaActionPerformed(evt);
             }
         });
 
@@ -439,9 +668,9 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Numero De Tarjeta");
 
-        campoTarjeta.addActionListener(new java.awt.event.ActionListener() {
+        jtfTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTarjetaActionPerformed(evt);
+                jtfTarjetaActionPerformed(evt);
             }
         });
 
@@ -453,14 +682,14 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         panelTarjetaLayout.setVerticalGroup(
             panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(campoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jtfTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel27.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -472,41 +701,45 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         jpEnvioLayout.setHorizontalGroup(
             jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEnvioLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpEnvioLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpEnvioLayout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jpEnvioLayout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(campoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpEnvioLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(metodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpEnvioLayout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEnvioLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpEnvioLayout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jLabel27)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(metodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(panelTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jpEnvioLayout.createSequentialGroup()
-                                    .addComponent(botonAgregarPaquete)
-                                    .addGap(36, 36, 36))))
-                        .addContainerGap())))
+                                .addGap(31, 31, 31)
+                                .addComponent(botonAgregarPaquete))
+                            .addGroup(jpEnvioLayout.createSequentialGroup()
+                                .addGap(184, 184, 184)
+                                .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jpEnvioLayout.setVerticalGroup(
             jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,47 +747,42 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(metodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jpEnvioLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))
-                    .addGroup(jpEnvioLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonAgregarPaquete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpEnvioLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(metodoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpEnvioLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(botonAgregarPaquete)))
+                .addGap(12, 12, 12)
+                .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpEnvioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpEnvio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jpEnvio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 82, Short.MAX_VALUE))
+            .addComponent(jpEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -574,42 +802,24 @@ public class RegistrarEnvio extends javax.swing.JPanel {
         Cancelar.setForeground(Color.white);
     }//GEN-LAST:event_CancelarMouseExited
 
-    private void valorEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorEnvioActionPerformed
+    private void jtfValorEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorEnvioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_valorEnvioActionPerformed
+    }//GEN-LAST:event_jtfValorEnvioActionPerformed
 
     private void botonAgregarPaqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarPaqueteMouseClicked
-        // TODO add your handling code here:
-        //Metodo De Pago
-        conteoPaquetes++;
-        numeroPaquetesResumen.setText(Integer.toString(conteoPaquetes));
-        int auxiliar = metodoDePago.getSelectedIndex();
-        String auxiliar2 = metodoDePago.getItemAt(auxiliar);
-        metodoPagoResumen.setText(auxiliar2);
 
-        //Valor Del Envio
-        int valorInicialEnvio = Integer.parseInt(valorEnvio.getText());
-        valorSuma = valorSuma + valorInicialEnvio;
-        valorEnvioResumen.setText(Integer.toString(valorSuma));
-
-        //Valor Paquete
-        int auxiliarPaquete = Integer.parseInt(valorPaquete.getText());
-        valorPaqueteSuma = valorPaqueteSuma + auxiliarPaquete;
-        valorPaqueteResumen.setText(Integer.toString(valorPaqueteSuma));
-
-        //Valor Impuesto
-        int auxiliarImpuesto = Integer.parseInt(valorImpuesto.getText());
-        valorImpuestoSuma = valorImpuestoSuma + auxiliarImpuesto;
-        valorImpuestoResumen.setText(Integer.toString(valorImpuestoSuma));
-
-        //Valor Seguro
-        int auxiliarSeguro = Integer.parseInt(valorSeguro.getText());
-        valorSeguroSuma = valorSeguroSuma + auxiliarSeguro;
-        valorSeguroResumen.setText(Integer.toString(valorSeguroSuma));
-
-        //Total
-        int auxiliarTotal = valorSuma + valorPaqueteSuma + valorImpuestoSuma + valorSeguroSuma;
-        totalResumen.setText(Integer.toString(auxiliarTotal));
+        if( validador("paquete") ){
+            if( cliente.cedulaExiste( jtfCedula.getText() ) ){
+                //JOptionPane.showMessageDialog(null, "Cliente si existe");
+                if( cedula_cliente.length() == 0 )
+                    cargarDatosCliente();
+            
+                agregarUnPaquete();
+                Registrar.setEnabled(true);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Cédula no existe en la base de clientes");
+        }
     }//GEN-LAST:event_botonAgregarPaqueteMouseClicked
 
     private void botonAgregarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarPaqueteActionPerformed
@@ -629,110 +839,33 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
         // TODO add your handling code here:
         // AQUI SE REGISTRA EL ENVIO
-        String finalNumber = "";
-        id_envio = (int) (10000 * Math.random());
-        finalNumber = "" + id_envio;
-        for (int i = finalNumber.length(); i < 4; i++) {
-
-            finalNumber = "0" + finalNumber;
-
-        }
         
-        id_envio = Integer.parseInt(finalNumber);
-        Envios envio = new Envios();
         try {
-            if (validador()) {
-                envio.registrarEnvio(id_envio, Integer.parseInt(cedula_cliente), metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
+            if (validador("registro") && conteoPaquetes>0 ) {
+                Envios envio = new Envios();
+                
+                envio.registrarEnvio(Integer.parseInt(cedula_cliente), metodoPagoResumen.getText(), valorSuma, valorPaqueteSuma, valorImpuestoSuma, valorSeguroSuma, conteoPaquetes);
+                id_envio = Integer.parseInt( envio.envioRecienteRegistrado() );
                 JOptionPane.showMessageDialog(null, "Envio #  " +id_envio+ " registrado exitosamente", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                
+                generarRecibo();
+                reiniciarVariables();
             }
         } catch (SQLException ex) {
             Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //GENERAR RECIBO
-        int auxiliar = campoRecibo.getSelectedIndex();
-        String recibo = campoRecibo.getItemAt(auxiliar);
-
-        if (recibo.equals("Si")) {
-
-            Document documento = new Document();
-
-            String rutaCompleta = "";
-
-            try {
-                String ruta = System.getProperty("user.home");
-                //JOptionPane.showMessageDialog(null, "Ruta: " + ruta);
-                try {
-                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Recibo"+id_envio+"_Prueba.pdf"));
-                    rutaCompleta = ruta + "/Desktop/Recibo"+id_envio+"_Prueba.pdf";
-                } catch (DocumentException | FileNotFoundException ex1) {
-                    try {
-                        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf"));
-                        rutaCompleta = ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf";
-                    } catch (DocumentException | FileNotFoundException ex2) {
-                        try {
-                            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf"));
-                            rutaCompleta = ruta + "/Escritorio/Recibo"+id_envio+"_Prueba.pdf";
-                        } catch (DocumentException | FileNotFoundException ex3) {
-                        }
-                    }
-                }
-
-                //PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Prueba.pdf"));
-                documento.open();
-
-                Paragraph titulo = new Paragraph("Recibo Envio # " + id_envio + "\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.RED));
-                Paragraph total = new Paragraph("Total A Pagar:" + totalResumen.getText() + "\n\n\n", FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.GREEN));
-                Paragraph titulo2 = new Paragraph("Datos Del Cliente\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
-
-                String texto = "Cedula: " + cedula_cliente + "\n"
-                        + "Nombre: " + nombre_cliente + "\n"
-                        + "Direccion: " + cedula_cliente + "\n"
-                        + "Comuna: " + comuna_cliente + "\n";
-                Paragraph parrafo = new Paragraph(texto, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
-
-                Paragraph titulo3 = new Paragraph("Datos Del Envio\n", FontFactory.getFont("arial", 18, Font.BOLD, BaseColor.BLACK));
-
-                String texto2 = "Metodo De Pago: " + metodoPagoResumen.getText() + "\n"
-                        + "Valor Envios " + valorEnvioResumen.getText() + "\n"
-                        + "Valor Paquetes: " + valorPaqueteResumen.getText() + "\n"
-                        + "Valor Impuestos: " + valorImpuestoResumen.getText() + "\n"
-                        + "Valor Seguros: " + valorSeguroResumen.getText() + "\n"
-                        + "Numero De Paquetes: " + numeroPaquetesResumen.getText() + "\n";
-                Paragraph parrafo2 = new Paragraph(texto2, FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.GRAY));
-                Paragraph parrafo3 = new Paragraph("Empresa De Servicios Flash", FontFactory.getFont("Segoe Script", 12, Font.BOLD, BaseColor.LIGHT_GRAY));
-
-                documento.add(titulo);
-                documento.add(titulo2);
-                documento.add(parrafo);
-                documento.add(titulo3);
-                documento.add(parrafo2);
-                documento.add(total);
-                documento.add(parrafo3);
-
-                documento.close();
-                JOptionPane.showMessageDialog(null, "Recibo # " + id_envio + " Creado. Se guardó en " + rutaCompleta);
-            } catch (HeadlessException ex) {
-                JOptionPane.showMessageDialog(null, "Aquí 2");
-            } catch (DocumentException ex) {
-                Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-
-        }
-
     }//GEN-LAST:event_RegistrarMouseClicked
 
-    private void campoCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCedulaActionPerformed
+    private void jtfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoCedulaActionPerformed
+    }//GEN-LAST:event_jtfCedulaActionPerformed
 
     private void metodoDePagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_metodoDePagoItemStateChanged
 
         int auxiliar = metodoDePago.getSelectedIndex();
         String auxiliar2 = metodoDePago.getItemAt(auxiliar);
         if (auxiliar2.equals("Efectivo")) {
+            jtfTarjeta.setText("");
             panelTarjeta.setVisible(false);
         } else {
             panelTarjeta.setVisible(true);
@@ -740,38 +873,16 @@ public class RegistrarEnvio extends javax.swing.JPanel {
 
     }//GEN-LAST:event_metodoDePagoItemStateChanged
 
-    private void campoTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTarjetaActionPerformed
+    private void jtfTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTarjetaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTarjetaActionPerformed
-
-    private void campoCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCedulaFocusLost
-        Clientes cliente = new Clientes();
-        try {
-            cliente.validarCliente(campoCedula.getText());
-
-            cedula_cliente = cliente.getCedula_cliente();
-            nombre_cliente = cliente.getNombre_cliente();
-            direccion_cliente = cliente.getDireccion_cliente();
-            comuna_cliente = cliente.getComuna_cliente();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistrarEnvio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        labelCedula.setText(cedula_cliente);
-        labelNombre.setText(nombre_cliente);
-        labelDireccion.setText(direccion_cliente);
-        labelComuna.setText("Comuna " + comuna_cliente);
-    }//GEN-LAST:event_campoCedulaFocusLost
+    }//GEN-LAST:event_jtfTarjetaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel Cancelar;
     javax.swing.JLabel Registrar;
     javax.swing.JButton botonAgregarPaquete;
-    javax.swing.JTextField campoCedula;
     private javax.swing.JComboBox<String> campoRecibo;
-    javax.swing.JTextField campoTarjeta;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -788,25 +899,30 @@ public class RegistrarEnvio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jpEnvio;
+    javax.swing.JTextField jtfCedula;
+    javax.swing.JTextField jtfDescripcion;
+    javax.swing.JTextField jtfTarjeta;
+    javax.swing.JTextField jtfValorEnvio;
+    javax.swing.JTextField jtfValorImpuesto;
+    javax.swing.JTextField jtfValorPaquete;
+    javax.swing.JTextField jtfValorSeguro;
     private javax.swing.JLabel labelCedula;
     private javax.swing.JLabel labelComuna;
     private javax.swing.JLabel labelDireccion;
     private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelSedeAsignada;
     javax.swing.JComboBox<String> metodoDePago;
     javax.swing.JLabel metodoPagoResumen;
     javax.swing.JLabel numeroPaquetesResumen;
     private javax.swing.JPanel panelTarjeta;
     javax.swing.JLabel totalResumen;
-    javax.swing.JTextField valorEnvio;
     javax.swing.JLabel valorEnvioResumen;
-    javax.swing.JTextField valorImpuesto;
     javax.swing.JLabel valorImpuestoResumen;
-    javax.swing.JTextField valorPaquete;
     javax.swing.JLabel valorPaqueteResumen;
-    javax.swing.JTextField valorSeguro;
     javax.swing.JLabel valorSeguroResumen;
     // End of variables declaration//GEN-END:variables
 }

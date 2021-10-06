@@ -26,7 +26,7 @@ public class Clientes {
     private String nombre_cliente;
     private String direccion_cliente;
     private String comuna_cliente;
-    
+    private String sede_asignada;
     
     public boolean cedulaExiste(String cedula){
         boolean cedulaExiste = false;
@@ -40,7 +40,7 @@ public class Clientes {
             conexion = DriverManager.getConnection(conexionExistente.getUrl(), conexionExistente.getUser(), conexionExistente.getPassword());
             stmt = conexion.createStatement();
 
-            sql = "SELECT count(*) FROM usuarios WHERE cedula = \'" + cedula +"\'";
+            sql = "SELECT count(*) FROM clientes WHERE cedula = \'" + cedula +"\'";
             ResultSet rs = stmt.executeQuery(sql);
             
             String respuestaQuery = "";
@@ -60,7 +60,7 @@ public class Clientes {
         return cedulaExiste;
     }
 
-    public void registrarClienteNuevo(int cedula, String nombre, String direccion, int id_comuna) throws SQLException {
+    public void registrarClienteNuevo(String cedula, String nombre, String direccion, int id_comuna, String sede_asignada) throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -72,14 +72,15 @@ public class Clientes {
             //JOptionPane.showMessageDialog(null, "Connected to Database");
             //conexion.close();
             stmt = conexion.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS clientes (cedula INT, nombre VARCHAR(50), direccion VARCHAR(100), id_comuna INT);";
+            sql = "CREATE TABLE IF NOT EXISTS clientes (cedula VARCHAR(50), nombre VARCHAR(50), direccion VARCHAR(100), id_comuna INT, sede_asignada VARCHAR(50));";
             stmt.executeUpdate(sql);
 
-            sql = "INSERT INTO clientes(cedula, nombre, direccion, id_comuna) VALUES("
+            sql = "INSERT INTO clientes(cedula, nombre, direccion, id_comuna, sede_asignada) VALUES("
                     + "\'" + cedula + "\',"
                     + "\'" + nombre + "\',"
                     + "\'" + direccion + "\',"
-                    + "\'" + id_comuna + "\'"
+                    + "\'" + id_comuna + "\',"
+                    + "\'" + sede_asignada + "\'"
                     + ");";
             stmt.executeUpdate(sql);
 
@@ -91,8 +92,8 @@ public class Clientes {
     }
 
     
-    public String validarCliente(String cedula) throws SQLException {
-        String usuarioValido = "empty";
+    public void traerDatosCliente(String cedula) throws SQLException {
+        //String usuarioValido = "empty";
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -111,12 +112,14 @@ public class Clientes {
             nombre_cliente = "";
             direccion_cliente = "";
             comuna_cliente = "";
+            sede_asignada = "";
             
             while(rs.next()){
                 cedula_cliente = rs.getString("cedula");
                 nombre_cliente = rs.getString("nombre");
                 direccion_cliente = rs.getString("direccion");
                 comuna_cliente = rs.getString("id_comuna");
+                sede_asignada = rs.getString("sede_asignada");
             }
             
             if( !(cedula.compareTo(cedula_cliente) == 0) ){
@@ -131,7 +134,7 @@ public class Clientes {
             JOptionPane.showMessageDialog(null, "Failed to Connected");
         }
         
-        return usuarioValido;
+        //return usuarioValido;
     }
 
     public String getCedula_cliente() {
@@ -152,6 +155,10 @@ public class Clientes {
 
     public String getDireccion_cliente() {
         return direccion_cliente;
+    }
+    
+    public String getSede_asignada() {
+        return sede_asignada;
     }
 
     public void setDireccion_cliente(String direccion_cliente) {

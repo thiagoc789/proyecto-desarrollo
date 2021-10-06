@@ -7,7 +7,6 @@ import FrontEnd.Operador.RegistrarEnvio;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import javax.swing.JOptionPane;
 
 public class PantallaAuxiliar extends javax.swing.JFrame {
 
@@ -16,23 +15,20 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
 
     String idUsuarioAux;
 
-    //ListarEnvios panelListarEnviosDia = new ListarEnvios(idUsuarioAux);
     ListarEnvios panelListarEnviosDia;
- 
 
     public PantallaAuxiliar(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
         this.idUsuarioAux = idUsuario;
-        
-        //JOptionPane.showMessageDialog(null, idUsuario);
-        panelListarEnviosDia = new ListarEnvios( idUsuarioAux );
+        panelListarEnviosDia = new ListarEnvios(idUsuarioAux);
+
     }
 
     public void cambioVisualizacion() {
         jlListarEnviosDia.setEnabled(true);
-        label2.setEnabled(true);
-        label3.setEnabled(true);
+        //label2.setEnabled(true);
+        //label3.setEnabled(true);
 
         panelListarEnviosDia.setVisible(false);
     }
@@ -53,7 +49,6 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
 //            label3.setEnabled(false);
         }
 
-        //estadoUsuario
         contenedor.validate();
         contenedor.setVisible(true);
     }
@@ -71,8 +66,6 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
         javax.swing.JLabel jlBloquear = new javax.swing.JLabel();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
         javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
-        label3 = new javax.swing.JLabel();
-        label2 = new javax.swing.JLabel();
         jlListarEnviosDia = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
 
@@ -140,10 +133,10 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                .addGap(148, 148, 148)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -229,24 +222,6 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
-        label3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        label3.setForeground(new java.awt.Color(102, 102, 102));
-        label3.setText("-Funcion 3");
-        label3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label3MouseClicked(evt);
-            }
-        });
-
-        label2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        label2.setForeground(new java.awt.Color(102, 102, 102));
-        label2.setText("-Función2");
-        label2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                label2MouseClicked(evt);
-            }
-        });
-
         jlListarEnviosDia.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jlListarEnviosDia.setForeground(new java.awt.Color(102, 102, 102));
         jlListarEnviosDia.setText("-Listar Envios día");
@@ -261,11 +236,8 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlListarEnviosDia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jlListarEnviosDia, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -273,11 +245,7 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jlListarEnviosDia, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(380, Short.MAX_VALUE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 180, 520));
@@ -290,44 +258,28 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        // TODO add your handling code here:
         x = evt.getX();
-
         y = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        // TODO add your handling code here:
         Point ubicacion = MouseInfo.getPointerInfo().getLocation();//1
         setLocation(ubicacion.x - x, ubicacion.y - y);//3
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        // TODO add your handling code here:
         if (evt.getClickCount() == 2) {//1
             setExtendedState(MAXIMIZED_BOTH);//2
         }
     }//GEN-LAST:event_jPanel1MouseClicked
-
-    private void label2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label2MouseClicked
-        cambioVisualizacion();
-        visualizacionActual("otraFuncion1");
-    }//GEN-LAST:event_label2MouseClicked
-
-    private void label3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label3MouseClicked
-        cambioVisualizacion();
-        visualizacionActual("otraFuncion2");
-    }//GEN-LAST:event_label3MouseClicked
 
     private void jlListarEnviosDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlListarEnviosDiaMouseClicked
         cambioVisualizacion();
@@ -339,9 +291,6 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lCerrarSesionMouseClicked
 
-    public String getIdUsuario() {
-        return this.idUsuarioAux;
-    }
     private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
         new SesionBloqueada(idUsuarioAux).setVisible(true);
         this.setVisible(false);
@@ -354,7 +303,5 @@ public class PantallaAuxiliar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel contenedor;
     public javax.swing.JLabel jlListarEnviosDia;
-    public javax.swing.JLabel label2;
-    public javax.swing.JLabel label3;
     // End of variables declaration//GEN-END:variables
 }

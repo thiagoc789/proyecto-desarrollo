@@ -12,16 +12,14 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    String idUsuario;
+    String idUsuarioSecre;
     
     ListarUsuariosTabulados panelListarUsuarios = new ListarUsuariosTabulados();
-
-
     
      public PantallaSecretaria(String idUsuario) {
         initComponents();
         contenedor.setVisible(false);
-        this.idUsuario = idUsuario;
+        this.idUsuarioSecre = idUsuario;
     }
     
     public void cambioVisualizacion(){
@@ -134,10 +132,10 @@ public class PantallaSecretaria extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                .addGap(148, 148, 148)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -284,12 +282,10 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -334,7 +330,7 @@ public class PantallaSecretaria extends javax.swing.JFrame {
     }//GEN-LAST:event_lCerrarSesionMouseClicked
 
     private void jlBloquearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBloquearMouseClicked
-        new SesionBloqueada( idUsuario ).setVisible(true);
+        new SesionBloqueada( idUsuarioSecre ).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jlBloquearMouseClicked
 

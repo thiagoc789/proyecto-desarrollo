@@ -28,6 +28,42 @@ public class RegistrarSede extends javax.swing.JPanel {
     public RegistrarSede() {
         initComponents();
     }
+    
+    public boolean validador(){
+        boolean validacion = true;
+        String respuesta = "Por favor verifique:";
+        
+        //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
+
+        if( jtfIdSede.getText().length()<1 || !(jtfIdSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Id ingresada, deben ser solo números";
+            jtfIdSede.setText("");
+            validacion = false;
+        }
+        if( jtfNombreSede.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar un nombre para la sede";
+            validacion = false;
+        }
+        if( jtfDireccionSede.getText().length()<1 ){
+            respuesta = respuesta + "\n   - Debe ingresar un dirección para la sede";
+            validacion = false;
+        }
+        if( jtfComunaSede.getText().length()<1 || !(jtfComunaSede.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Comuna ingresada, debe ser un número";
+            jtfComunaSede.setText("");
+            validacion = false;
+        }
+        if( jtfTelefonoSede.getText().length()<1 && !(jtfTelefonoSede.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+            respuesta = respuesta + "\n   - Debe ingresar un teléfono, deben ser solo números";
+            jtfTelefonoSede.setText("");
+            validacion = false;
+        }
+        
+        if( !validacion )
+            JOptionPane.showMessageDialog(null, respuesta);
+        
+        return validacion;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,12 +79,14 @@ public class RegistrarSede extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        Nombre = new javax.swing.JTextField();
-        Dirección = new javax.swing.JTextField();
-        Id = new javax.swing.JTextField();
-        Telefono = new javax.swing.JTextField();
-        Registrar = new javax.swing.JLabel();
-        Cancelar = new javax.swing.JLabel();
+        jtfNombreSede = new javax.swing.JTextField();
+        jtfDireccionSede = new javax.swing.JTextField();
+        jtfIdSede = new javax.swing.JTextField();
+        jtfTelefonoSede = new javax.swing.JTextField();
+        lRegistrar = new javax.swing.JLabel();
+        jtfComunaSede = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        Cancelar1 = new javax.swing.JLabel();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.white, null, null));
 
@@ -68,47 +106,45 @@ public class RegistrarSede extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Id sede");
 
-        Dirección.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DirecciónActionPerformed(evt);
+        lRegistrar.setBackground(new java.awt.Color(0, 153, 102));
+        lRegistrar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        lRegistrar.setForeground(new java.awt.Color(255, 255, 255));
+        lRegistrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lRegistrar.setText("Registrar");
+        lRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lRegistrar.setOpaque(true);
+        lRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lRegistrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lRegistrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lRegistrarMouseExited(evt);
             }
         });
 
-        Registrar.setBackground(new java.awt.Color(0, 153, 102));
-        Registrar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Registrar.setForeground(new java.awt.Color(255, 255, 255));
-        Registrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Registrar.setText("Registrar");
-        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Registrar.setOpaque(true);
-        Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RegistrarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                RegistrarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                RegistrarMouseExited(evt);
-            }
-        });
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel16.setText("Comuna");
 
-        Cancelar.setBackground(new java.awt.Color(0, 153, 102));
-        Cancelar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Cancelar.setForeground(new java.awt.Color(255, 255, 255));
-        Cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Cancelar.setText("Cancelar");
-        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Cancelar.setOpaque(true);
-        Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+        Cancelar1.setBackground(new java.awt.Color(0, 153, 102));
+        Cancelar1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        Cancelar1.setForeground(new java.awt.Color(255, 255, 255));
+        Cancelar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Cancelar1.setText("Cancelar");
+        Cancelar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Cancelar1.setOpaque(true);
+        Cancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CancelarMouseClicked(evt);
+                Cancelar1MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                CancelarMouseEntered(evt);
+                Cancelar1MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                CancelarMouseExited(evt);
+                Cancelar1MouseExited(evt);
             }
         });
 
@@ -117,32 +153,39 @@ public class RegistrarSede extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(72, 72, 72)
+                        .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(Cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
+                                .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Dirección, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jtfTelefonoSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jtfIdSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jtfDireccionSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(51, 51, 51)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtfNombreSede, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(115, Short.MAX_VALUE))
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfComunaSede, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,104 +194,102 @@ public class RegistrarSede extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfNombreSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfIdSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfComunaSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfDireccionSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Dirección, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
+                    .addComponent(jtfTelefonoSede, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(278, Short.MAX_VALUE))
+                    .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void DirecciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DirecciónActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DirecciónActionPerformed
-
-    private void RegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseClicked
+    
+    private void lRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarMouseClicked
         // TODO add your handling code here:
         Sedes sede = new Sedes();
         try {
-            if( !( sede.idExiste(Id.getText()) ) ){
-                sede.registrarSedeNueva(Id.getText(), Nombre.getText(), Dirección.getText(), Telefono.getText());
-                JOptionPane.showMessageDialog(null, "Sede " + Id.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
-                Id.setText("");
-                Nombre.setText("");
-                Dirección.setText("");
-                Telefono.setText("");
-            }else
-                JOptionPane.showMessageDialog(null, "El Id ya existe");
-
+            if( validador() ){
+                if( !( sede.idExiste(jtfIdSede.getText()) ) ){
+                    sede.registrarSedeNueva(jtfIdSede.getText(), jtfNombreSede.getText(), jtfDireccionSede.getText(), jtfTelefonoSede.getText(), jtfComunaSede.getText());
+                    JOptionPane.showMessageDialog(null, "Sede " + jtfIdSede.getText() + " Registrada Con Exito", "Sistematizacion De Procesos - Flash", JOptionPane.INFORMATION_MESSAGE);
+                    jtfIdSede.setText("");
+                    jtfNombreSede.setText("");
+                    jtfDireccionSede.setText("");
+                    jtfTelefonoSede.setText("");
+                    jtfComunaSede.setText("");
+                }else
+                    JOptionPane.showMessageDialog(null, "El Id ya existe");
+            }
         } catch (SQLException ex) {
             //Logger.getLogger(RegistrarSedeViejo.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_RegistrarMouseClicked
+    }//GEN-LAST:event_lRegistrarMouseClicked
 
-    private void RegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseEntered
+    private void lRegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarMouseEntered
         // TODO add your handling code here:
-        Registrar.setForeground(Color.red);
-    }//GEN-LAST:event_RegistrarMouseEntered
+        lRegistrar.setForeground(Color.red);
+    }//GEN-LAST:event_lRegistrarMouseEntered
 
-    private void RegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseExited
+    private void lRegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRegistrarMouseExited
         // TODO add your handling code here:
-        Registrar.setForeground(Color.WHITE);
-    }//GEN-LAST:event_RegistrarMouseExited
+        lRegistrar.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lRegistrarMouseExited
 
-    private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
-        // TODO add your handling code here:
-        new PantallaGerente("Gerente").setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_CancelarMouseClicked
+    private void Cancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Cancelar1MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_Cancelar1MouseClicked
 
-    private void CancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseEntered
+    private void Cancelar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Cancelar1MouseEntered
         // TODO add your handling code here:
-        Cancelar.setForeground(Color.red);
-    }//GEN-LAST:event_CancelarMouseEntered
+    }//GEN-LAST:event_Cancelar1MouseEntered
 
-    private void CancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseExited
+    private void Cancelar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Cancelar1MouseExited
         // TODO add your handling code here:
-        Cancelar.setForeground(Color.white);
-    }//GEN-LAST:event_CancelarMouseExited
+    }//GEN-LAST:event_Cancelar1MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JLabel Cancelar;
-    javax.swing.JTextField Dirección;
-    javax.swing.JTextField Id;
-    javax.swing.JTextField Nombre;
-    javax.swing.JLabel Registrar;
-    javax.swing.JTextField Telefono;
+    javax.swing.JLabel Cancelar1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel4;
+    javax.swing.JTextField jtfComunaSede;
+    javax.swing.JTextField jtfDireccionSede;
+    javax.swing.JTextField jtfIdSede;
+    javax.swing.JTextField jtfNombreSede;
+    javax.swing.JTextField jtfTelefonoSede;
+    javax.swing.JLabel lRegistrar;
     // End of variables declaration//GEN-END:variables
 }

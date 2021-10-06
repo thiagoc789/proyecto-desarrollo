@@ -22,26 +22,33 @@ public class PrimerIngreso extends javax.swing.JFrame {
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
         
-        if( Nombre.getText().length()<1 ){
+        if( jtfNombre.getText().length()<1 ){
             respuesta = respuesta + "\n   - Debe ingresar un nombre";
             validacion = false;
         }
-        if( Cedula.getText().length()<1 || !(Cedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
-            Cedula.setText("");
+            jtfCedula.setText("");
             validacion = false;
         }
-        if( Telefono.getText().length()<1 || !(Telefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfTelefono.getText().length()<1 || !(jtfTelefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
             respuesta = respuesta + "\n   - Teléfono ingresado, deben ser solo números";
-            Telefono.setText("");
+            jtfTelefono.setText("");
             validacion = false;
         }
-        if( Contrasena.getText().length()<1 ){
-            respuesta = respuesta + "\n   - Debe ingresar una contraseña";
+        if( jtfPass1.getText().length()<1 || jtfPass1.getText().compareTo( jtfPass2.getText() ) != 0 ){
+            if( jtfPass1.getText().length()<1 )
+                respuesta = respuesta + "\n   - Ingrese una contraseña";
+            else{
+                respuesta = respuesta + "\n   - Contaseña y su confirmación no coinciden";
+                jtfPass1.setText("");
+                jtfPass2.setText("");
+            }
             validacion = false;
         }
-        if( Correo.getText().length()<1 || !Correo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
+        if( jtfCorreo.getText().length()<1 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
             respuesta = respuesta + "\n   - Ingrese un correo válido";
+            jtfCorreo.setText("");
             validacion = false;
         }
         
@@ -64,12 +71,19 @@ public class PrimerIngreso extends javax.swing.JFrame {
         javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        Cedula = new javax.swing.JFormattedTextField();
-        Telefono = new javax.swing.JFormattedTextField();
-        Nombre = new javax.swing.JFormattedTextField();
-        Correo = new javax.swing.JFormattedTextField();
-        Contrasena = new javax.swing.JPasswordField();
+        jtfCedula = new javax.swing.JFormattedTextField();
+        jtfTelefono = new javax.swing.JFormattedTextField();
+        jtfNombre = new javax.swing.JFormattedTextField();
+        jtfCorreo = new javax.swing.JFormattedTextField();
+        jtfPass1 = new javax.swing.JPasswordField();
         javax.swing.JLabel jLabel7 = new javax.swing.JLabel();
+        jtfPass2 = new javax.swing.JPasswordField();
+        javax.swing.JLabel jLabel8 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel9 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel10 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel11 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel12 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -135,7 +149,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, Short.MAX_VALUE)
                 .addGap(151, 151, 151)
@@ -207,113 +221,98 @@ public class PrimerIngreso extends javax.swing.JFrame {
             }
         });
 
-        Cedula.setForeground(new java.awt.Color(153, 153, 153));
-        Cedula.setText("Cedula");
-        Cedula.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                CedulaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                CedulaFocusLost(evt);
-            }
-        });
-        Cedula.addActionListener(new java.awt.event.ActionListener() {
+        jtfCedula.setForeground(new java.awt.Color(153, 153, 153));
+        jtfCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CedulaActionPerformed(evt);
+                jtfCedulaActionPerformed(evt);
             }
         });
 
-        Telefono.setForeground(new java.awt.Color(153, 153, 153));
-        Telefono.setText("Telefono");
-        Telefono.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                TelefonoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                TelefonoFocusLost(evt);
-            }
-        });
-        Telefono.addActionListener(new java.awt.event.ActionListener() {
+        jtfTelefono.setForeground(new java.awt.Color(153, 153, 153));
+        jtfTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TelefonoActionPerformed(evt);
+                jtfTelefonoActionPerformed(evt);
             }
         });
 
-        Nombre.setForeground(new java.awt.Color(153, 153, 153));
-        Nombre.setText("Nombre");
-        Nombre.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                NombreFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                NombreFocusLost(evt);
-            }
-        });
-        Nombre.addActionListener(new java.awt.event.ActionListener() {
+        jtfNombre.setForeground(new java.awt.Color(153, 153, 153));
+        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NombreActionPerformed(evt);
+                jtfNombreActionPerformed(evt);
             }
         });
 
-        Correo.setForeground(new java.awt.Color(153, 153, 153));
-        Correo.setText("Correo");
-        Correo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                CorreoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                CorreoFocusLost(evt);
-            }
-        });
-        Correo.addActionListener(new java.awt.event.ActionListener() {
+        jtfCorreo.setForeground(new java.awt.Color(153, 153, 153));
+        jtfCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CorreoActionPerformed(evt);
+                jtfCorreoActionPerformed(evt);
             }
         });
 
-        Contrasena.setForeground(new java.awt.Color(153, 153, 153));
-        Contrasena.setText("Contraseña");
-        Contrasena.setHighlighter(null);
-        Contrasena.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                ContrasenaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                ContrasenaFocusLost(evt);
-            }
-        });
+        jtfPass1.setForeground(new java.awt.Color(153, 153, 153));
+        jtfPass1.setHighlighter(null);
 
         jLabel7.setBackground(new java.awt.Color(102, 102, 102));
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("CARGO : GERENTE");
 
+        jtfPass2.setForeground(new java.awt.Color(153, 153, 153));
+        jtfPass2.setHighlighter(null);
+
+        jLabel8.setText("Cédula");
+
+        jLabel9.setText("Nombre");
+
+        jLabel10.setText("Teléfono");
+
+        jLabel11.setText("Correo");
+
+        jLabel12.setText("Clave");
+
+        jLabel13.setText("Confirmar clave");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(182, 182, 182)
+                .addComponent(jLabel1)
+                .addGap(0, 138, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Telefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                            .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Nombre)
-                            .addComponent(Correo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                            .addComponent(Contrasena, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtfCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtfTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                                    .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtfCedula, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(116, 116, 116))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(221, 221, 221))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(223, 223, 223))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(211, 211, 211)
@@ -328,19 +327,33 @@ public class PrimerIngreso extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(118, 118, 118))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -377,13 +390,13 @@ public class PrimerIngreso extends javax.swing.JFrame {
         setLocation(ubicacion.x - x, ubicacion.y - y);//3
     }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaActionPerformed
+    private void jtfCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CedulaActionPerformed
+    }//GEN-LAST:event_jtfCedulaActionPerformed
 
-    private void TelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelefonoActionPerformed
+    private void jtfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TelefonoActionPerformed
+    }//GEN-LAST:event_jtfTelefonoActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         // TODO add your handling code here:
@@ -396,8 +409,8 @@ public class PrimerIngreso extends javax.swing.JFrame {
         Usuarios registrar = new Usuarios();
         try {
             if( validador() ){
-                registrar.registrarUsuarioNuevo(Cedula.getText(), Nombre.getText(), Telefono.getText(), Contrasena.getText(), "Gerente", "Sin Sede", "Activo");
-                new PantallaGerente("Gerente").setVisible(true);
+                registrar.registrarUsuarioNuevo(jtfCedula.getText(), jtfNombre.getText(), jtfTelefono.getText(), jtfPass1.getText(), "Gerente", "Sin Sede", "Activo", jtfCorreo.getText());
+                new PantallaGerente( jtfCedula.getText() ).setVisible(true);
                 this.setVisible(false);
             }
         } catch (SQLException ex) {
@@ -414,98 +427,15 @@ public class PrimerIngreso extends javax.swing.JFrame {
     private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
         // TODO add your handling code here:
         jLabel4.setForeground(Color.red);
-
-
     }//GEN-LAST:event_jLabel4MouseEntered
 
-    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
+    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NombreActionPerformed
+    }//GEN-LAST:event_jtfNombreActionPerformed
 
-    private void CorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorreoActionPerformed
+    private void jtfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CorreoActionPerformed
-
-    private void CedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusGained
-        // TODO add your handling code here:
-        if (Cedula.getText().equals("Cedula")) {
-            Cedula.setText("");
-            Cedula.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_CedulaFocusGained
-
-    private void CedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CedulaFocusLost
-        // TODO add your handling code here:
-        if (Cedula.getText().equals("")) {
-            Cedula.setText("Cedula");
-            Cedula.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_CedulaFocusLost
-
-    private void NombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NombreFocusGained
-        // TODO add your handling code here:
-        if (Nombre.getText().equals("Nombre")) {
-            Nombre.setText("");
-            Nombre.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_NombreFocusGained
-
-    private void NombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_NombreFocusLost
-        // TODO add your handling code here:
-        if (Nombre.getText().equals("")) {
-            Nombre.setText("Nombre");
-            Nombre.setForeground(new Color(153, 153, 153));
-        }
-
-    }//GEN-LAST:event_NombreFocusLost
-
-    private void TelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TelefonoFocusGained
-        // TODO add your handling code here:
-        if (Telefono.getText().equals("Telefono")) {
-            Telefono.setText("");
-            Telefono.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_TelefonoFocusGained
-
-    private void TelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_TelefonoFocusLost
-        // TODO add your handling code here:
-        if (Telefono.getText().equals("")) {
-            Telefono.setText("Telefono");
-            Telefono.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_TelefonoFocusLost
-
-    private void CorreoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CorreoFocusGained
-        // TODO add your handling code here:
-        if (Correo.getText().equals("Correo")) {
-            Correo.setText("");
-            Correo.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_CorreoFocusGained
-
-    private void CorreoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_CorreoFocusLost
-        // TODO add your handling code here:
-        if (Correo.getText().equals("")) {
-            Correo.setText("Correo");
-            Correo.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_CorreoFocusLost
-
-    private void ContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusGained
-        // TODO add your handling code here:
-        if (Contrasena.getText().equals("Contraseña")) {
-            Contrasena.setText("");
-            Contrasena.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_ContrasenaFocusGained
-
-    private void ContrasenaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ContrasenaFocusLost
-        // TODO add your handling code here:
-        if (Contrasena.getText().equals("")) {
-            Contrasena.setText("Contraseña");
-            Contrasena.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_ContrasenaFocusLost
+    }//GEN-LAST:event_jtfCorreoActionPerformed
 
     private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
         // TODO add your handling code here:
@@ -527,12 +457,13 @@ public class PrimerIngreso extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JFormattedTextField Cedula;
-    javax.swing.JPasswordField Contrasena;
-    javax.swing.JFormattedTextField Correo;
-    javax.swing.JFormattedTextField Nombre;
-    javax.swing.JFormattedTextField Telefono;
     javax.swing.JLabel jLabel3;
     javax.swing.JLabel jLabel4;
+    javax.swing.JFormattedTextField jtfCedula;
+    javax.swing.JFormattedTextField jtfCorreo;
+    javax.swing.JFormattedTextField jtfNombre;
+    javax.swing.JPasswordField jtfPass1;
+    javax.swing.JPasswordField jtfPass2;
+    javax.swing.JFormattedTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 }
