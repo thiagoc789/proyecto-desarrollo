@@ -26,12 +26,12 @@ public class PrimerIngreso extends javax.swing.JFrame {
             respuesta = respuesta + "\n   - Debe ingresar un nombre";
             validacion = false;
         }
-        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || (jtfCedula.getText().length()>0 && !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
             jtfCedula.setText("");
             validacion = false;
         }
-        if( jtfTelefono.getText().length()<1 || !(jtfTelefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfTelefono.getText().length()<1 || (jtfTelefono.getText().length()>0 && !(jtfTelefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ){
             respuesta = respuesta + "\n   - Teléfono ingresado, deben ser solo números";
             jtfTelefono.setText("");
             validacion = false;
@@ -46,7 +46,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
             }
             validacion = false;
         }
-        if( jtfCorreo.getText().length()<1 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
+        if( jtfCorreo.getText().length()<1 || (jtfCorreo.getText().length()>0 && !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ) ){
             respuesta = respuesta + "\n   - Ingrese un correo válido";
             jtfCorreo.setText("");
             validacion = false;
@@ -84,7 +84,6 @@ public class PrimerIngreso extends javax.swing.JFrame {
         javax.swing.JLabel jLabel11 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel12 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel13 = new javax.swing.JLabel();
-        bSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistematización De Procesos - Empresa Flash");
@@ -273,13 +272,6 @@ public class PrimerIngreso extends javax.swing.JFrame {
 
         jLabel13.setText("Confirmar clave");
 
-        bSesion.setText("Sesión");
-        bSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bSesionMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -289,7 +281,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(0, 138, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap(170, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -313,10 +305,7 @@ public class PrimerIngreso extends javax.swing.JFrame {
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jtfPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(bSesion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(191, 191, 191))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,14 +353,8 @@ public class PrimerIngreso extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                        .addGap(118, 118, 118))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bSesion)
-                        .addGap(197, 197, 197))))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                .addGap(118, 118, 118))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(408, 408, 408)
@@ -469,17 +452,11 @@ public class PrimerIngreso extends javax.swing.JFrame {
         jLabel3.setForeground(Color.white);
     }//GEN-LAST:event_jLabel3MouseExited
 
-    private void bSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSesionMouseClicked
-        new IngresoUsuario().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_bSesionMouseClicked
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton bSesion;
     javax.swing.JLabel jLabel3;
     javax.swing.JLabel jLabel4;
     javax.swing.JFormattedTextField jtfCedula;

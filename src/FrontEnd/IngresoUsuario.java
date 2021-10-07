@@ -22,7 +22,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
 
-        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || ( jtfCedula.getText().length()>0 && !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
             jtfCedula.setText("");
             validacion = false;
@@ -51,7 +51,6 @@ public class IngresoUsuario extends javax.swing.JFrame {
         lEntrar = new javax.swing.JLabel();
         jtfCedula = new javax.swing.JFormattedTextField();
         jtfClave = new javax.swing.JPasswordField();
-        jButton3 = new javax.swing.JButton();
         javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
 
@@ -197,13 +196,6 @@ public class IngresoUsuario extends javax.swing.JFrame {
         jtfClave.setForeground(new java.awt.Color(153, 153, 153));
         jtfClave.setHighlighter(null);
 
-        jButton3.setText("<html>\n<center>\nProbar<br>PRIMER<br>INGRESO\n</center>\n</html>");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-
         jLabel1.setText("Cédula");
 
         jLabel3.setText("Clave");
@@ -213,7 +205,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap(197, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -225,10 +217,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtfCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
-                                .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(188, 188, 188))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -253,9 +242,7 @@ public class IngresoUsuario extends javax.swing.JFrame {
                     .addComponent(jtfClave, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(224, 224, 224)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(118, 118, 118))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -347,17 +334,11 @@ public class IngresoUsuario extends javax.swing.JFrame {
         lCancelar.setForeground(Color.white);
     }//GEN-LAST:event_lCancelarMouseExited
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        this.setVisible(false);
-        new PrimerIngreso().setVisible(true);
-    }//GEN-LAST:event_jButton3MouseClicked
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton3;
     javax.swing.JFormattedTextField jtfCedula;
     javax.swing.JPasswordField jtfClave;
     javax.swing.JLabel lCancelar;

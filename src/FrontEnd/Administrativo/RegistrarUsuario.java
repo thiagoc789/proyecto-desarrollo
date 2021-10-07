@@ -40,7 +40,7 @@ public class RegistrarUsuario extends javax.swing.JPanel {
         
         //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
 
-        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || (jtfCedula.getText().length()>0 && !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) )){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
             jtfCedula.setText("");
             validacion = false;
@@ -49,12 +49,12 @@ public class RegistrarUsuario extends javax.swing.JPanel {
             respuesta = respuesta + "\n   - Debe ingresar un nombre";
             validacion = false;
         }
-        if( jtfTelefono.getText().length()<1 && !(jtfTelefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfTelefono.getText().length()<1 || (jtfTelefono.getText().length()>0 && !(jtfTelefono.getText().matches("[+-]?\\d*(\\.\\d+)?")) )){
             respuesta = respuesta + "\n   - Debe ingresar un teléfono, deben ser solo números";
             jtfTelefono.setText("");
             validacion = false;
         }
-        if( jtfCorreo.getText().length()<1 || !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") ){
+        if( jtfCorreo.getText().length()<1 || (jtfCorreo.getText().length()>0 && !jtfCorreo.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$") )){
             respuesta = respuesta + "\n   - Ingrese un correo válido";
             validacion = false;
         }

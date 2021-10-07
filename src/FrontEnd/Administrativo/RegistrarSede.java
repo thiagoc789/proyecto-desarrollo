@@ -35,7 +35,7 @@ public class RegistrarSede extends javax.swing.JPanel {
         
         //JOptionPane.showMessageDialog(null, "_" + jcbSede.getItemAt(jcbSede.getSelectedIndex()) + "_");
 
-        if( jtfIdSede.getText().length()<1 || !(jtfIdSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfIdSede.getText().length()<1 || (jtfIdSede.getText().length()>0 && !(jtfIdSede.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ){
             respuesta = respuesta + "\n   - Id ingresada, deben ser solo números";
             jtfIdSede.setText("");
             validacion = false;
@@ -48,12 +48,12 @@ public class RegistrarSede extends javax.swing.JPanel {
             respuesta = respuesta + "\n   - Debe ingresar un dirección para la sede";
             validacion = false;
         }
-        if( jtfComunaSede.getText().length()<1 || !(jtfComunaSede.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+        if( jtfComunaSede.getText().length()<1 || (jtfComunaSede.getText().length()>0 && !(jtfComunaSede.getText().matches("[+]?\\d*(\\.\\d+)?")) )){
             respuesta = respuesta + "\n   - Comuna ingresada, debe ser un número";
             jtfComunaSede.setText("");
             validacion = false;
         }
-        if( jtfTelefonoSede.getText().length()<1 && !(jtfTelefonoSede.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+        if( jtfTelefonoSede.getText().length()<1 ||(jtfTelefonoSede.getText().length()>0 && !(jtfTelefonoSede.getText().matches("[+]?\\d*(\\.\\d+)?")) )){
             respuesta = respuesta + "\n   - Debe ingresar un teléfono, deben ser solo números";
             jtfTelefonoSede.setText("");
             validacion = false;
@@ -155,11 +155,6 @@ public class RegistrarSede extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(Cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -184,7 +179,12 @@ public class RegistrarSede extends javax.swing.JPanel {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfComunaSede, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jtfComunaSede, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(lRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(Cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(

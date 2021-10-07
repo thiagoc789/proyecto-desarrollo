@@ -168,7 +168,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace pref="197" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -183,11 +183,7 @@
                                       <Component id="jtfCedula" min="-2" pref="360" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="374" max="32767" attributes="0"/>
-                                  <Component id="lCancelar" min="-2" pref="158" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lCancelar" alignment="1" min="-2" pref="158" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                       </Group>
@@ -222,10 +218,7 @@
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lCancelar" alignment="3" pref="126" max="32767" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lCancelar" pref="126" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -328,18 +321,6 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;center&gt;&#xa;Probar&lt;br&gt;PRIMER&lt;br&gt;INGRESO&#xa;&lt;/center&gt;&#xa;&lt;/html&gt;"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton3MouseClicked"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">

@@ -35,20 +35,13 @@ public class ModificarUsuario extends javax.swing.JPanel {
     public ModificarUsuario(String usuarioActual) {
         initComponents();
         this.usuarioActual = usuarioActual;
-        
-//        jcbCargo.addItem("No cambiar");
-//        jcbCargo.addItem("Secretaria");
-//        jcbCargo.addItem("Auxiliar");
-//        jcbCargo.addItem("Operador");
-
-        //areaSedes.setText(usuario.listarSedes() );
     }
     
     public boolean validador(){
         boolean validacion = true;
         String respuesta = "Por favor verifique:";
 
-        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || (jtfCedula.getText().length()>0 && !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ) ){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
             jtfCedula.setText("");
             validacion = false;
@@ -68,7 +61,6 @@ public class ModificarUsuario extends javax.swing.JPanel {
         if ( jcbCargo.getItemAt(jcbCargo.getSelectedIndex()).compareTo("No cambiar") != 0 ){
             stringCargo = jcbCargo.getItemAt(jcbCargo.getSelectedIndex());
         }
-        //if( jcbEstado.getSelectedIndex() < 1 ){
         if ( jcbEstado.getItemAt(jcbEstado.getSelectedIndex()).compareTo("No cambiar") != 0 ){
             stringEstado = jcbEstado.getItemAt(jcbEstado.getSelectedIndex());
         }

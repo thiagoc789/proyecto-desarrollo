@@ -48,7 +48,7 @@ public boolean validador(){
             respuesta = respuesta + "\n   - Debe ingresar un nombre";
             validacion = false;
         }
-        if( jtfCedula.getText().length()<1 || !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) ){
+        if( jtfCedula.getText().length()<1 || (jtfCedula.getText().length()>0 && !(jtfCedula.getText().matches("[+-]?\\d*(\\.\\d+)?")) )){
             respuesta = respuesta + "\n   - Cédula ingresada, deben ser solo números";
             jtfCedula.setText("");
             validacion = false;
@@ -57,7 +57,7 @@ public boolean validador(){
             respuesta = respuesta + "\n   - Debe ingresar una dirección";
             validacion = false;
         }
-        if( jtfComuna.getText().length()<1 || !(jtfComuna.getText().matches("[+]?\\d*(\\.\\d+)?")) ){
+        if( jtfComuna.getText().length()<1 || (jtfComuna.getText().length()>0 && !(jtfComuna.getText().matches("[+]?\\d*(\\.\\d+)?")) )){
             respuesta = respuesta + "\n   - Comuna ingresado, deben ser solo números positivos";
             jtfComuna.setText("");
             validacion = false;
