@@ -113,9 +113,9 @@ public class Tarjetas {
                 saldoTarjeta = rs.getInt("saldo");
             }
             
-            if( costoTotal > saldoTarjeta )
+            if( costoTotal > saldoTarjeta ){
                 JOptionPane.showMessageDialog(null, "La tarjeta no tiene saldo suficiente");
-            else{
+            }else{
                 transaccionRealizada = true;
                 stmt = conexion.createStatement();
 

@@ -114,6 +114,7 @@ public class RegistrarEnvio extends javax.swing.JPanel {
                     if( unaTarjeta.tarjetaExiste( jtfTarjeta.getText() ) ){
                         if( !unaTarjeta.descontarDeTarjeta(jtfTarjeta.getText(), costoTotal) ){
                             validacion = false;
+                            respuesta = respuesta + "\n   - La tarjeta no existe";
                         }
                     }
                     else{
