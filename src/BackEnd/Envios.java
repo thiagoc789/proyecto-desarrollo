@@ -37,6 +37,22 @@ public class Envios {
             stmt = conexion.createStatement();
             sql = "CREATE TABLE IF NOT EXISTS envios (id_envio SERIAL, cedula_cliente INT, metodo_Pago VARCHAR(50), valor_Envios INT, valor_Paquetes INT, valor_Impuestos INT, valor_Seguros INT, numero_Envios int, estado VARCHAR(15));";
             stmt.executeUpdate(sql);
+            
+            // SQL PARA SELECCIONAR UNA CÉDULA DE UN AUXILIAR ADECUADO
+            
+            // TENGO
+            // cédula del cliente
+            
+            sql = "SELECT cedula FROM usuarios\n" +
+                    "WHERE sede = (SELECT nombre FROM sedes\n" +
+                    "WHERE id = (SELECT sede_asignada FROM clientes\n" +
+                    "WHERE (cedula = \'" + cedula_cliente + "\') AND (cargo = 'Auxiliar') ))\n" +
+                    "ORDER BY RANDOM() LIMIT 1";
+            ResultSet rs = stmt.executeQuery(sql);
+            String cedulaAuxiliar = "";
+            while(rs.next()){
+                cedulaAuxiliar = rs.getString("cedula");
+            }
 
             sql = "INSERT INTO envios(cedula_cliente, metodo_Pago, valor_Envios, valor_Paquetes, valor_Impuestos, valor_Seguros, numero_Envios, estado, id_auxiliare) VALUES("
                     + "\'" + cedula_cliente + "\',"
@@ -47,7 +63,7 @@ public class Envios {
                     + "\'" + valorSeguros + "\',"
                     + "\'" + numeroEnvios + "\',"
                     + "\'pendiente\',"
-                    + "\'7766\'"
+                    + "\'" + cedulaAuxiliar + "\'"
                     + ");";
             stmt.executeUpdate(sql);
 
